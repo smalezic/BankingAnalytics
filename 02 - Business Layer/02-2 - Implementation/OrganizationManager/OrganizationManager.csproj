@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14791856-C5C8-4FD4-BD2B-48B6E628A681}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp</RootNamespace>
-    <AssemblyName>ConsoleApp</AssemblyName>
+    <ProjectGuid>{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADS.BankingAnalytics.Business.OrganizationManager</RootNamespace>
+    <AssemblyName>OrganizationManager</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,29 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\01 - Data Layer\01-3 - Repository Activities\RepositoryActivities\RepositoryActivities.csproj">
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\RepositoryActivities\RepositoryActivities.csproj">
       <Project>{c9025385-3ebf-4df3-a181-23bfd55f0b87}</Project>
       <Name>RepositoryActivities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\02 - Business Layer\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj">
+    <ProjectReference Include="..\..\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj">
       <Project>{3c7369dc-262a-4442-a5f0-c66432185710}</Project>
       <Name>IOrganizationManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\02 - Business Layer\02-2 - Implementation\OrganizationManager\OrganizationManager.csproj">
-      <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
-      <Name>OrganizationManager</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

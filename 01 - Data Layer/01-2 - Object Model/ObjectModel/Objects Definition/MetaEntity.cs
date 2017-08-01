@@ -7,10 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
-    public partial class Organization : MetaEntity
+    public abstract partial class MetaEntity
     {
-        public String Name { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        public virtual ICollection<Unit> Units { get; set; }
+        public override string ToString()
+        {
+            return String.Format("Id: {0}", Id);
+        }
     }
 }

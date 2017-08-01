@@ -35,6 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - Client Layer", "04 - C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "04 - Client Layer\ConsoleApp\ConsoleApp.csproj", "{14791856-C5C8-4FD4-BD2B-48B6E628A681}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOrganizationManager", "02 - Business Layer\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj", "{3C7369DC-262A-4442-A5F0-C66432185710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationManager", "02 - Business Layer\02-2 - Implementation\OrganizationManager\OrganizationManager.csproj", "{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,14 @@ Global
 		{14791856-C5C8-4FD4-BD2B-48B6E628A681}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14791856-C5C8-4FD4-BD2B-48B6E628A681}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14791856-C5C8-4FD4-BD2B-48B6E628A681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7369DC-262A-4442-A5F0-C66432185710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7369DC-262A-4442-A5F0-C66432185710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7369DC-262A-4442-A5F0-C66432185710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7369DC-262A-4442-A5F0-C66432185710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A17CFE-0F8A-419B-97A3-97827FAEF0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +93,7 @@ Global
 		{C9025385-3EBF-4DF3-A181-23BFD55F0B87} = {581E1BE9-4C1B-40BF-BC3F-957A687D5D9C}
 		{7AE38427-F521-4A63-9581-7E25836BB0FE} = {E361AD31-877A-45F3-BCEB-F5FE08465B57}
 		{14791856-C5C8-4FD4-BD2B-48B6E628A681} = {73DFC737-6717-43B8-98D2-8EEF6AA0CA21}
+		{3C7369DC-262A-4442-A5F0-C66432185710} = {CDFB7CA5-CA7D-43D7-B23F-28BE8B70CEFB}
+		{91A17CFE-0F8A-419B-97A3-97827FAEF0FD} = {78B8F228-8F5B-4A8A-84CF-469CA2CB32B0}
 	EndGlobalSection
 EndGlobal

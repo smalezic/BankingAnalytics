@@ -1,15 +1,52 @@
-﻿using System;
+﻿using ADS.BankingAnalytics.Business.OrganizationManager;
+using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
+using ADS.BankingAnalytics.DataEntities.ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp
+namespace ADS.BankingAnalytics.Client.ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
+            IGenericRepositoryActivity repository = new GenericRepositoryActivity();
+            IWorker worker = new Worker(repository);
+
+            //Organization org = new Organization()
+            //{
+            //    Name = "Test"
+            //};
+
+            //var savedOrg = worker.Save(org);
+
+            //Unit unit = new Unit()
+            //{
+            //    Organization = org
+            //};
+
+            //var savedUnit = worker.Save(unit);
+
+            //Unit childUnit = new Unit()
+            //{
+            //    Organization = org,
+            //    ParentUnit = unit
+            //};
+
+            //var savedChildUnit = worker.Save(childUnit);
+
+            //Console.WriteLine(savedOrg.ToString());
+            //Console.WriteLine(savedUnit.ToString());
+            //Console.WriteLine(savedChildUnit.ToString());
+
+            var entity = worker.FindEntity<Unit>(2);
+            var org = worker.FindEntity<Organization>(1);
+            Console.WriteLine(org.ToString());
+
+            Console.ReadLine();
         }
     }
 }

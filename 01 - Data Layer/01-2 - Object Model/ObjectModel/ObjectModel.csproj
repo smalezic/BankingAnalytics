@@ -183,7 +183,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects Definition\MetaEntity.cs" />
     <Compile Include="Objects Definition\Organization.cs" />
+    <Compile Include="Objects Definition\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

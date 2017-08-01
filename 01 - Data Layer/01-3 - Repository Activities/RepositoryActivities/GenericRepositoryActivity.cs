@@ -7,7 +7,7 @@ using ADS.BankingAnalytics.DataEntities.DataBroker;
 
 namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 {
-    public class GenericRepositoryActivity
+    public class GenericRepositoryActivity : IGenericRepositoryActivity
     {
         #region Fields
 
@@ -28,31 +28,36 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 
         #region Interface Implementation
 
-        public T GetById<T>(object[] pk, params Expression<Func<T, object>>[] includeExpressions) where T : class
+        public TEntity GetById<TEntity>(object[] pk, params Expression<Func<TEntity, object>>[] includeExpressions) where TEntity : class
         {
-            return _context.Set<T>().Find(pk);
+            return _context.Set<TEntity>().Find(pk);
         }
 
-        public IQueryable<T> GetAll<T>(params Expression<Func<T, object>>[] includeExpressions) where T : class
+        public TEntity GetById<TEntity>(int id) where TEntity : class
         {
-            var retVal = _context.Set<T>();
+            return _context.Set<TEntity>().Find(id);
+        }
+
+        public IQueryable<TEntity> GetAll<TEntity>(params Expression<Func<TEntity, object>>[] includeExpressions) where TEntity : class
+        {
+            var retVal = _context.Set<TEntity>();
 
             if (includeExpressions.Any())
             {
                 var set = includeExpressions
-                  .Aggregate<Expression<Func<T, object>>, IQueryable<T>>
+                  .Aggregate<Expression<Func<TEntity, object>>, IQueryable<TEntity>>
                     (retVal, (current, expression) => current.Include(expression));
             }
 
             return retVal;
         }
 
-        public IEnumerable<T> GetByCriteria<T>(
-            Expression<Func<T, bool>> criteria,
-            params Expression<Func<T, object>>[] includeStatements
-            ) where T : class
+        public IEnumerable<TEntity> GetByCriteria<TEntity>(
+            Expression<Func<TEntity, bool>> criteria,
+            params Expression<Func<TEntity, object>>[] includeStatements
+            ) where TEntity : class
         {
-            IQueryable<T> retVal = _context.Set<T>();
+            IQueryable<TEntity> retVal = _context.Set<TEntity>();
 
             if (criteria != null)
             {
@@ -67,7 +72,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
             return retVal;
         }
 
-        public IEnumerable<T> GetJoinnedWithCriteria<T, K>(Func<T, bool> criteria) where T : class where K : class
+        public IEnumerable<TEntity> GetJoinnedWithCriteria<TEntity, K>(Func<TEntity, bool> criteria) where TEntity : class where K : class
         {
             throw new NotImplementedException();
 
@@ -79,9 +84,9 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
             //        );
         }
 
-        public T Save<T>(T entity, params object[] pk) where T : class
+        public TEntity Save<TEntity>(TEntity entity, params object[] pk) where TEntity : class
         {
-            var entry = _context.Entry<T>(entity);
+            var entry = _context.Entry<TEntity>(entity);
 
             switch (entry.State)
             {
@@ -96,13 +101,13 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 
                 case EntityState.Detached:
                     // Let's see if it really exists in Db
-                    T foundEntity = null;
+                    TEntity foundEntity = null;
                     if (pk != null && pk.Length > 0)
                     {
                         // Ako je pk tipa int proveriti da li je razlicito od 0, ukoliko nije int ulazi u blok
                         if (pk.Any(it => it != null && (it.GetType() == typeof(int) && ((int)it) > 0) || (it.GetType() != typeof(int))))
                         {
-                            foundEntity = _context.Set<T>().Find(pk);
+                            foundEntity = _context.Set<TEntity>().Find(pk);
                         }
                     }
                     if (foundEntity == null)
@@ -138,7 +143,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
             {
                 //TODO: Do proper logging of DbContext exception!
 
-                //_logger.FatalFormat("Saving an entry of type '{0}' has failed because of entity validation.", typeof(T).FullName);
+                //_logger.FatalFormat("Saving an entry of type '{0}' has failed because of entity validation.", typeof(TEntity).FullName);
                 //_logger.FatalFormat("Error (StackTrace) - {0}", enValEx.StackTrace);
                 //_logger.FatalFormat("Error (InnerException) - {0}", enValEx.InnerException);
                 //_logger.FatalFormat("Error (Message) - {0}", enValEx.Message);

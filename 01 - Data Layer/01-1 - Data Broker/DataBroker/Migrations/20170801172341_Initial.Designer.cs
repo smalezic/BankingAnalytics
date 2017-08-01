@@ -8,9 +8,10 @@ using ADS.BankingAnalytics.DataEntities.DataBroker;
 namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 {
     [DbContext(typeof(OrganizationalStructureDbContext))]
-    partial class OrganizationalStructureDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170801172341_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
