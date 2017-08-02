@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ADS.BankingAnalytics.Logging;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
 using ADS.BankingAnalytics.Logging.NLogLogger;
+using ADS.BankingAnalytics.Common.CompositionRoot;
 
 //using NLog;
 
@@ -20,6 +21,11 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
         static void Main(string[] args)
         {
+            FabricModule fabricModule = new FabricModule();
+            fabricModule.Load();
+            IGenericRepositoryActivity repositoryActivity = fabricModule.Resolve<IGenericRepositoryActivity>();
+            IWorker worker = fabricModule.ResolveWorker(repositoryActivity);
+
             //IGenericRepositoryActivity repository = new GenericRepositoryActivity();
             //IWorker worker = new Worker(repository);
 
@@ -64,14 +70,13 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            ILogger logger = new Logger("Business");
+            //ILogger logger = new Logger("Business");
             //logger.Trace("Upis u log fajl - {0}:{1}", 1, 2);
             //logger.Trace("Upis u log fajl - Poruka");
-            logger.Warn("Business message - {0}", "new filter");
+            //logger.Warn("Business message - {0}", "new filter");
 
-
-            ILogger logger2 = new Logger("Console");
-            logger2.Info("Test");
+            //ILogger logger2 = new Logger("Console");
+            //logger2.Info("Test");
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 {
     public interface IFabricModule
     {
+        void Load();
+        void Load(ContainerBuilder builder);
+
+        T Resolve<T>() where T : class;
     }
 }

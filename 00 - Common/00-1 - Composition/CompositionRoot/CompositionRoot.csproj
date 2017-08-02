@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,23 @@
     <Compile Include="FabricModule.cs" />
     <Compile Include="IFabricModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\RepositoryActivities\RepositoryActivities.csproj">
+      <Project>{c9025385-3ebf-4df3-a181-23bfd55f0b87}</Project>
+      <Name>RepositoryActivities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\02 - Business Layer\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj">
+      <Project>{3c7369dc-262a-4442-a5f0-c66432185710}</Project>
+      <Name>IOrganizationManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\02 - Business Layer\02-2 - Implementation\OrganizationManager\OrganizationManager.csproj">
+      <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
+      <Name>OrganizationManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
