@@ -10,6 +10,8 @@ using ADS.BankingAnalytics.Logging;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
 using ADS.BankingAnalytics.Logging.NLogLogger;
 using ADS.BankingAnalytics.Common.CompositionRoot;
+using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
+using Microsoft.EntityFrameworkCore;
 
 //using NLog;
 
@@ -22,8 +24,14 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
         static void Main(string[] args)
         {
             FabricModule fabricModule = new FabricModule();
+
             fabricModule.Load();
-            IGenericRepositoryActivity repositoryActivity = fabricModule.Resolve<IGenericRepositoryActivity>();
+
+            IFactory factory = new Factory();
+            DbContext context = factory.Context;
+
+            //IGenericRepositoryActivity repositoryActivity = fabricModule.Resolve<IGenericRepositoryActivity>();
+            IGenericRepositoryActivity repositoryActivity = fabricModule.ResolveRepositoryActivity(context);
             IWorker worker = fabricModule.ResolveWorker(repositoryActivity);
 
             //IGenericRepositoryActivity repository = new GenericRepositoryActivity();
@@ -61,11 +69,11 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            //var org = worker.FindEntity<Organization>(1);
-            //var entity = worker.FindEntity<Unit>(2);
+            var org = worker.FindEntity<Organization>(1);
+            var entity = worker.FindEntity<Unit>(2);
 
-            //Console.WriteLine(org.ToString());
-            //Console.WriteLine(entity.ToString());
+            Console.WriteLine(org.ToString());
+            Console.WriteLine(entity.ToString());
 
 
 

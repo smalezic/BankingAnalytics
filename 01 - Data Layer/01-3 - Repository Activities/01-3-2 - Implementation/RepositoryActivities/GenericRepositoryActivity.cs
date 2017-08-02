@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using ADS.BankingAnalytics.DataEntities.DataBroker;
 
 namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 {
@@ -13,15 +12,15 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 
         //private static readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private OrganizationalStructureDbContext _context;
+        private DbContext _context;
 
         #endregion Fields
 
         #region Constructors
 
-        public GenericRepositoryActivity()
+        public GenericRepositoryActivity(DbContext context)
         {
-            _context = new OrganizationalStructureDbContext();
+            _context = context;
         }
 
         #endregion Constructors

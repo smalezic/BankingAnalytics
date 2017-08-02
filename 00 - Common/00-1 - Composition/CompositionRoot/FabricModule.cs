@@ -2,6 +2,7 @@
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
 using Autofac;
 using Autofac.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,28 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
                 ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();
 
                 return clientLifetimeScope.Resolve<IWorker>(paramList);
+            }
+            catch (Exception exc)
+            {
+                //_logger.Error("Error - {0}", exc);
+                throw;
+            }
+        }
+
+        public IGenericRepositoryActivity ResolveRepositoryActivity(DbContext context)
+        {
+            try
+            {
+                var paramList = new List<ResolvedParameter>
+                {
+                    new ResolvedParameter(
+                            (pi, ctx) => pi.ParameterType == typeof(DbContext) && pi.Name == "context",
+                            (pi, ctx) => context
+                        )
+                };
+                ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();
+
+                return clientLifetimeScope.Resolve<IGenericRepositoryActivity>(paramList);
             }
             catch (Exception exc)
             {
