@@ -7,19 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ADS.BankingAnalytics.Logging;
+using ADS.BankingAnalytics.Logging.LoggingInterface;
+using ADS.BankingAnalytics.Logging.NLogLogger;
 
-using NLog;
+//using NLog;
 
 namespace ADS.BankingAnalytics.Client.ConsoleApp
 {
     class Program
     {
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        //private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
-            IGenericRepositoryActivity repository = new GenericRepositoryActivity();
-            IWorker worker = new Worker(repository);
+            //IGenericRepositoryActivity repository = new GenericRepositoryActivity();
+            //IWorker worker = new Worker(repository);
+
+
+
 
             //Organization org = new Organization()
             //{
@@ -59,10 +64,10 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            //ILogger logger = new NLogLogger();
-            //logger.Trace("Upis u log fajl");
+            ILogger logger = new Logger();
+            logger.Trace("Upis u log fajl - {0}:{1}", 1, 2);
 
-            _logger.Info("Test");
+            //_logger.Info("Test");
 
 
 
