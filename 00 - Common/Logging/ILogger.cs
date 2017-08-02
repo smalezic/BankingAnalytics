@@ -8,5 +8,6 @@ namespace ADS.BankingAnalytics.Logging
 {
     public interface ILogger
     {
+        void Trace(String message, params object[] parameters);
     }
 }

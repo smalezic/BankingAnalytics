@@ -6,11 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ADS.BankingAnalytics.Logging;
+
+using NLog;
 
 namespace ADS.BankingAnalytics.Client.ConsoleApp
 {
     class Program
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
             IGenericRepositoryActivity repository = new GenericRepositoryActivity();
@@ -42,10 +47,27 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
             //Console.WriteLine(savedUnit.ToString());
             //Console.WriteLine(savedChildUnit.ToString());
 
-            var entity = worker.FindEntity<Unit>(2);
-            var org = worker.FindEntity<Organization>(1);
-            Console.WriteLine(org.ToString());
 
+
+
+            //var org = worker.FindEntity<Organization>(1);
+            //var entity = worker.FindEntity<Unit>(2);
+
+            //Console.WriteLine(org.ToString());
+            //Console.WriteLine(entity.ToString());
+
+
+
+
+            //ILogger logger = new NLogLogger();
+            //logger.Trace("Upis u log fajl");
+
+            _logger.Info("Test");
+
+
+
+
+            Console.Write("Press 'Enter' to finish");
             Console.ReadLine();
         }
     }
