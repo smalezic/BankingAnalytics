@@ -64,10 +64,14 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            ILogger logger = new Logger();
-            logger.Trace("Upis u log fajl - {0}:{1}", 1, 2);
+            ILogger logger = new Logger("Business");
+            //logger.Trace("Upis u log fajl - {0}:{1}", 1, 2);
+            //logger.Trace("Upis u log fajl - Poruka");
+            logger.Warn("Business message - {0}", "new filter");
 
-            //_logger.Info("Test");
+
+            ILogger logger2 = new Logger("Console");
+            logger2.Info("Test");
 
 
 

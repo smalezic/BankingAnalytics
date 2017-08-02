@@ -44,9 +44,29 @@ namespace ADS.BankingAnalytics.Logging.NLogLogger
             _logger.Trace(message, parameters);
         }
 
-        public void TempTrace(String message)
+        public void Debug(String message, params object[] parameters)
         {
-            _logger.Info(message);
+            _logger.Debug(message, parameters);
+        }
+
+        public void Info(String message, params object[] parameters)
+        {
+            _logger.Info(message, parameters);
+        }
+
+        public void Warn(String message, params object[] parameters)
+        {
+            _logger.Warn(message, parameters);
+        }
+
+        public void Error(String message, params object[] parameters)
+        {
+            _logger.Error(message, parameters);
+        }
+
+        public void Fatal(String message, params object[] parameters)
+        {
+            _logger.Fatal(message, parameters);
         }
 
         #endregion Interface Implementation
