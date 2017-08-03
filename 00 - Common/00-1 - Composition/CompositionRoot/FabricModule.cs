@@ -71,7 +71,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             }
         }
 
-        public IWorker ResolveWorker(IGenericRepositoryActivity repositoryActivity)
+        public IWorker ResolveWorker(IGenericRepositoryActivity repositoryActivity, ILogger logger)
         {
             try
             {
@@ -80,6 +80,10 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
                     new ResolvedParameter(
                             (pi, ctx) => pi.ParameterType == typeof(IGenericRepositoryActivity) && pi.Name == "genericRepository",
                             (pi, ctx) => repositoryActivity
+                        ),
+                    new ResolvedParameter(
+                            (pi, ctx) => pi.ParameterType == typeof(ILogger) && pi.Name == "logger",
+                            (pi, ctx) => logger
                         )
                 };
                 ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();
@@ -92,7 +96,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             }
         }
 
-        public IGenericRepositoryActivity ResolveRepositoryActivity(DbContext context)
+        public IGenericRepositoryActivity ResolveRepositoryActivity(DbContext context, ILogger logger)
         {
             try
             {
@@ -101,6 +105,10 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
                     new ResolvedParameter(
                             (pi, ctx) => pi.ParameterType == typeof(DbContext) && pi.Name == "context",
                             (pi, ctx) => context
+                        ),
+                    new ResolvedParameter(
+                            (pi, ctx) => pi.ParameterType == typeof(ILogger) && pi.Name == "logger",
+                            (pi, ctx) => logger
                         )
                 };
                 ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();

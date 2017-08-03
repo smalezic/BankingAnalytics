@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ADS.BankingAnalytics.Logging.LoggingInterface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
     {
         #region Fields
 
-        //private static readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        // Instance of DbContext
         private DbContext _context;
+
+        // Instance of ILogger
+        private readonly ILogger _logger;
 
         #endregion Fields
 
@@ -21,6 +24,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
         public GenericRepositoryActivity(DbContext context, ILogger logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         #endregion Constructors
@@ -49,6 +53,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
         /// <returns></returns>
         public TEntity GetById<TEntity>(int id) where TEntity : class
         {
+            _logger.Trace("Find entity by Id - {0}", id);
             return _context.Set<TEntity>().Find(id);
         }
 

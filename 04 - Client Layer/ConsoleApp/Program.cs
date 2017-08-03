@@ -30,9 +30,9 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
             IFactory factory = new Factory();
             DbContext context = factory.Context;
 
-            //IGenericRepositoryActivity repositoryActivity = fabricModule.Resolve<IGenericRepositoryActivity>();
-            IGenericRepositoryActivity repositoryActivity = fabricModule.ResolveRepositoryActivity(context);
-            IWorker worker = fabricModule.ResolveWorker(repositoryActivity);
+            ILogger logger = fabricModule.Resolve<ILogger>();
+            IGenericRepositoryActivity repositoryActivity = fabricModule.ResolveRepositoryActivity(context, logger);
+            IWorker worker = fabricModule.ResolveWorker(repositoryActivity, logger);
 
             //IGenericRepositoryActivity repository = new GenericRepositoryActivity();
             //IWorker worker = new Worker(repository);

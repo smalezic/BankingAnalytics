@@ -1,5 +1,6 @@
 ﻿using ADS.BankingAnalytics.Business.OrganizationManager;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
+using ADS.BankingAnalytics.Logging.LoggingInterface;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +17,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
         void Load(ContainerBuilder builder);
 
         T Resolve<T>() where T : class;
-        IWorker ResolveWorker(IGenericRepositoryActivity repositoryActivity);
-        IGenericRepositoryActivity ResolveRepositoryActivity(DbContext context);
+        IWorker ResolveWorker(IGenericRepositoryActivity repositoryActivity, ILogger logger);
+        IGenericRepositoryActivity ResolveRepositoryActivity(DbContext context, ILogger logger);
     }
 }
