@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.EntityFrameworkCore.1.1.2\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Microsoft.EntityFrameworkCore.1.1.2\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Extensions.Caching.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
@@ -160,6 +160,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\00 - Common\00-2 - Logging\LoggingInterface\LoggingInterface.csproj">
+      <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
+      <Name>LoggingInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\01-3-1 - Interfaces\IRepositoryActivities\IRepositoryActivities.csproj">
       <Project>{a2e683e8-71a1-4636-949d-a2d8fea48e3e}</Project>
       <Name>IRepositoryActivities</Name>

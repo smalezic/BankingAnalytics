@@ -180,6 +180,14 @@
       <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
       <Name>OrganizationManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\00-2 - Logging\LoggingInterface\LoggingInterface.csproj">
+      <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
+      <Name>LoggingInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\00-2 - Logging\NLogLogger\NLogLogger.csproj">
+      <Project>{967eea56-a698-47e2-9cf2-f1b4e12c1b10}</Project>
+      <Name>NLogLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

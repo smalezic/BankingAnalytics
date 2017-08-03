@@ -1,5 +1,7 @@
 ﻿using ADS.BankingAnalytics.Business.OrganizationManager;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
+using ADS.BankingAnalytics.Logging.LoggingInterface;
+using ADS.BankingAnalytics.Logging.NLogLogger;
 using Autofac;
 using Autofac.Core;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +29,8 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             {
                 Load(new ContainerBuilder());
             }
-            catch (Exception exc)
+            catch
             {
-                //_logger.Error("Error - {0}", exc);
                 throw;
             }
         }
@@ -41,13 +42,13 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
                 // Register implementations of interfaces here
                 builder.RegisterType<Worker>().As<IWorker>();
                 builder.RegisterType<GenericRepositoryActivity>().As<IGenericRepositoryActivity>();
+                builder.RegisterType<Logger>().As<ILogger>();
 
                 // Build the container
                 _container = builder.Build();
             }
-            catch (Exception exc)
+            catch
             {
-                //_logger.Error("Error - {0}", exc);
                 throw;
             }
         }
@@ -64,9 +65,8 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 
                 return clientLifetimeScope.Resolve<T>();
             }
-            catch (Exception exc)
+            catch
             {
-                //_logger.Error("Error - {0}", exc);
                 throw;
             }
         }
@@ -86,9 +86,8 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 
                 return clientLifetimeScope.Resolve<IWorker>(paramList);
             }
-            catch (Exception exc)
+            catch
             {
-                //_logger.Error("Error - {0}", exc);
                 throw;
             }
         }
@@ -108,9 +107,8 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 
                 return clientLifetimeScope.Resolve<IGenericRepositoryActivity>(paramList);
             }
-            catch (Exception exc)
+            catch
             {
-                //_logger.Error("Error - {0}", exc);
                 throw;
             }
         }
@@ -131,7 +129,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
         //                )
         //        };
         //        ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();
-
+        //
         //        return clientLifetimeScope.Resolve<IDispatcher>(paramList);
         //    }
         //    catch (Exception exc)
