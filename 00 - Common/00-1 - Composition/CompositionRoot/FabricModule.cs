@@ -121,32 +121,6 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             }
         }
 
-        //public IDispatcher ResolveDispatcher(IWorker worker, String folderName)
-        //{
-        //    try
-        //    {
-        //        var paramList = new List<ResolvedParameter>
-        //        {
-        //            new ResolvedParameter(
-        //                    (pi, ctx) => pi.ParameterType == typeof(IWorker) && pi.Name == "worker",
-        //                    (pi, ctx) => worker
-        //                ),
-        //            new ResolvedParameter(
-        //                    (pi, ctx) => pi.ParameterType == typeof(String) && pi.Name == "folderName",
-        //                    (pi, ctx) => folderName
-        //                )
-        //        };
-        //        ILifetimeScope clientLifetimeScope = _container.BeginLifetimeScope();
-        //
-        //        return clientLifetimeScope.Resolve<IDispatcher>(paramList);
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        _logger.Error("Error - ", exc);
-        //        throw;
-        //    }
-        //}
-
         #endregion Resolve
     }
 }
