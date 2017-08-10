@@ -1,7 +1,9 @@
-﻿using Owin;
+﻿using ADS.BankingAnalytics.AnalyticsServiceAPI.Middleware;
+using Owin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,25 +17,56 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            var middleware = new Func<AppFunc, AppFunc>(MyMiddleware);
-            app.Use(middleware);
-        }
+            //var middleware = new Func<AppFunc, AppFunc>(MyMiddleware);
+            //app.Use(middleware);
 
-        public AppFunc MyMiddleware(AppFunc next)
-        {
-            AppFunc appFunc = async (IDictionary<String, Object> environment) =>
+            //app.Use(async (ctx, next) =>
+            //{
+            //    Console.WriteLine("Incoming request: " + ctx.Request.Path);
+            //    await next();
+            //    Console.WriteLine("Outgoing request: " + ctx.Request.Path);
+            //});
+
+            //app.Use(async (ctx, next) => {
+            //    await ctx.Response.WriteAsync("<html><head></head><body>Hello World</bpdy></html>");
+            //});
+
+            var options = new MiddlewareOptions
             {
-                var response = environment["owin.ResponseBody"] as Stream;
-
-                using (var writer = new StreamWriter(response))
+                OnIncomingRequest = (ctx) =>
                 {
-                    await writer.WriteAsync("<h1>Hello from my first middleware</h1>");
+                    var watch = new Stopwatch();
+                    watch.Start();
+                    ctx.Environment["DebugStopwatch"] = watch;
+                },
+                OnOutgoingRequest = (ctx) =>
+                {
+                    var watch = (Stopwatch)ctx.Environment["DebugStopwatch"];
+                    watch.Stop();
+                    Console.WriteLine("Request took: " + watch.ElapsedMilliseconds + " ms");
                 }
-
-                await next.Invoke(environment);
             };
 
-            return appFunc;
+            //app.Use<ControllerMiddleware>(options);
+            app.UseWebApi(options);
+            app.Use<OwinApplication>();
         }
+
+        //public AppFunc MyMiddleware(AppFunc next)
+        //{
+        //    AppFunc appFunc = async (IDictionary<String, Object> environment) =>
+        //    {
+        //        var response = environment["owin.ResponseBody"] as Stream;
+
+        //        using (var writer = new StreamWriter(response))
+        //        {
+        //            await writer.WriteAsync("<h1>Hello from my first middleware</h1>");
+        //        }
+
+        //        await next.Invoke(environment);
+        //    };
+
+        //    return appFunc;
+        //}
     }
 }
