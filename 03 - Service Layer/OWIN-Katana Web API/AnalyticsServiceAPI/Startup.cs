@@ -1,4 +1,5 @@
-﻿using ADS.BankingAnalytics.AnalyticsServiceAPI.Middleware;
+﻿using ADS.BankingAnalytics.AnalyticsServiceAPI.AutofacComposition;
+using ADS.BankingAnalytics.AnalyticsServiceAPI.Middleware;
 using Owin;
 using System;
 using System.Collections;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI
 {
@@ -47,9 +49,20 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
                 }
             };
 
-            //app.Use<ControllerMiddleware>(options);
-            app.UseWebApi(options);
-            app.Use<OwinApplication>();
+
+
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            Bootstrapper.Run(config);
+            app.UseWebApi(config);
+
+            //var config = new HttpConfiguration();
+            //config.MapHttpAttributeRoutes();
+            //app.UseWebApi(config);
+
+            ////app.Use<ControllerMiddleware>(options);
+            //app.UseWebApi(options);
+            //app.Use<OwinApplication>();
         }
 
         //public AppFunc MyMiddleware(AppFunc next)

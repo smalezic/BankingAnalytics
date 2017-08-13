@@ -13,7 +13,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
     {
         static void Main(string[] args)
         {
-            WebApp.Start<Startup>("http://localhost:8086");
+            WebApp.Start<Startup>("http://localhost:8081");
 
             Console.WriteLine("Server is started. Press Enter to quit.");
             Console.ReadLine();
