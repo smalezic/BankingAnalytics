@@ -13,7 +13,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.AutofacComposition
         public static void Run(HttpConfiguration config)
         {
             // Configure Autofac
-            //AutofacWebApiConfig.Initialize(GlobalConfiguration.Configuration);
             AutofacWebApiConfig.Initialize(config);
         }
     }

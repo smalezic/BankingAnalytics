@@ -38,7 +38,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
                 _worker = new Worker(activity, logger);
             }
             var x = _worker.FindEntity<Organization>(1);
-            return Content(System.Net.HttpStatusCode.OK, "Hello from Web Api");
+            return Content(System.Net.HttpStatusCode.OK, "Hello from Web Api, " + x.Name);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.AutofacComposition
 
         private static IContainer RegisterServices(ContainerBuilder builder)
         {
-            //Register your Web API controllers.  
+            //Register Web API controllers.  
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<OrganizationalStructureDbContext>()
