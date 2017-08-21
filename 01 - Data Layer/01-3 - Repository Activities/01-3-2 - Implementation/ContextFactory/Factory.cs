@@ -11,9 +11,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory
     public class Factory : IFactory
     {
         #region Fields
-
-        private DbContext _context;
-
+        
         #endregion Fields
 
         #region IFactory Interface Implementation

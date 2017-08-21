@@ -164,6 +164,10 @@
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
       <Name>LoggingInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\01-3-1 - Interfaces\IContextFactory\IContextFactory.csproj">
+      <Project>{f6cb7814-b047-4ba1-9bd4-9ff8c8797920}</Project>
+      <Name>IContextFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\01-3-1 - Interfaces\IRepositoryActivities\IRepositoryActivities.csproj">
       <Project>{a2e683e8-71a1-4636-949d-a2d8fea48e3e}</Project>
       <Name>IRepositoryActivities</Name>

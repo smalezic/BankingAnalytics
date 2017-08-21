@@ -25,7 +25,7 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
         {
             FabricModule fabricModule = new FabricModule();
 
-            fabricModule.Load();
+            fabricModule.Initialize();
 
             IFactory factory = new Factory();
             DbContext context = factory.Context;

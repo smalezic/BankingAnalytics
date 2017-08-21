@@ -3,7 +3,6 @@ using ADS.BankingAnalytics.DataEntities.ObjectModel;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
-using ADS.BankingAnalytics.Logging.NLogLogger;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,15 +27,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpGet]
         public IHttpActionResult HelloWorld()
         {
-            if(_worker == null)
-            {
-                IFactory factory = new Factory();
-                DbContext context = factory.Context;
-                ILogger logger = new Logger();
-
-                IGenericRepositoryActivity activity = new GenericRepositoryActivity(context, logger);
-                _worker = new Worker(activity, logger);
-            }
             var x = _worker.FindEntity<Organization>(1);
             return Content(System.Net.HttpStatusCode.OK, "Hello from Web Api, " + x.Name);
         }

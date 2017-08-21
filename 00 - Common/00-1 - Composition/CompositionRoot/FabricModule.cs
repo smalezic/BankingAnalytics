@@ -4,12 +4,16 @@ using ADS.BankingAnalytics.Logging.LoggingInterface;
 using ADS.BankingAnalytics.Logging.NLogLogger;
 using Autofac;
 using Autofac.Core;
+using Autofac.Integration.WebApi;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Reflection;
+using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
 
 namespace ADS.BankingAnalytics.Common.CompositionRoot
 {
@@ -23,11 +27,11 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 
         #region Load
 
-        public void Load()
+        public void Initialize()
         {
             try
             {
-                Load(new ContainerBuilder());
+                RegisterServices(new ContainerBuilder());
             }
             catch
             {
@@ -35,22 +39,51 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             }
         }
 
-        public void Load(ContainerBuilder builder)
+        public void Initialize(ContainerBuilder builder)
         {
             try
             {
-                // Register implementations of interfaces here
-                builder.RegisterType<Worker>().As<IWorker>();
-                builder.RegisterType<GenericRepositoryActivity>().As<IGenericRepositoryActivity>();
-                builder.RegisterType<Logger>().As<ILogger>();
-
-                // Build the container
-                _container = builder.Build();
+                RegisterServices(builder);
             }
             catch
             {
                 throw;
             }
+        }
+
+        public static void Initialize(HttpConfiguration config, Assembly assembly)
+        {
+            Initialize(config, RegisterServices(new ContainerBuilder(), assembly));
+        }
+
+
+        public static void Initialize(HttpConfiguration config, IContainer container)
+        {
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        private static IContainer RegisterServices(ContainerBuilder builder, Assembly assembly = null)
+        {
+            if (assembly != null)
+            {
+                //Register Web API controllers.
+                builder.RegisterApiControllers(assembly);
+            }
+
+            //builder.RegisterType<OrganizationalStructureDbContext>()
+            //       .As<DbContext>()
+            //       .InstancePerRequest();
+
+            // Register implementations of interfaces
+            builder.RegisterType<Factory>().As<IFactory>();
+            builder.RegisterType<Worker>().As<IWorker>();
+            builder.RegisterType<GenericRepositoryActivity>().As<IGenericRepositoryActivity>();
+            builder.RegisterType<Logger>().As<ILogger>();
+
+            // Build the container
+            _container = builder.Build();
+
+            return _container;
         }
 
         #endregion Load

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ADS.BankingAnalytics.Common.CompositionRoot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,7 +15,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.AutofacComposition
         public static void Run(HttpConfiguration config)
         {
             // Configure Autofac
-            AutofacWebApiConfig.Initialize(config);
+            FabricModule.Initialize(config, Assembly.GetExecutingAssembly());
         }
     }
 }

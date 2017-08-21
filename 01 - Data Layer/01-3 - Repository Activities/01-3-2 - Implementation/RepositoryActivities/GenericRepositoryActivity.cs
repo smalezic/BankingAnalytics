@@ -1,4 +1,5 @@
-﻿using ADS.BankingAnalytics.Logging.LoggingInterface;
+﻿using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
+using ADS.BankingAnalytics.Logging.LoggingInterface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 
         #region Constructors
 
-        public GenericRepositoryActivity(DbContext context, ILogger logger)
+        public GenericRepositoryActivity(IFactory contextFactory, ILogger logger)
         {
-            _context = context;
+            _context = contextFactory.Context;
             _logger = logger;
         }
 

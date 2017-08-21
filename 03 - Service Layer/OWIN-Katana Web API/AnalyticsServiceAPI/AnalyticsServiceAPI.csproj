@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Autofac.WebApi2.4.1.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
@@ -188,7 +188,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacComposition\AutofacWebApiConfig.cs" />
     <Compile Include="AutofacComposition\Bootstrapper.cs" />
     <Compile Include="Controllers\ImporterController.cs" />
     <Compile Include="Middleware\ControllerMiddleware.cs" />
@@ -213,14 +212,6 @@
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
       <Name>LoggingInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\00 - Common\00-2 - Logging\NLogLogger\NLogLogger.csproj">
-      <Project>{967eea56-a698-47e2-9cf2-f1b4e12c1b10}</Project>
-      <Name>NLogLogger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\01 - Data Layer\01-1 - Data Broker\DataBroker\DataBroker.csproj">
-      <Project>{6daf3b24-e5c8-4e4c-8fb3-6caa9ef30afa}</Project>
-      <Name>DataBroker</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>
@@ -233,21 +224,9 @@
       <Project>{a2e683e8-71a1-4636-949d-a2d8fea48e3e}</Project>
       <Name>IRepositoryActivities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-2 - Implementation\ContextFactory\ContextFactory.csproj">
-      <Project>{a7ab008c-6908-4fbb-82d9-02f093ed5186}</Project>
-      <Name>ContextFactory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-2 - Implementation\RepositoryActivities\RepositoryActivities.csproj">
-      <Project>{c9025385-3ebf-4df3-a181-23bfd55f0b87}</Project>
-      <Name>RepositoryActivities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\02 - Business Layer\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj">
       <Project>{3c7369dc-262a-4442-a5f0-c66432185710}</Project>
       <Name>IOrganizationManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\02 - Business Layer\02-2 - Implementation\OrganizationManager\OrganizationManager.csproj">
-      <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
-      <Name>OrganizationManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
