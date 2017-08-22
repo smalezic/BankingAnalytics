@@ -55,9 +55,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LoggingInterface\LoggingInterface.csproj">
+    <ProjectReference Include="..\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
-      <Name>LoggingInterface</Name>
+      <Name>ILogging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

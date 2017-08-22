@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-2 - Logging", "00-2 - Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositionRoot", "00 - Common\00-1 - Composition\CompositionRoot\CompositionRoot.csproj", "{EB20CC1D-ECE6-4BF5-B788-FFB183F03FE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingInterface", "00 - Common\00-2 - Logging\LoggingInterface\LoggingInterface.csproj", "{3BF8DDCE-0E82-4BAE-9B5A-3F6962D7870C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILogging", "00 - Common\00-2 - Logging\LoggingInterface\ILogging.csproj", "{3BF8DDCE-0E82-4BAE-9B5A-3F6962D7870C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLogLogger", "00 - Common\00-2 - Logging\NLogLogger\NLogLogger.csproj", "{967EEA56-A698-47E2-9CF2-F1B4E12C1B10}"
 EndProject

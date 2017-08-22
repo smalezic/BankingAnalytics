@@ -166,9 +166,9 @@
       <Project>{eb20cc1d-ece6-4bf5-b788-ffb183f03fe0}</Project>
       <Name>CompositionRoot</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\00 - Common\00-2 - Logging\LoggingInterface\LoggingInterface.csproj">
+    <ProjectReference Include="..\..\00 - Common\00-2 - Logging\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
-      <Name>LoggingInterface</Name>
+      <Name>ILogging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\00 - Common\00-2 - Logging\NLogLogger\NLogLogger.csproj">
       <Project>{967eea56-a698-47e2-9cf2-f1b4e12c1b10}</Project>

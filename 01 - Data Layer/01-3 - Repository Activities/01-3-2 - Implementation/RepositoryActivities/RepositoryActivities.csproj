@@ -160,9 +160,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\00 - Common\00-2 - Logging\LoggingInterface\LoggingInterface.csproj">
+    <ProjectReference Include="..\..\..\..\00 - Common\00-2 - Logging\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
-      <Name>LoggingInterface</Name>
+      <Name>ILogging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\01-3-1 - Interfaces\IContextFactory\IContextFactory.csproj">
       <Project>{f6cb7814-b047-4ba1-9bd4-9ff8c8797920}</Project>

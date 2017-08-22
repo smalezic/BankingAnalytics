@@ -44,9 +44,9 @@
     <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\00 - Common\00-2 - Logging\LoggingInterface\LoggingInterface.csproj">
+    <ProjectReference Include="..\..\..\00 - Common\00-2 - Logging\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
-      <Name>LoggingInterface</Name>
+      <Name>ILogging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
