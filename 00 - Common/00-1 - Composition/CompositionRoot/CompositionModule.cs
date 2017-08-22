@@ -25,7 +25,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
 
         #endregion Fields
 
-        #region Load
+        #region Initialize
 
         public void Initialize()
         {
@@ -75,7 +75,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             //       .InstancePerRequest();
 
             // Register implementations of interfaces
-            builder.RegisterType<Factory>().As<IFactory>();
+            builder.RegisterType<DbContextFactory>().As<IDbContextFactory>();
             builder.RegisterType<Worker>().As<IWorker>();
             builder.RegisterType<GenericRepositoryActivity>().As<IGenericRepositoryActivity>();
             builder.RegisterType<Logger>().As<ILogger>();
@@ -86,7 +86,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             return _container;
         }
 
-        #endregion Load
+        #endregion Initialize
 
         #region Resolve
 

@@ -27,7 +27,7 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
             fabricModule.Initialize();
 
-            IFactory factory = new Factory();
+            IDbContextFactory factory = new DbContextFactory();
             DbContext context = factory.Context;
 
             ILogger logger = fabricModule.Resolve<ILogger>();

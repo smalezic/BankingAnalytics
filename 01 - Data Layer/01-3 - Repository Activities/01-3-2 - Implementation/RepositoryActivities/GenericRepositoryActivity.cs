@@ -22,7 +22,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
 
         #region Constructors
 
-        public GenericRepositoryActivity(IFactory contextFactory, ILogger logger)
+        public GenericRepositoryActivity(IDbContextFactory contextFactory, ILogger logger)
         {
             _context = contextFactory.Context;
             _logger = logger;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory
 {
-    public class Factory : IFactory
+    public class DbContextFactory : IDbContextFactory
     {
         #region Fields
         

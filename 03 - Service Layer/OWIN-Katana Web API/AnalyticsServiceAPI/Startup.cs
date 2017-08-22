@@ -19,20 +19,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            //var middleware = new Func<AppFunc, AppFunc>(MyMiddleware);
-            //app.Use(middleware);
-
-            //app.Use(async (ctx, next) =>
-            //{
-            //    Console.WriteLine("Incoming request: " + ctx.Request.Path);
-            //    await next();
-            //    Console.WriteLine("Outgoing request: " + ctx.Request.Path);
-            //});
-
-            //app.Use(async (ctx, next) => {
-            //    await ctx.Response.WriteAsync("<html><head></head><body>Hello World</bpdy></html>");
-            //});
-
             var options = new MiddlewareOptions
             {
                 OnIncomingRequest = (ctx) =>
@@ -55,31 +41,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
             config.MapHttpAttributeRoutes();
             Bootstrapper.Run(config);
             app.UseWebApi(config);
-
-            //var config = new HttpConfiguration();
-            //config.MapHttpAttributeRoutes();
-            //app.UseWebApi(config);
-
-            ////app.Use<ControllerMiddleware>(options);
-            //app.UseWebApi(options);
-            //app.Use<OwinApplication>();
+            
         }
-
-        //public AppFunc MyMiddleware(AppFunc next)
-        //{
-        //    AppFunc appFunc = async (IDictionary<String, Object> environment) =>
-        //    {
-        //        var response = environment["owin.ResponseBody"] as Stream;
-
-        //        using (var writer = new StreamWriter(response))
-        //        {
-        //            await writer.WriteAsync("<h1>Hello from my first middleware</h1>");
-        //        }
-
-        //        await next.Invoke(environment);
-        //    };
-
-        //    return appFunc;
-        //}
     }
 }

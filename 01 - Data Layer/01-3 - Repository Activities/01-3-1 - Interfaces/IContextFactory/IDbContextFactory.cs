@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory
 {
-    public interface IFactory
+    public interface IDbContextFactory
     {
         DbContext Context { get; }
     }
