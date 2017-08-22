@@ -15,7 +15,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.AutofacComposition
         public static void Run(HttpConfiguration config)
         {
             // Configure Autofac
-            FabricModule.Initialize(config, Assembly.GetExecutingAssembly());
+            CompositionModule.Initialize(config, Assembly.GetExecutingAssembly());
         }
     }
 }

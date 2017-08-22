@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace ADS.BankingAnalytics.Common.CompositionRoot
 {
-    public interface IFabricModule
+    public interface ICompositionModule
     {
         void Initialize();
         void Initialize(ContainerBuilder builder);

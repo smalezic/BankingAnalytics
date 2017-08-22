@@ -17,7 +17,7 @@ using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
 
 namespace ADS.BankingAnalytics.Common.CompositionRoot
 {
-    public class FabricModule : IFabricModule
+    public class CompositionModule : ICompositionModule
     {
         #region Fields
         

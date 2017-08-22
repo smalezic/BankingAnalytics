@@ -177,8 +177,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FabricModule.cs" />
-    <Compile Include="IFabricModule.cs" />
+    <Compile Include="CompositionModule.cs" />
+    <Compile Include="ICompositionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

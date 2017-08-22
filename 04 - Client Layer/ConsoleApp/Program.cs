@@ -23,7 +23,7 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
         static void Main(string[] args)
         {
-            FabricModule fabricModule = new FabricModule();
+            CompositionModule fabricModule = new CompositionModule();
 
             fabricModule.Initialize();
 
