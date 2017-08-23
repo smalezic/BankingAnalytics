@@ -190,9 +190,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20170802141907_InitialCreate.cs" />
-    <Compile Include="Migrations\20170802141907_InitialCreate.designer.cs">
-      <DependentUpon>20170802141907_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20170823210113_Initial.cs" />
+    <Compile Include="Migrations\20170823210113_Initial.designer.cs">
+      <DependentUpon>20170823210113_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
@@ -207,6 +207,9 @@
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migration Instructions.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

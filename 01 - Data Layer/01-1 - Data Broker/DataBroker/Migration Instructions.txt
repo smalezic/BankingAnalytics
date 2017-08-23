@@ -1,0 +1,12 @@
+﻿All commands for migration need to be written in Package Manager Console.
+In order to sucessfully execute a command, project 'DataBroker' has to be set as a StartUp project.
+In Package Manager Console, for package source select All and for Default project select 'Data Broker'
+
+To create migrations write the command: 'Add-Migration InitialCreate' and press Enter. InitialCreate is the name of the migration and can be any other.
+To delete previously created migration, type the command: 'Rremove-Migration'.
+To create database, type the command: 'Updata-Database'
+
+In order to reset migrations to zero (to generate Up command with all entities) perform next steps:
+1. Delete the state: delete the migrations folder in the project.
+2. Delete the __MigrationHistory table in your database.
+3. Run the following command in the Package Manager Console: Add-Migration Initial

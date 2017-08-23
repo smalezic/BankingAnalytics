@@ -11,6 +11,9 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
 {
     public class OrganizationalStructureDbContext : DbContext
     {
+        public DbSet<ExpandableEntity> ExpandableEntities { get; set; }
+        public DbSet<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }
+        public DbSet<AdditionalField> AdditionalFields { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Unit> Units { get; set; }
 
@@ -22,6 +25,19 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Additional Fields Implementation
+
+            modelBuilder.Entity<ExpandableEntity>()
+                .ToTable("ExpandableEntities");
+
+            modelBuilder.Entity<AdditionalFieldDefinition>()
+                .ToTable("AdditionalFieldDefinitions");
+
+            modelBuilder.Entity<AdditionalField>()
+                .ToTable("AdditionalFields");
+
+            #endregion Additional Fields Implementation
+
             modelBuilder.Entity<Organization>()
                 .ToTable("Organizations");
 

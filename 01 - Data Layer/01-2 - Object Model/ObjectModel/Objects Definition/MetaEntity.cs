@@ -11,7 +11,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
     {
         [Key]
         public int Id { get; set; }
-
+        
         public override string ToString()
         {
             return String.Format("Id: {0}, Name: {1}", Id, base.ToString());

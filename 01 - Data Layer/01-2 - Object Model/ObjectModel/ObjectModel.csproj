@@ -183,6 +183,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects Definition\AdditionalField.cs" />
+    <Compile Include="Objects Definition\AdditionalFieldDefinition.cs" />
+    <Compile Include="Objects Definition\ExpandableEntity.cs" />
     <Compile Include="Objects Definition\MetaEntity.cs" />
     <Compile Include="Objects Definition\Organization.cs" />
     <Compile Include="Objects Definition\Unit.cs" />

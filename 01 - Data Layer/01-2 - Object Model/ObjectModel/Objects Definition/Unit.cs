@@ -17,6 +17,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         [ForeignKey("ParentUnit")]
         public Nullable<int> ParentUnitId { get; set; }
         public virtual Unit ParentUnit { get; set; }
+
         public virtual ICollection<Unit> ChildUnits { get; set; }
 
         //public virtual ICollection<InterUnitRelation> ChildUnitRelations { get; set; }
