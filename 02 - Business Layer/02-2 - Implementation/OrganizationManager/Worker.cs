@@ -45,6 +45,25 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return _genericRepository.GetById<TEntity>(id);
         }
 
+        public ExpandableEntity SaveExp(ExpandableEntity entity)
+        {
+            ExpandableEntity retVal;
+
+            try
+            {
+                retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
+
+                // TODO: Add logic for saving inner collection
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            return retVal;
+        }
+
         #endregion IWorker Interface Implementation
     }
 }

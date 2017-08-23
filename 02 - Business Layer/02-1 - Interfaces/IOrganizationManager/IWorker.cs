@@ -11,5 +11,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
     {
         MetaEntity Save(MetaEntity entity);
         TEntity FindEntity<TEntity>(int id) where TEntity : class;
+        ExpandableEntity SaveExp(ExpandableEntity entity);
     }
 }

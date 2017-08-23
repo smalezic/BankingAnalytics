@@ -8,6 +8,12 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
     public partial class ExpandableEntity : MetaEntity
     {
+        public ExpandableEntity()
+        {
+            AdditionalFieldDefinitions = new HashSet<AdditionalFieldDefinition>();
+            AdditionalFields = new HashSet<AdditionalField>();
+        }
+
         public int MetaEntityId { get; set; }
         public String MetaEntityType { get; set; }
 

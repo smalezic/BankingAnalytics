@@ -34,9 +34,27 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
             IGenericRepositoryActivity repositoryActivity = fabricModule.ResolveRepositoryActivity(context, logger);
             IWorker worker = fabricModule.ResolveWorker(repositoryActivity, logger);
 
-            //IGenericRepositoryActivity repository = new GenericRepositoryActivity();
-            //IWorker worker = new Worker(repository);
 
+
+            // Create AdditionalFieldDefinition
+
+            var def = new AdditionalFieldDefinition
+            {
+                Name = "Name",
+                IsMandatory = true
+            };
+
+            // Create ExpandableEntity
+
+            var expEntity = new ExpandableEntity
+            {
+                MetaEntityType = "Unit",
+                MetaEntityId = 1,
+            };
+
+            expEntity.AdditionalFieldDefinitions.Add(def);
+
+            var savedExp = worker.SaveExp(expEntity);
 
 
 
@@ -68,13 +86,13 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
+            //
+            //var org = worker.FindEntity<Organization>(1);
+            //var entity = worker.FindEntity<Unit>(2);
 
-            var org = worker.FindEntity<Organization>(1);
-            var entity = worker.FindEntity<Unit>(2);
-
-            Console.WriteLine(org.ToString());
-            Console.WriteLine(entity.ToString());
-
+            //Console.WriteLine(org.ToString());
+            //Console.WriteLine(entity.ToString());
+            //
 
 
 

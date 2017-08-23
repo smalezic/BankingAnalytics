@@ -13,6 +13,7 @@ namespace ADS.BankingAnalytics.Logging.LoggingInterface
         void Info(String message, params object[] parameters);
         void Warn(String message, params object[] parameters);
         void Error(String message, params object[] parameters);
+        void Error(Exception exc);
         void Fatal(String message, params object[] parameters);
     }
 }

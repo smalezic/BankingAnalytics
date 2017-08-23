@@ -64,17 +64,16 @@ namespace ADS.BankingAnalytics.Logging.NLogLogger
             _logger.Error(message, parameters);
         }
 
+        public void Error(Exception exc)
+        {
+            _logger.Error(exc);
+        }
+
         public void Fatal(String message, params object[] parameters)
         {
             _logger.Fatal(message, parameters);
         }
 
         #endregion Interface Implementation
-
-        #region Private Methods
-
-
-
-        #endregion Private Methods
     }
 }
