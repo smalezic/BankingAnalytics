@@ -13,11 +13,26 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            var config = new HttpConfiguration();
-            config.MapHttpAttributeRoutes();
+            //var config = new HttpConfiguration();
+            //config.MapHttpAttributeRoutes();
 
+            var config = ConfigureWebApi();
             Bootstrapper.Run(config);
             app.UseWebApi(config);
+        }
+
+        private HttpConfiguration ConfigureWebApi()
+        {
+            var config = new HttpConfiguration();
+
+            config.MapHttpAttributeRoutes();
+
+            //config.Routes.MapHttpRoute(
+            //    "DefaultApi",
+            //    "api/{controller}/{id}",
+            //    new { id = RouteParameter.Optional });
+
+            return config;
         }
     }
 }

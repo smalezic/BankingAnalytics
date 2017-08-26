@@ -52,13 +52,13 @@
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-1 - Interfaces\IExpandableEntityFactory\IExpandableEntityFactory.csproj">
+      <Project>{57216ced-0a70-4fb4-9d27-f78019e2729a}</Project>
+      <Name>IExpandableEntityFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-1 - Interfaces\IRepositoryActivities\IRepositoryActivities.csproj">
       <Project>{a2e683e8-71a1-4636-949d-a2d8fea48e3e}</Project>
       <Name>IRepositoryActivities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\IExpandableEntityFactory\IExpandableEntityFactory.csproj">
-      <Project>{57216ced-0a70-4fb4-9d27-f78019e2729a}</Project>
-      <Name>IExpandableEntityFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\02-1 - Interfaces\IOrganizationManager\IOrganizationManager.csproj">
       <Project>{3c7369dc-262a-4442-a5f0-c66432185710}</Project>

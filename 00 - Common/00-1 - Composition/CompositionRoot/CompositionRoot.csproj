@@ -121,8 +121,8 @@
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Net.Http.4.3.2\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -190,6 +190,10 @@
       <Project>{f6cb7814-b047-4ba1-9bd4-9ff8c8797920}</Project>
       <Name>IContextFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-1 - Interfaces\IExpandableEntityFactory\IExpandableEntityFactory.csproj">
+      <Project>{57216ced-0a70-4fb4-9d27-f78019e2729a}</Project>
+      <Name>IExpandableEntityFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-1 - Interfaces\IRepositoryActivities\IRepositoryActivities.csproj">
       <Project>{a2e683e8-71a1-4636-949d-a2d8fea48e3e}</Project>
       <Name>IRepositoryActivities</Name>
@@ -197,6 +201,10 @@
     <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-2 - Implementation\ContextFactory\ContextFactory.csproj">
       <Project>{a7ab008c-6908-4fbb-82d9-02f093ed5186}</Project>
       <Name>ContextFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-2 - Implementation\ExpandableEntityFactory\ExpandableEntityFactory.csproj">
+      <Project>{a8fd27c6-4c30-47bf-9bc7-ce417dd285c5}</Project>
+      <Name>ExpandableEntityFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-3 - Repository Activities\01-3-2 - Implementation\RepositoryActivities\RepositoryActivities.csproj">
       <Project>{c9025385-3ebf-4df3-a181-23bfd55f0b87}</Project>
@@ -209,14 +217,6 @@
     <ProjectReference Include="..\..\..\02 - Business Layer\02-2 - Implementation\OrganizationManager\OrganizationManager.csproj">
       <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
       <Name>OrganizationManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\ExpandableEntityFactory\ExpandableEntityFactory.csproj">
-      <Project>{a8fd27c6-4c30-47bf-9bc7-ce417dd285c5}</Project>
-      <Name>ExpandableEntityFactory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\IExpandableEntityFactory\IExpandableEntityFactory.csproj">
-      <Project>{57216ced-0a70-4fb4-9d27-f78019e2729a}</Project>
-      <Name>IExpandableEntityFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\00-2 - Logging\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>

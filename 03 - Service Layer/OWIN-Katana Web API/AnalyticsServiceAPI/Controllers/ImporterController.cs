@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/Importer")]
     public class ImporterController : ApiController
     {
         private IWorker _worker;
