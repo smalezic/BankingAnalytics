@@ -37,6 +37,53 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region IWorker Interface Implementation
 
+        public List<Organization> GetAllOrganizations()
+        {
+            List<Organization> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetAllOrganizations'");
+
+                retVal = _genericRepository.GetAll<Organization>().ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetAllOrganizations' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            
+            return retVal;
+        }
+
+        public List<Unit> GetUnits(int organizationId)
+        {
+            List<Unit> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetUnits'");
+                _logger.Trace("Parameter: organizationId - {0}", organizationId);
+
+                retVal = _genericRepository.GetByCriteria<Unit>(
+                    it => it.OrganizationId == organizationId
+                    ).ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            
+            return retVal;
+        }
+
         public MetaEntity Save(MetaEntity entity)
         {
             _logger.Trace("Saving entity with Id - {0}", entity.Id);

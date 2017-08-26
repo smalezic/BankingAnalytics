@@ -13,9 +13,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            //var config = new HttpConfiguration();
-            //config.MapHttpAttributeRoutes();
-
             var config = ConfigureWebApi();
             Bootstrapper.Run(config);
             app.UseWebApi(config);
@@ -24,6 +21,13 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI
         private HttpConfiguration ConfigureWebApi()
         {
             var config = new HttpConfiguration();
+
+            //// This line fixes JSON serialization of circular referenced objects
+            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            // These two lines fixes JSON serialization of circural referenced objects
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
 
             config.MapHttpAttributeRoutes();
 

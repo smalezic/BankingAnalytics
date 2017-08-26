@@ -68,9 +68,9 @@ namespace ADS.BankingAnalytics.Logging.NLogLogger
         {
             _logger.Error(exc);
 
-            //_logger.FatalFormat("Error (StackTrace) - {0}", exc.StackTrace);
-            //_logger.FatalFormat("Error (InnerException) - {0}", exc.InnerException);
-            //_logger.FatalFormat("Error (Message) - {0}", exc.Message);
+            //_logger.Error("Error (Message) - {0}", exc.Message);
+            //_logger.Error("Error (StackTrace) - {0}", exc.StackTrace);
+            //Error(exc.InnerException);
         }
 
         public void Fatal(String message, params object[] parameters)

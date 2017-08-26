@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Net;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 {
@@ -28,7 +29,22 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         public IHttpActionResult HelloWorld()
         {
             var x = _worker.FindUnit(1);
-            return Content(System.Net.HttpStatusCode.OK, x);
+            return Content(HttpStatusCode.OK, x);
+        }
+
+        [Route("GetAllOrganizations")]
+        [HttpGet]
+        public IHttpActionResult GetAllOrganizations()
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAllOrganizations());
+        }
+
+        [Route("GetUnits/{organizationId}")]
+        [HttpGet]
+        public IHttpActionResult GetUnits(int organizationId)
+        {
+            var x = Content(HttpStatusCode.OK, _worker.GetUnits(organizationId));
+            return x;
         }
     }
 }
