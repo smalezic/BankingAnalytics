@@ -27,8 +27,8 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpGet]
         public IHttpActionResult HelloWorld()
         {
-            var x = _worker.FindEntity<Organization>(1);
-            return Content(System.Net.HttpStatusCode.OK, "Hello from Web Api, " + x);
+            var x = _worker.FindUnit(1);
+            return Content(System.Net.HttpStatusCode.OK, x);
         }
     }
 }

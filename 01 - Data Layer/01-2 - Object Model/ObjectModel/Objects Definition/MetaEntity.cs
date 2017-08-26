@@ -11,10 +11,20 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
     {
         [Key]
         public int Id { get; set; }
+
+        public ExpandableEntity Expansion;
         
-        public override string ToString()
+        public override String ToString()
         {
             return String.Format("Id: {0}, Name: {1}", Id, base.ToString());
+        }
+
+        public virtual String TypeName
+        {
+            get
+            {
+                return this.GetType().Name;
+            }
         }
     }
 }

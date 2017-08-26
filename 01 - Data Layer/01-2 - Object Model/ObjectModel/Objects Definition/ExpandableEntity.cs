@@ -14,7 +14,9 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
             AdditionalFields = new HashSet<AdditionalField>();
         }
 
+        // Reference to expanded entity
         public int MetaEntityId { get; set; }
+        // Type of expanded entity
         public String MetaEntityType { get; set; }
 
         public virtual ICollection<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }

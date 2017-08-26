@@ -1,5 +1,6 @@
 ﻿using ADS.BankingAnalytics.DataEntities.ObjectModel;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
+using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntityFactory;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,17 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         // Instance of ILogger
         private readonly ILogger _logger;
 
+        private IExpandableEntityCreator _expansionCreator;
+
         #endregion Fields
 
         #region Constructor
 
-        public Worker(IGenericRepositoryActivity genericRepository, ILogger logger)
+        public Worker(IGenericRepositoryActivity genericRepository, ILogger logger, IExpandableEntityCreator expansionCreator)
         {
             _genericRepository = genericRepository;
             _logger = logger;
+            _expansionCreator = expansionCreator;
         }
 
         #endregion Constructor
@@ -39,10 +43,23 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return _genericRepository.Save<MetaEntity>(entity, entity.Id);
         }
 
-        public TEntity FindEntity<TEntity>(int id) where TEntity : class
+        public Unit FindUnit(int id)
         {
-            _logger.Trace("Fetching entity with Id - {0}", id);
-            return _genericRepository.GetById<TEntity>(id);
+            Unit retVal = null;
+
+            try
+            {
+                _logger.Trace("Fetching unit with Id - {0}", id);
+                retVal = _genericRepository.GetById<Unit>(id);
+                retVal = (Unit) _expansionCreator.Expand(retVal);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                throw;
+            }
+
+            return retVal;
         }
 
         public ExpandableEntity SaveExp(ExpandableEntity entity)
@@ -53,7 +70,16 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
 
-                // TODO: Add logic for saving inner collection
+                // Save inner collections
+                foreach(var fieldDefinition in entity.AdditionalFieldDefinitions)
+                {
+                    _genericRepository.Save<AdditionalFieldDefinition>(fieldDefinition);
+                }
+
+                foreach (var field in entity.AdditionalFields)
+                {
+                    _genericRepository.Save<AdditionalField>(field);
+                }
             }
             catch (Exception exc)
             {

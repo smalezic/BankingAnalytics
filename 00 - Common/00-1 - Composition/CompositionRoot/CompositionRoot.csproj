@@ -210,6 +210,14 @@
       <Project>{91a17cfe-0f8a-419b-97a3-97827faef0fd}</Project>
       <Name>OrganizationManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpandableEntityFactory\ExpandableEntityFactory.csproj">
+      <Project>{a8fd27c6-4c30-47bf-9bc7-ce417dd285c5}</Project>
+      <Name>ExpandableEntityFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\IExpandableEntityFactory\IExpandableEntityFactory.csproj">
+      <Project>{57216ced-0a70-4fb4-9d27-f78019e2729a}</Project>
+      <Name>IExpandableEntityFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\00-2 - Logging\LoggingInterface\ILogging.csproj">
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
       <Name>ILogging</Name>

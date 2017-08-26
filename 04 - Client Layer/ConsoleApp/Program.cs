@@ -36,25 +36,29 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            // Create AdditionalFieldDefinition
+            worker.FindUnit(1);
 
-            var def = new AdditionalFieldDefinition
-            {
-                Name = "Name",
-                IsMandatory = true
-            };
 
-            // Create ExpandableEntity
 
-            var expEntity = new ExpandableEntity
-            {
-                MetaEntityType = "Unit",
-                MetaEntityId = 1,
-            };
+            //// Create AdditionalFieldDefinition
+            //var def = new AdditionalFieldDefinition
+            //{
+            //    Name = "Name",
+            //    IsMandatory = true
+            //};
 
-            expEntity.AdditionalFieldDefinitions.Add(def);
+            //// Create ExpandableEntity
+            //var expEntity = new ExpandableEntity
+            //{
+            //    MetaEntityType = "Unit",
+            //    MetaEntityId = 1,
+            //};
 
-            var savedExp = worker.SaveExp(expEntity);
+            //expEntity.AdditionalFieldDefinitions.Add(def);
+
+            //var savedExp = worker.SaveExp(expEntity);
+
+
 
 
 

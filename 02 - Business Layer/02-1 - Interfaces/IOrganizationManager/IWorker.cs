@@ -10,7 +10,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
     public interface IWorker
     {
         MetaEntity Save(MetaEntity entity);
-        TEntity FindEntity<TEntity>(int id) where TEntity : class;
+        Unit FindUnit(int id);
         ExpandableEntity SaveExp(ExpandableEntity entity);
     }
 }
