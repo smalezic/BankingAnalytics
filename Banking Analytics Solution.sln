@@ -73,6 +73,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-3 - Extensions and Helpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmuValueInjectorExtension", "00 - Common\00-3 - Extensions and Helpers\OmuValueInjectorExtension\OmuValueInjectorExtension.csproj", "{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-4 - Enumerations", "00-4 - Enumerations", "{63110118-4601-492B-9D64-C7746E339459}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enumerations", "00 - Common\00-4 - Enumerations\Enumerations\Enumerations.csproj", "{5C1FF985-096A-4467-8658-419CECDF7CB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +159,10 @@ Global
 		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1FF985-096A-4467-8658-419CECDF7CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1FF985-096A-4467-8658-419CECDF7CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1FF985-096A-4467-8658-419CECDF7CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1FF985-096A-4467-8658-419CECDF7CB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,5 +198,7 @@ Global
 		{4D3EF7EA-9322-4531-82B1-CD83832DA25D} = {73DFC737-6717-43B8-98D2-8EEF6AA0CA21}
 		{048A80E8-513F-4BE6-B637-8D68F0687CED} = {E361AD31-877A-45F3-BCEB-F5FE08465B57}
 		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1} = {048A80E8-513F-4BE6-B637-8D68F0687CED}
+		{63110118-4601-492B-9D64-C7746E339459} = {E361AD31-877A-45F3-BCEB-F5FE08465B57}
+		{5C1FF985-096A-4467-8658-419CECDF7CB1} = {63110118-4601-492B-9D64-C7746E339459}
 	EndGlobalSection
 EndGlobal

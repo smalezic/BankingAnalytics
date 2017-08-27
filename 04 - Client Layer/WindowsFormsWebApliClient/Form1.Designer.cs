@@ -30,28 +30,37 @@
         {
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOrganizationName = new System.Windows.Forms.TextBox();
+            this.btnAddOrganization = new System.Windows.Forms.Button();
             this.cmbOrganizations = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmbUnits = new System.Windows.Forms.ComboBox();
-            this.btnAddOrganization = new System.Windows.Forms.Button();
-            this.txtOrganizationName = new System.Windows.Forms.TextBox();
-            this.chkHasParent = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtUnitName = new System.Windows.Forms.TextBox();
-            this.btnAddUnitToList = new System.Windows.Forms.Button();
-            this.btnSaveUnitList = new System.Windows.Forms.Button();
-            this.lblOrganizationName = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.lblUnitName = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblOrganizationName = new System.Windows.Forms.Label();
+            this.btnSaveUnitList = new System.Windows.Forms.Button();
+            this.btnAddUnitToList = new System.Windows.Forms.Button();
+            this.txtUnitName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chkHasParent = new System.Windows.Forms.CheckBox();
+            this.cmbUnits = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblSelectedUnitId = new System.Windows.Forms.Label();
+            this.lblSelectedUnitName = new System.Windows.Forms.Label();
+            this.lblSelectedUnitParentName = new System.Windows.Forms.Label();
+            this.rchAdditionalFields = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(529, 324);
+            this.btnExit.Location = new System.Drawing.Point(797, 560);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 0;
@@ -72,6 +81,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Organizations";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Name:";
+            // 
+            // txtOrganizationName
+            // 
+            this.txtOrganizationName.Location = new System.Drawing.Point(50, 66);
+            this.txtOrganizationName.Name = "txtOrganizationName";
+            this.txtOrganizationName.Size = new System.Drawing.Size(160, 20);
+            this.txtOrganizationName.TabIndex = 2;
+            // 
+            // btnAddOrganization
+            // 
+            this.btnAddOrganization.Location = new System.Drawing.Point(217, 63);
+            this.btnAddOrganization.Name = "btnAddOrganization";
+            this.btnAddOrganization.Size = new System.Drawing.Size(108, 23);
+            this.btnAddOrganization.TabIndex = 1;
+            this.btnAddOrganization.Text = "Add Organization";
+            this.btnAddOrganization.UseVisualStyleBackColor = true;
+            this.btnAddOrganization.Click += new System.EventHandler(this.btnAddOrganization_Click);
+            // 
             // cmbOrganizations
             // 
             this.cmbOrganizations.FormattingEnabled = true;
@@ -83,6 +118,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.lblUnitName);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
@@ -95,119 +131,10 @@
             this.groupBox2.Controls.Add(this.cmbUnits);
             this.groupBox2.Location = new System.Drawing.Point(430, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(442, 295);
+            this.groupBox2.Size = new System.Drawing.Size(442, 487);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Units";
-            // 
-            // cmbUnits
-            // 
-            this.cmbUnits.FormattingEnabled = true;
-            this.cmbUnits.Location = new System.Drawing.Point(51, 19);
-            this.cmbUnits.Name = "cmbUnits";
-            this.cmbUnits.Size = new System.Drawing.Size(160, 21);
-            this.cmbUnits.TabIndex = 0;
-            this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
-            // 
-            // btnAddOrganization
-            // 
-            this.btnAddOrganization.Location = new System.Drawing.Point(217, 63);
-            this.btnAddOrganization.Name = "btnAddOrganization";
-            this.btnAddOrganization.Size = new System.Drawing.Size(108, 23);
-            this.btnAddOrganization.TabIndex = 1;
-            this.btnAddOrganization.Text = "Add Organization";
-            this.btnAddOrganization.UseVisualStyleBackColor = true;
-            this.btnAddOrganization.Click += new System.EventHandler(this.btnAddOrganization_Click);
-            // 
-            // txtOrganizationName
-            // 
-            this.txtOrganizationName.Location = new System.Drawing.Point(50, 66);
-            this.txtOrganizationName.Name = "txtOrganizationName";
-            this.txtOrganizationName.Size = new System.Drawing.Size(160, 20);
-            this.txtOrganizationName.TabIndex = 2;
-            // 
-            // chkHasParent
-            // 
-            this.chkHasParent.AutoSize = true;
-            this.chkHasParent.Location = new System.Drawing.Point(50, 183);
-            this.chkHasParent.Name = "chkHasParent";
-            this.chkHasParent.Size = new System.Drawing.Size(101, 17);
-            this.chkHasParent.TabIndex = 1;
-            this.chkHasParent.Text = "Has Parent Unit";
-            this.chkHasParent.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Name:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 160);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Name:";
-            // 
-            // txtUnitName
-            // 
-            this.txtUnitName.Location = new System.Drawing.Point(50, 157);
-            this.txtUnitName.Name = "txtUnitName";
-            this.txtUnitName.Size = new System.Drawing.Size(160, 20);
-            this.txtUnitName.TabIndex = 3;
-            // 
-            // btnAddUnitToList
-            // 
-            this.btnAddUnitToList.Location = new System.Drawing.Point(218, 156);
-            this.btnAddUnitToList.Name = "btnAddUnitToList";
-            this.btnAddUnitToList.Size = new System.Drawing.Size(75, 23);
-            this.btnAddUnitToList.TabIndex = 4;
-            this.btnAddUnitToList.Text = "Add To List";
-            this.btnAddUnitToList.UseVisualStyleBackColor = true;
-            this.btnAddUnitToList.Click += new System.EventHandler(this.btnAddUnitToList_Click);
-            // 
-            // btnSaveUnitList
-            // 
-            this.btnSaveUnitList.Location = new System.Drawing.Point(302, 156);
-            this.btnSaveUnitList.Name = "btnSaveUnitList";
-            this.btnSaveUnitList.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveUnitList.TabIndex = 5;
-            this.btnSaveUnitList.Text = "Save List";
-            this.btnSaveUnitList.UseVisualStyleBackColor = true;
-            this.btnSaveUnitList.Click += new System.EventHandler(this.btnSaveUnitList_Click);
-            // 
-            // lblOrganizationName
-            // 
-            this.lblOrganizationName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblOrganizationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblOrganizationName.Location = new System.Drawing.Point(81, 65);
-            this.lblOrganizationName.Name = "lblOrganizationName";
-            this.lblOrganizationName.Size = new System.Drawing.Size(160, 21);
-            this.lblOrganizationName.TabIndex = 6;
-            this.lblOrganizationName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Organization:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Unit:";
             // 
             // lblUnitName
             // 
@@ -219,11 +146,174 @@
             this.lblUnitName.TabIndex = 10;
             this.lblUnitName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(46, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Unit:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Organization:";
+            // 
+            // lblOrganizationName
+            // 
+            this.lblOrganizationName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblOrganizationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOrganizationName.Location = new System.Drawing.Point(81, 65);
+            this.lblOrganizationName.Name = "lblOrganizationName";
+            this.lblOrganizationName.Size = new System.Drawing.Size(160, 21);
+            this.lblOrganizationName.TabIndex = 6;
+            this.lblOrganizationName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnSaveUnitList
+            // 
+            this.btnSaveUnitList.Location = new System.Drawing.Point(302, 156);
+            this.btnSaveUnitList.Name = "btnSaveUnitList";
+            this.btnSaveUnitList.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveUnitList.TabIndex = 5;
+            this.btnSaveUnitList.Text = "Save List";
+            this.btnSaveUnitList.UseVisualStyleBackColor = true;
+            this.btnSaveUnitList.Click += new System.EventHandler(this.btnSaveUnitList_Click);
+            // 
+            // btnAddUnitToList
+            // 
+            this.btnAddUnitToList.Location = new System.Drawing.Point(218, 156);
+            this.btnAddUnitToList.Name = "btnAddUnitToList";
+            this.btnAddUnitToList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddUnitToList.TabIndex = 4;
+            this.btnAddUnitToList.Text = "Add To List";
+            this.btnAddUnitToList.UseVisualStyleBackColor = true;
+            this.btnAddUnitToList.Click += new System.EventHandler(this.btnAddUnitToList_Click);
+            // 
+            // txtUnitName
+            // 
+            this.txtUnitName.Location = new System.Drawing.Point(50, 157);
+            this.txtUnitName.Name = "txtUnitName";
+            this.txtUnitName.Size = new System.Drawing.Size(160, 20);
+            this.txtUnitName.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 160);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Name:";
+            // 
+            // chkHasParent
+            // 
+            this.chkHasParent.AutoSize = true;
+            this.chkHasParent.Location = new System.Drawing.Point(50, 183);
+            this.chkHasParent.Name = "chkHasParent";
+            this.chkHasParent.Size = new System.Drawing.Size(101, 17);
+            this.chkHasParent.TabIndex = 1;
+            this.chkHasParent.Text = "Has Parent Unit";
+            this.chkHasParent.UseVisualStyleBackColor = true;
+            // 
+            // cmbUnits
+            // 
+            this.cmbUnits.FormattingEnabled = true;
+            this.cmbUnits.Location = new System.Drawing.Point(51, 19);
+            this.cmbUnits.Name = "cmbUnits";
+            this.cmbUnits.Size = new System.Drawing.Size(160, 21);
+            this.cmbUnits.TabIndex = 0;
+            this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rchAdditionalFields);
+            this.panel1.Controls.Add(this.lblSelectedUnitParentName);
+            this.panel1.Controls.Add(this.lblSelectedUnitName);
+            this.panel1.Controls.Add(this.lblSelectedUnitId);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Location = new System.Drawing.Point(9, 206);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(427, 275);
+            this.panel1.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(19, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Id:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Name:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Parent:";
+            // 
+            // lblSelectedUnitId
+            // 
+            this.lblSelectedUnitId.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitId.Location = new System.Drawing.Point(50, 18);
+            this.lblSelectedUnitId.Name = "lblSelectedUnitId";
+            this.lblSelectedUnitId.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitId.TabIndex = 3;
+            this.lblSelectedUnitId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedUnitName
+            // 
+            this.lblSelectedUnitName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitName.Location = new System.Drawing.Point(50, 52);
+            this.lblSelectedUnitName.Name = "lblSelectedUnitName";
+            this.lblSelectedUnitName.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitName.TabIndex = 4;
+            this.lblSelectedUnitName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedUnitParentName
+            // 
+            this.lblSelectedUnitParentName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitParentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitParentName.Location = new System.Drawing.Point(50, 86);
+            this.lblSelectedUnitParentName.Name = "lblSelectedUnitParentName";
+            this.lblSelectedUnitParentName.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitParentName.TabIndex = 5;
+            this.lblSelectedUnitParentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // rchAdditionalFields
+            // 
+            this.rchAdditionalFields.Location = new System.Drawing.Point(6, 123);
+            this.rchAdditionalFields.Name = "rchAdditionalFields";
+            this.rchAdditionalFields.Size = new System.Drawing.Size(416, 147);
+            this.rchAdditionalFields.TabIndex = 6;
+            this.rchAdditionalFields.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 359);
+            this.ClientSize = new System.Drawing.Size(884, 595);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExit);
@@ -234,6 +324,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -257,6 +349,14 @@
         private System.Windows.Forms.Label lblUnitName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox rchAdditionalFields;
+        private System.Windows.Forms.Label lblSelectedUnitParentName;
+        private System.Windows.Forms.Label lblSelectedUnitName;
+        private System.Windows.Forms.Label lblSelectedUnitId;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 

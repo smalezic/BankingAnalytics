@@ -24,11 +24,11 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             _worker = worker;
         }
 
-        [Route("hello")]
+        [Route("FindUnit/{id}")]
         [HttpGet]
-        public IHttpActionResult HelloWorld()
+        public IHttpActionResult FindUnit(int id)
         {
-            var x = _worker.FindUnit(1);
+            var x = _worker.FindUnit(id);
             return Content(HttpStatusCode.OK, x);
         }
 

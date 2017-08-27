@@ -195,5 +195,11 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\00 - Common\00-4 - Enumerations\Enumerations\Enumerations.csproj">
+      <Project>{5c1ff985-096a-4467-8658-419cecdf7cb1}</Project>
+      <Name>Enumerations</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

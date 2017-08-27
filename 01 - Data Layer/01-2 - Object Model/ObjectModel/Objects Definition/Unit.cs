@@ -22,6 +22,11 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 
         public virtual ICollection<Unit> ChildUnits { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         //public virtual ICollection<InterUnitRelation> ChildUnitRelations { get; set; }
 
         //public Nullable<int> UnitRelationId { get; set; }

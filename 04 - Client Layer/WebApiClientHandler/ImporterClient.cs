@@ -30,15 +30,10 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
         #endregion Constructor
 
         #region Controller's Methods invocations
-
-        /// <summary>
-        /// Test method
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        
         public Unit GetUnit(int id)
         {
-            var response = _client.GetAsync(_client.BaseAddress + "hello/").Result;
+            var response = _client.GetAsync(_client.BaseAddress + "FindUnit/" + id.ToString()).Result;
             return response.Content.ReadAsAsync<Unit>().Result;
         }
 

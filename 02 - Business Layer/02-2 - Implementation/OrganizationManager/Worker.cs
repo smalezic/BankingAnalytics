@@ -136,9 +136,10 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                     unitDb = new Unit();
                 }
 
-                // Update the existing entity or create the new one
+                // Update the existing entity or create the new one with the data from the passed entity
                 unitDb.InjectFrom<PrimitiveTypesExcludeId>(unit);
                 
+                // Save the entity
                 retVal = (Unit)SaveSimpleEntity(unitDb);
             }
             catch (Exception exc)

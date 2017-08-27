@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ADS.BankingAnalytics.DataEntities.Enumerations.CommonEnumerations;
 
 namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 {
@@ -76,6 +77,52 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             if (_selectedUnit != null)
             {
                 lblUnitName.Text = _selectedUnit.Name;
+
+                lblSelectedUnitId.Text = _selectedUnit.Id.ToString();
+                lblSelectedUnitName.Text = _selectedUnit.Name;
+                lblSelectedUnitParentName.Text = _selectedUnit.ParentUnit != null ? _selectedUnit.ParentUnit.Name : String.Empty;
+
+                rchAdditionalFields.Clear();
+
+                var expandedUnit = _importerClient.GetUnit(_selectedUnit.Id);
+
+                if (expandedUnit.Expansion != null)
+                {
+                    foreach (var field in expandedUnit.Expansion.AdditionalFields)
+                    {
+                        String name = field.AdditionalFieldDefinition.Name;
+                        object value;
+
+                        switch(field.AdditionalFieldDefinition.FieldValueType)
+                        {
+                            case FieldType.String:
+                                value = field.StringValue;
+                                break;
+
+                            case FieldType.Int:
+                                value = field.IntValue;
+                                break;
+
+                            case FieldType.Decimal:
+                                value = field.DecimalValue;
+                                break;
+
+                            case FieldType.DateTime:
+                                value = field.DateTimeValue;
+                                break;
+
+                            case FieldType.Bool:
+                                value = field.BooleanValue;
+                                break;
+
+                            default:
+                                value = null;
+                                break;
+                        }
+
+                        rchAdditionalFields.AppendText(String.Format("Field name - {0}, has value - {1}{2}", name, value, Environment.NewLine));
+                    }
+                }
             }
             else
             {
