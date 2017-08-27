@@ -194,6 +194,10 @@
     <Compile Include="Migrations\20170823210113_Initial.designer.cs">
       <DependentUpon>20170823210113_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170827115059_AddedNameToUnit.cs" />
+    <Compile Include="Migrations\20170827115059_AddedNameToUnit.designer.cs">
+      <DependentUpon>20170827115059_AddedNameToUnit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

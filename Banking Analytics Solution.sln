@@ -69,6 +69,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpandableEntityFactory", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClientHandler", "04 - Client Layer\WebApiClientHandler\WebApiClientHandler.csproj", "{4D3EF7EA-9322-4531-82B1-CD83832DA25D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-3 - Extensions and Helpers", "00-3 - Extensions and Helpers", "{048A80E8-513F-4BE6-B637-8D68F0687CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmuValueInjectorExtension", "00 - Common\00-3 - Extensions and Helpers\OmuValueInjectorExtension\OmuValueInjectorExtension.csproj", "{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +151,10 @@ Global
 		{4D3EF7EA-9322-4531-82B1-CD83832DA25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D3EF7EA-9322-4531-82B1-CD83832DA25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D3EF7EA-9322-4531-82B1-CD83832DA25D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,5 +188,7 @@ Global
 		{57216CED-0A70-4FB4-9D27-F78019E2729A} = {FCFF2344-E444-4F83-93D0-24D99E200CDA}
 		{A8FD27C6-4C30-47BF-9BC7-CE417DD285C5} = {43E37D68-6E0F-495F-9F00-12784648FDC3}
 		{4D3EF7EA-9322-4531-82B1-CD83832DA25D} = {73DFC737-6717-43B8-98D2-8EEF6AA0CA21}
+		{048A80E8-513F-4BE6-B637-8D68F0687CED} = {E361AD31-877A-45F3-BCEB-F5FE08465B57}
+		{DFAC7784-65E9-46FC-A021-C8DB004E2ED1} = {048A80E8-513F-4BE6-B637-8D68F0687CED}
 	EndGlobalSection
 EndGlobal

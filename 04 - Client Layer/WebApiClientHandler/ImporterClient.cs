@@ -29,7 +29,7 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
 
         #endregion Constructor
 
-        #region Controller's Methods invokations
+        #region Controller's Methods invocations
 
         /// <summary>
         /// Test method
@@ -54,6 +54,18 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<List<Unit>>().Result;
         }
 
-        #endregion Controller's Methods invokations
+        public Organization SaveSimpleEntity(Organization entity)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveOrganization/", entity).Result;
+            return response.Content.ReadAsAsync<Organization>().Result;
+        }
+
+        public bool SaveUnits(List<Unit> units)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", units).Result;
+            return response.Content.ReadAsAsync<bool>().Result;
+        }
+
+        #endregion Controller's Methods invocations
     }
 }

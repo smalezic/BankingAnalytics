@@ -43,8 +43,23 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetUnits(int organizationId)
         {
-            var x = Content(HttpStatusCode.OK, _worker.GetUnits(organizationId));
-            return x;
+            return Content(HttpStatusCode.OK, _worker.GetUnits(organizationId));
+        }
+
+        [Route("SaveOrganization")]
+        [HttpPost]
+        public IHttpActionResult SaveOrganization(Organization org)
+        {
+            var orgDb = _worker.SaveSimpleEntity(org);
+            return Content(HttpStatusCode.OK, orgDb);
+        }
+        
+        [Route("SaveUnits")]
+        [HttpPost]
+        public IHttpActionResult SaveUnits(List<Unit> units)
+        {
+            var retVal = _worker.SaveUnits(units);
+            return Content(HttpStatusCode.OK, retVal);
         }
     }
 }

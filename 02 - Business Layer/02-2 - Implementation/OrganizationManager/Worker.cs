@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Omu.ValueInjecter;
 
 namespace ADS.BankingAnalytics.Business.OrganizationManager
 {
@@ -84,10 +85,125 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public MetaEntity Save(MetaEntity entity)
+        public bool SaveUnits(List<Unit> units)
         {
-            _logger.Trace("Saving entity with Id - {0}", entity.Id);
-            return _genericRepository.Save<MetaEntity>(entity, entity.Id);
+            bool retVal = true;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveCollectionOfSimpleEntities'");
+
+                units.ForEach(it =>
+                {
+                    SaveUnit(it);
+                });
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = false;
+            }
+
+            _logger.Debug("Method 'SaveCollectionOfSimpleEntities' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
+        }
+
+        public Unit SaveUnit(Unit unit)
+        {
+            Unit retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveUnit'");
+
+                if(unit.ParentUnit != null)
+                {
+                    var parentUnit = SaveUnit(unit.ParentUnit);
+                    unit.ParentUnitId = parentUnit.Id;
+                }
+
+                // Check if a unit in the same organization and with the same name already exists
+                var unitDb = _genericRepository.GetByCriteria<Unit>(
+                        it => it.OrganizationId == unit.OrganizationId
+                            && it.Name.ToLower().Trim() == unit.Name.ToLower().Trim()
+                    )
+                    .FirstOrDefault();
+
+                if(unitDb == null)
+                {
+                    unitDb = new Unit();
+                }
+
+                // Update the existing entity or create the new one
+                unitDb.InjectFrom<PrimitiveTypesExcludeId>(unit);
+                
+                retVal = (Unit)SaveSimpleEntity(unitDb);
+            }
+            catch (Exception exc)
+            {
+                retVal = null;
+                _logger.Error(exc);
+            }
+
+            _logger.Debug("Method 'SaveUnit' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
+        }
+
+        public MetaEntity SaveSimpleEntity(MetaEntity entity)
+        {
+            MetaEntity retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveSimpleEntity'");
+
+                _logger.Trace("Saving entity with Id - {0}", entity.Id);
+                retVal = _genericRepository.Save<MetaEntity>(entity, entity.Id);
+
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'SaveSimpleEntity' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
+        }
+
+        public ExpandableEntity SaveExpandableEntity(ExpandableEntity entity)
+        {
+            ExpandableEntity retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveExpandableEntity'");
+
+                retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
+
+                // Save inner collections
+                foreach (var fieldDefinition in entity.AdditionalFieldDefinitions)
+                {
+                    _genericRepository.Save<AdditionalFieldDefinition>(fieldDefinition);
+                }
+
+                foreach (var field in entity.AdditionalFields)
+                {
+                    _genericRepository.Save<AdditionalField>(field);
+                }
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'SaveExpandableEntity' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
         }
 
         public Unit FindUnit(int id)
@@ -104,34 +220,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 _logger.Error(exc);
                 throw;
-            }
-
-            return retVal;
-        }
-
-        public ExpandableEntity SaveExp(ExpandableEntity entity)
-        {
-            ExpandableEntity retVal;
-
-            try
-            {
-                retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
-
-                // Save inner collections
-                foreach(var fieldDefinition in entity.AdditionalFieldDefinitions)
-                {
-                    _genericRepository.Save<AdditionalFieldDefinition>(fieldDefinition);
-                }
-
-                foreach (var field in entity.AdditionalFields)
-                {
-                    _genericRepository.Save<AdditionalField>(field);
-                }
-            }
-            catch (Exception exc)
-            {
-                _logger.Error(exc);
-                retVal = null;
             }
 
             return retVal;

@@ -12,8 +12,11 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         List<Organization> GetAllOrganizations();
         List<Unit> GetUnits(int organizationId);
 
-        MetaEntity Save(MetaEntity entity);
+        bool SaveUnits(List<Unit> entities);
+
+        MetaEntity SaveSimpleEntity(MetaEntity entity);
+        ExpandableEntity SaveExpandableEntity(ExpandableEntity entity);
+
         Unit FindUnit(int id);
-        ExpandableEntity SaveExp(ExpandableEntity entity);
     }
 }

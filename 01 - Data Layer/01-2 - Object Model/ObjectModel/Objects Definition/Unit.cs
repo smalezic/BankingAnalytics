@@ -10,6 +10,8 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
     public partial class Unit : MetaEntity
     {
+        public String Name { get; set; }
+
         [Required]
         public int OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }

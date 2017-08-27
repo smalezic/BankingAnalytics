@@ -17,6 +17,10 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         #region Fields
 
         private ImporterClient _importerClient;
+        private Organization _selectedOrganization;
+        private Unit _selectedUnit;
+
+        private List<Unit> _units;
 
         #endregion Fields
 
@@ -25,6 +29,8 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         public Form1()
         {
             InitializeComponent();
+
+            _units = new List<Unit>();
         }
 
         #endregion Constructor
@@ -43,6 +49,157 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             Close();
         }
 
+        private void cmbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedOrganization = (Organization)cmbOrganizations.SelectedItem;
+
+            if (_selectedOrganization != null)
+            {
+                var units = _importerClient.GetUnits(_selectedOrganization.Id);
+
+                cmbUnits.Items.Clear();
+                cmbUnits.Items.AddRange(units.ToArray());
+
+                lblOrganizationName.Text = _selectedOrganization.Name;
+            }
+            else
+            {
+                lblOrganizationName.Text = String.Empty;
+                MessageBox.Show("There is no any organization selected!");
+            }
+        }
+
+        private void cmbUnits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedUnit = (Unit)cmbUnits.SelectedItem;
+
+            if (_selectedUnit != null)
+            {
+                lblUnitName.Text = _selectedUnit.Name;
+            }
+            else
+            {
+                lblUnitName.Text = String.Empty;
+                MessageBox.Show("There is no any unit selected!");
+            }
+        }
+
+        private void btnAddOrganization_Click(object sender, EventArgs e)
+        {
+            if(String.IsNullOrWhiteSpace(txtOrganizationName.Text) == false)
+            {
+                var org = new Organization()
+                {
+                    Name = txtOrganizationName.Text
+                };
+
+                var x = _importerClient.SaveSimpleEntity(org);
+
+                GetAllOrganizations();
+            }
+            else
+            {
+                MessageBox.Show("Please enter the name of the organization!");
+            }
+        }
+
+        private void btnAddUnitToList_Click(object sender, EventArgs e)
+        {
+            if(_selectedOrganization != null)
+            {
+                if (String.IsNullOrWhiteSpace(txtUnitName.Text) == false)
+                {
+                    var unit = new Unit()
+                    {
+                        Name = txtUnitName.Text,
+                        OrganizationId = _selectedOrganization.Id
+                    };
+
+                    if (chkHasParent.Checked)
+                    {
+                        unit.ParentUnit = _selectedUnit;
+                    }
+
+                    _units.Add(unit);
+                    cmbUnits.Items.Add(unit);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter the name of the unit!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must provide an organization to the new unit!");
+            }
+        }
+
+        private void btnSaveUnitList_Click(object sender, EventArgs e)
+        {
+            var units = new List<Unit>();
+
+            var board = new Unit()
+            {
+                Name = "Board of directors",
+                OrganizationId = _selectedOrganization.Id
+            };
+
+            units.Add(board);
+
+            var operations = new Unit()
+            {
+                Name = "Operations",
+                OrganizationId = _selectedOrganization.Id,
+                ParentUnit = board
+            };
+
+            units.Add(operations);
+
+            var hr = new Unit()
+            {
+                Name = "HR",
+                OrganizationId = _selectedOrganization.Id,
+                ParentUnit = board
+            };
+
+            units.Add(hr);
+
+            var claims = new Unit()
+            {
+                Name = "Claims",
+                OrganizationId = _selectedOrganization.Id,
+                ParentUnit = operations
+            };
+
+            units.Add(claims);
+
+            var branches = new Unit()
+            {
+                Name = "Branches",
+                OrganizationId = _selectedOrganization.Id,
+                ParentUnit = claims
+            };
+
+            units.Add(branches);
+
+            var x = _importerClient.SaveUnits(units);
+
+            //if (_units.Count() > 0)
+            //{
+            //    var x = _importerClient.SaveUnits(_units);
+
+            //    if(x == true)
+            //    {
+            //        _units.Clear();
+            //        MessageBox.Show("Ok");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Not Ok");
+            //    }
+            //}
+        }
+
         #endregion Event Handlers
 
         #region Private Methods
@@ -56,22 +213,5 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         }
 
         #endregion Private Methods
-
-        private void cmbOrganizations_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var org = (Organization) cmbOrganizations.SelectedItem;
-
-            if (org != null)
-            {
-                var units = _importerClient.GetUnits(org.Id);
-
-                cmbUnits.Items.Clear();
-                cmbUnits.Items.AddRange(units.ToArray());
-            }
-            else
-            {
-                MessageBox.Show("There is no any organization selected");
-            }
-        }
     }
 }
