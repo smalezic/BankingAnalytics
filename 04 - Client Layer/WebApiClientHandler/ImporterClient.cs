@@ -34,7 +34,17 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
         public Unit GetUnit(int id)
         {
             var response = _client.GetAsync(_client.BaseAddress + "FindUnit/" + id.ToString()).Result;
-            return response.Content.ReadAsAsync<Unit>().Result;
+            var x = response.Content.ReadAsAsync<String>().Result;
+
+            var ser = x.Substring(0, x.IndexOf("|"));
+            var ser1 = x.Substring(x.IndexOf("|") + 1);
+
+            var ext = JsonConvert.DeserializeObject<ExpandableEntity>(ser);
+            var expandedUnit = JsonConvert.DeserializeObject<Unit>(ser1);
+
+            expandedUnit.Expansion = ext;
+
+            return expandedUnit;
         }
 
         public List<Organization> GetAllOrganizations()

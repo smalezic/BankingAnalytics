@@ -12,7 +12,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         [Key]
         public int Id { get; set; }
 
-        public ExpandableEntity Expansion;
+        public Expandable Expansion;
         
         public override String ToString()
         {

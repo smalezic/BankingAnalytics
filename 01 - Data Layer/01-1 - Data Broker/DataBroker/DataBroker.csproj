@@ -202,6 +202,14 @@
     <Compile Include="Migrations\20170827161646_AdditionalFieldDefinitionChanged.designer.cs">
       <DependentUpon>20170827161646_AdditionalFieldDefinitionChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170828192920_TypeEntitiesAdded.cs" />
+    <Compile Include="Migrations\20170828192920_TypeEntitiesAdded.designer.cs">
+      <DependentUpon>20170828192920_TypeEntitiesAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20170828201410_ExpandableDoesNotInheritedMetaEntity.cs" />
+    <Compile Include="Migrations\20170828201410_ExpandableDoesNotInheritedMetaEntity.designer.cs">
+      <DependentUpon>20170828201410_ExpandableDoesNotInheritedMetaEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

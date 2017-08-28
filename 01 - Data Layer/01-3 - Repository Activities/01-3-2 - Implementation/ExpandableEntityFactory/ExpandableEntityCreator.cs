@@ -30,11 +30,23 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntit
                     it =>
                         it.MetaEntityId == entity.Id
                         && it.MetaEntityType == entity.TypeName,
-                    it => it.AdditionalFieldDefinitions,
                     it => it.AdditionalFields
                 )
                 .FirstOrDefault();
             
+            return entity;
+        }
+
+        public MetaEntity ExpandType(MetaEntity entity)
+        {
+            entity.Expansion = _genericRepository.GetByCriteria<ExpandableEntityType>(
+                    it =>
+                        it.MetaEntityId == entity.Id
+                        && it.MetaEntityType == entity.TypeName,
+                    it => it.AdditionalFieldDefinitions
+                )
+                .FirstOrDefault();
+
             return entity;
         }
     }

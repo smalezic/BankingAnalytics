@@ -16,6 +16,8 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
         public DbSet<AdditionalField> AdditionalFields { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<UnitCategory> UnitCategory { get; set; }
+        public DbSet<ExpandableEntityType> ExpandableEntityType { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

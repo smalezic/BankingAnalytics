@@ -21,6 +21,9 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public virtual Unit ParentUnit { get; set; }
 
         public virtual ICollection<Unit> ChildUnits { get; set; }
+        
+        public Nullable<int> UnitCategoryId { get; set; }
+        public virtual UnitCategory UnitCategory{ get; set; }
 
         public override string ToString()
         {

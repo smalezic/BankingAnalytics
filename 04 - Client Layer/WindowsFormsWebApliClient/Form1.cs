@@ -88,7 +88,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
                 if (expandedUnit.Expansion != null)
                 {
-                    foreach (var field in expandedUnit.Expansion.AdditionalFields)
+                    foreach (var field in ((ExpandableEntity)expandedUnit.Expansion).AdditionalFields)
                     {
                         String name = field.AdditionalFieldDefinition.Name;
                         object value;

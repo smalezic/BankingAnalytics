@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 {
@@ -29,7 +30,11 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         public IHttpActionResult FindUnit(int id)
         {
             var x = _worker.FindUnit(id);
-            return Content(HttpStatusCode.OK, x);
+            var ser = JsonConvert.SerializeObject(x.Expansion);
+            x.Expansion = null;
+            var ser1 = JsonConvert.SerializeObject(x);
+
+            return Content(HttpStatusCode.OK, ser + "|" + ser1);
         }
 
         [Route("GetAllOrganizations")]
