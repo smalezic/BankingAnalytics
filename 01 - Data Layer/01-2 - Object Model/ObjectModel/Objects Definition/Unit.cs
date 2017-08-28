@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
-    public partial class Unit : MetaEntity
+    public partial class Unit : ExpandableEntity
     {
         public String Name { get; set; }
 

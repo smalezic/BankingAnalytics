@@ -9,9 +9,10 @@ using ADS.BankingAnalytics.DataEntities.Enumerations;
 namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 {
     [DbContext(typeof(OrganizationalStructureDbContext))]
-    partial class OrganizationalStructureDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170827193557_ExpandableChanged")]
+    partial class ExpandableChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -60,7 +61,9 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("ExpandableEntityTypeId");
+                    b.Property<int>("ExpandableEntityId");
+
+                    b.Property<int?>("ExpandableEntityTypeId");
 
                     b.Property<int>("FieldValueType");
 
@@ -71,6 +74,8 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     b.Property<int?>("Order");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExpandableEntityId");
 
                     b.HasIndex("ExpandableEntityTypeId");
 
@@ -86,6 +91,10 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         .IsRequired();
 
                     b.Property<int?>("ExpandableEntityTypeId");
+
+                    b.Property<int>("MetaEntityId");
+
+                    b.Property<string>("MetaEntityType");
 
                     b.HasKey("Id");
 
@@ -103,6 +112,10 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
+
+                    b.Property<int>("MetaEntityId");
+
+                    b.Property<string>("MetaEntityType");
 
                     b.HasKey("Id");
 
@@ -168,10 +181,14 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.AdditionalFieldDefinition", b =>
                 {
-                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntityType", "ExpandableEntityType")
-                        .WithMany("AdditionalFieldDefinitions")
-                        .HasForeignKey("ExpandableEntityTypeId")
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity", "ExpandableEntity")
+                        .WithMany()
+                        .HasForeignKey("ExpandableEntityId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntityType")
+                        .WithMany("AdditionalFieldDefinitions")
+                        .HasForeignKey("ExpandableEntityTypeId");
                 });
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity", b =>

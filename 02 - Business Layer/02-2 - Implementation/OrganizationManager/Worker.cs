@@ -187,7 +187,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
 
                 // Save inner collections
-                foreach (var fieldDefinition in entity.AdditionalFieldDefinitions)
+                foreach (var fieldDefinition in entity.ExpandableEntityType.AdditionalFieldDefinitions)
                 {
                     _genericRepository.Save<AdditionalFieldDefinition>(fieldDefinition);
                 }

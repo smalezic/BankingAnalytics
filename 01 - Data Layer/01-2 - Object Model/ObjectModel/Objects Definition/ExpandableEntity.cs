@@ -10,16 +10,12 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
     {
         public ExpandableEntity()
         {
-            AdditionalFieldDefinitions = new HashSet<AdditionalFieldDefinition>();
             AdditionalFields = new HashSet<AdditionalField>();
         }
 
-        // Reference to expanded entity
-        public int MetaEntityId { get; set; }
-        // Type of expanded entity
-        public String MetaEntityType { get; set; }
+        public Nullable<int> ExpandableEntityTypeId { get; set; }
+        public virtual ExpandableEntityType ExpandableEntityType { get; set; }
 
-        public virtual ICollection<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }
         public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
     }
 }

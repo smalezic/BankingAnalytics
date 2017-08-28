@@ -15,6 +15,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
         public DbSet<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }
         public DbSet<AdditionalField> AdditionalFields { get; set; }
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<UnitType> UnitTypes { get; set; }
         public DbSet<Unit> Units { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,9 +28,6 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
         {
             #region Additional Fields Implementation
 
-            modelBuilder.Entity<ExpandableEntity>()
-                .ToTable("ExpandableEntities");
-
             modelBuilder.Entity<AdditionalFieldDefinition>()
                 .ToTable("AdditionalFieldDefinitions");
 
@@ -40,6 +38,9 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
 
             modelBuilder.Entity<Organization>()
                 .ToTable("Organizations");
+
+            modelBuilder.Entity<UnitType>()
+                .ToTable("UnitTypes");
 
             modelBuilder.Entity<Unit>()
                 .ToTable("Units");

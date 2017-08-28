@@ -202,6 +202,14 @@
     <Compile Include="Migrations\20170827161646_AdditionalFieldDefinitionChanged.designer.cs">
       <DependentUpon>20170827161646_AdditionalFieldDefinitionChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170827193557_ExpandableChanged.cs" />
+    <Compile Include="Migrations\20170827193557_ExpandableChanged.designer.cs">
+      <DependentUpon>20170827193557_ExpandableChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20170827202431_ExpandableChanged-2.cs" />
+    <Compile Include="Migrations\20170827202431_ExpandableChanged-2.designer.cs">
+      <DependentUpon>20170827202431_ExpandableChanged-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
