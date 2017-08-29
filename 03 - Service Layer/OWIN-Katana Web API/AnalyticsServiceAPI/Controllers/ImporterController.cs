@@ -29,12 +29,20 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpGet]
         public IHttpActionResult FindUnit(int id)
         {
-            var x = _worker.FindUnit(id);
-            var ser = JsonConvert.SerializeObject(x.Expansion);
-            x.Expansion = null;
-            var ser1 = JsonConvert.SerializeObject(x);
+            var unit = _worker.FindUnit(id);
+            
+            var serializedExpansion = JsonConvert.SerializeObject(
+                unit.Expansion,
+                Formatting.Indented,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
 
-            return Content(HttpStatusCode.OK, ser + "|" + ser1);
+            unit.Expansion = null;
+            var serializedUnit = JsonConvert.SerializeObject(unit);
+
+            return Content(HttpStatusCode.OK, serializedExpansion + "|" + serializedUnit);
         }
 
         [Route("GetAllOrganizations")]

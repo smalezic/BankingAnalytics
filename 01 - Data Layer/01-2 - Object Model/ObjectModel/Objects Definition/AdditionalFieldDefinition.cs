@@ -20,8 +20,8 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public Nullable<System.DateTime> DeletedAt { get; set; }
         
         public int ExpandableEntityId { get; set; }
-        public virtual ExpandableEntity ExpandableEntity { get; set; }
+        public ExpandableEntity ExpandableEntity { get; set; }
 
-        public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
+        public ICollection<AdditionalField> AdditionalFields { get; set; }
     }
 }

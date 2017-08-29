@@ -26,14 +26,17 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntit
 
         public MetaEntity Expand(MetaEntity entity)
         {
-            entity.Expansion = _genericRepository.GetByCriteria<ExpandableEntity>(
-                    it =>
-                        it.MetaEntityId == entity.Id
-                        && it.MetaEntityType == entity.TypeName,
-                    it => it.AdditionalFields
-                )
-                .FirstOrDefault();
-            
+            //entity.Expansion = _genericRepository.GetByCriteria<ExpandableEntity>(
+            //        it =>
+            //            it.MetaEntityId == entity.Id
+            //            && it.MetaEntityType == entity.TypeName,
+            //        it => it.AdditionalFields
+            //    )
+            //    .FirstOrDefault();
+
+            //return entity;
+
+            entity.Expansion = _genericRepository.GetAdditionalFields(entity);
             return entity;
         }
 

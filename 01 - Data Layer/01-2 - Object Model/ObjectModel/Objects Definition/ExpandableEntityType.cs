@@ -13,6 +13,6 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
             AdditionalFieldDefinitions = new HashSet<AdditionalFieldDefinition>();
         }
 
-        public virtual ICollection<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }
+        public ICollection<AdditionalFieldDefinition> AdditionalFieldDefinitions { get; set; }
     }
 }

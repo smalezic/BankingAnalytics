@@ -1,4 +1,5 @@
 ﻿using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
+using ADS.BankingAnalytics.DataEntities.ObjectModel;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -213,6 +214,22 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
         }
 
         #endregion Saving changes
+
+        #region NonGeneric Methods
+
+        public ExpandableEntity GetAdditionalFields(MetaEntity entity)
+        {
+            return _context.Set<ExpandableEntity>()
+                .Include(it => it.AdditionalFields)
+                .ThenInclude(it => it.AdditionalFieldDefinition)
+                .Where(
+                    it =>
+                        it.MetaEntityId == entity.Id
+                        && it.MetaEntityType == entity.TypeName)
+                .FirstOrDefault();
+        }
+
+        #endregion NonGeneric Methods
 
         #endregion Interface Implementation
 

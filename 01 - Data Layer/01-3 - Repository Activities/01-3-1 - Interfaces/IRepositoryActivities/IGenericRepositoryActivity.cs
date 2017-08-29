@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADS.BankingAnalytics.DataEntities.ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -73,5 +74,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
         TEntity Save<TEntity>(TEntity entity, params object[] pk) where TEntity : class;
 
         #endregion Saving changes
+
+        ExpandableEntity GetAdditionalFields(MetaEntity entity);
     }
 }

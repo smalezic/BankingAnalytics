@@ -19,6 +19,6 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public int ExpandableEntityId { get; set; }
 
         public int AdditionalFieldDefinitionId { get; set; }
-        public virtual AdditionalFieldDefinition AdditionalFieldDefinition { get; set; }
+        public AdditionalFieldDefinition AdditionalFieldDefinition { get; set; }
     }
 }
