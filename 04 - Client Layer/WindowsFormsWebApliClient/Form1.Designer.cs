@@ -56,6 +56,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbUnitCategories = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmbAdditionalFields = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtAdditionalFieldValue = new System.Windows.Forms.TextBox();
+            this.btnAddAdditionalFieldValue = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -124,6 +129,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnAddAdditionalFieldValue);
+            this.groupBox2.Controls.Add(this.txtAdditionalFieldValue);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.cmbAdditionalFields);
+            this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.cmbUnitCategories);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.lblUnitName);
@@ -226,7 +236,7 @@
             // 
             this.lblUnitName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblUnitName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblUnitName.Location = new System.Drawing.Point(81, 95);
+            this.lblUnitName.Location = new System.Drawing.Point(93, 96);
             this.lblUnitName.Name = "lblUnitName";
             this.lblUnitName.Size = new System.Drawing.Size(160, 23);
             this.lblUnitName.TabIndex = 10;
@@ -235,7 +245,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 100);
+            this.label4.Location = new System.Drawing.Point(58, 101);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 8;
@@ -244,7 +254,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 69);
+            this.label3.Location = new System.Drawing.Point(18, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 7;
@@ -254,7 +264,7 @@
             // 
             this.lblOrganizationName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblOrganizationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblOrganizationName.Location = new System.Drawing.Point(81, 65);
+            this.lblOrganizationName.Location = new System.Drawing.Point(93, 66);
             this.lblOrganizationName.Name = "lblOrganizationName";
             this.lblOrganizationName.Size = new System.Drawing.Size(160, 21);
             this.lblOrganizationName.TabIndex = 6;
@@ -262,7 +272,7 @@
             // 
             // btnSaveUnitList
             // 
-            this.btnSaveUnitList.Location = new System.Drawing.Point(247, 174);
+            this.btnSaveUnitList.Location = new System.Drawing.Point(259, 175);
             this.btnSaveUnitList.Name = "btnSaveUnitList";
             this.btnSaveUnitList.Size = new System.Drawing.Size(75, 23);
             this.btnSaveUnitList.TabIndex = 5;
@@ -272,7 +282,7 @@
             // 
             // btnAddUnitToList
             // 
-            this.btnAddUnitToList.Location = new System.Drawing.Point(247, 143);
+            this.btnAddUnitToList.Location = new System.Drawing.Point(259, 144);
             this.btnAddUnitToList.Name = "btnAddUnitToList";
             this.btnAddUnitToList.Size = new System.Drawing.Size(75, 23);
             this.btnAddUnitToList.TabIndex = 4;
@@ -282,7 +292,7 @@
             // 
             // txtUnitName
             // 
-            this.txtUnitName.Location = new System.Drawing.Point(81, 176);
+            this.txtUnitName.Location = new System.Drawing.Point(93, 177);
             this.txtUnitName.Name = "txtUnitName";
             this.txtUnitName.Size = new System.Drawing.Size(160, 20);
             this.txtUnitName.TabIndex = 3;
@@ -290,7 +300,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 179);
+            this.label2.Location = new System.Drawing.Point(49, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 2;
@@ -299,7 +309,7 @@
             // chkHasParent
             // 
             this.chkHasParent.AutoSize = true;
-            this.chkHasParent.Location = new System.Drawing.Point(81, 202);
+            this.chkHasParent.Location = new System.Drawing.Point(93, 203);
             this.chkHasParent.Name = "chkHasParent";
             this.chkHasParent.Size = new System.Drawing.Size(101, 17);
             this.chkHasParent.TabIndex = 1;
@@ -327,7 +337,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(23, 148);
+            this.label9.Location = new System.Drawing.Point(35, 149);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 11;
@@ -336,11 +346,53 @@
             // cmbUnitCategories
             // 
             this.cmbUnitCategories.FormattingEnabled = true;
-            this.cmbUnitCategories.Location = new System.Drawing.Point(81, 145);
+            this.cmbUnitCategories.Location = new System.Drawing.Point(93, 146);
             this.cmbUnitCategories.Name = "cmbUnitCategories";
             this.cmbUnitCategories.Size = new System.Drawing.Size(160, 21);
             this.cmbUnitCategories.TabIndex = 12;
             this.cmbUnitCategories.SelectedIndexChanged += new System.EventHandler(this.cmbUnitCategories_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 243);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Additional Field:";
+            // 
+            // cmbAdditionalFields
+            // 
+            this.cmbAdditionalFields.FormattingEnabled = true;
+            this.cmbAdditionalFields.Location = new System.Drawing.Point(93, 240);
+            this.cmbAdditionalFields.Name = "cmbAdditionalFields";
+            this.cmbAdditionalFields.Size = new System.Drawing.Size(160, 21);
+            this.cmbAdditionalFields.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(50, 274);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Value:";
+            // 
+            // txtAdditionalFieldValue
+            // 
+            this.txtAdditionalFieldValue.Location = new System.Drawing.Point(93, 271);
+            this.txtAdditionalFieldValue.Name = "txtAdditionalFieldValue";
+            this.txtAdditionalFieldValue.Size = new System.Drawing.Size(160, 20);
+            this.txtAdditionalFieldValue.TabIndex = 16;
+            // 
+            // btnAddAdditionalFieldValue
+            // 
+            this.btnAddAdditionalFieldValue.Location = new System.Drawing.Point(259, 269);
+            this.btnAddAdditionalFieldValue.Name = "btnAddAdditionalFieldValue";
+            this.btnAddAdditionalFieldValue.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAdditionalFieldValue.TabIndex = 17;
+            this.btnAddAdditionalFieldValue.Text = "Add Value";
+            this.btnAddAdditionalFieldValue.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -393,6 +445,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbUnitCategories;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAddAdditionalFieldValue;
+        private System.Windows.Forms.TextBox txtAdditionalFieldValue;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbAdditionalFields;
+        private System.Windows.Forms.Label label10;
     }
 }
 

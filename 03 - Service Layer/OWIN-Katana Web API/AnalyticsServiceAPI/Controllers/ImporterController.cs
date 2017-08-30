@@ -66,6 +66,13 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, _worker.GetUnits(organizationId));
         }
 
+        [Route("GetAdditionalFieldDefinitions/{unitCategoryId}")]
+        [HttpGet]
+        public IHttpActionResult GetAdditionalFieldDefinitions(int unitCategoryId)
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAdditionalFieldDefinitions(unitCategoryId));
+        }
+
         [Route("SaveOrganization")]
         [HttpPost]
         public IHttpActionResult SaveOrganization(Organization org)

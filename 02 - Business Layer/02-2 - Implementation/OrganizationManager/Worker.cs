@@ -107,6 +107,32 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
+        public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)
+        {
+            List<AdditionalFieldDefinition> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetUnits'");
+                _logger.Trace("Parameter: organizationId - {0}", unitCategoryId);
+
+                retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
+                    it => it.ExpandableEntityId == unitCategoryId
+                    // dodaj i tip entiteta kao kriterijum pretrage
+                    ).ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+
+            return retVal;
+        }
+
         public bool SaveUnits(List<Unit> units)
         {
             bool retVal = true;

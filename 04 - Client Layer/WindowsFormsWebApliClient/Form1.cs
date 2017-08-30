@@ -74,6 +74,18 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         private void cmbUnitCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedUnitCategory = (UnitCategory)cmbUnitCategories.SelectedItem;
+
+            if (_selectedUnitCategory != null)
+            {
+                var addFieldsDefinitions = _importerClient.GetAdditionalFieldsDefinitions(_selectedUnitCategory.Id);
+
+                cmbAdditionalFields.Items.Clear();
+                cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
+            }
+            else
+            {
+                MessageBox.Show("There is no any category selected!");
+            }
         }
 
         private void cmbUnits_SelectedIndexChanged(object sender, EventArgs e)

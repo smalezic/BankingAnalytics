@@ -65,6 +65,12 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<List<Unit>>().Result;
         }
 
+        public List<AdditionalFieldDefinition> GetAdditionalFieldsDefinitions(int unitCategoryId)
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAdditionalFieldDefinitions/" + unitCategoryId.ToString() + "/").Result;
+            return response.Content.ReadAsAsync<List<AdditionalFieldDefinition>>().Result;
+        }
+
         public Organization SaveOrganization(Organization entity)
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveOrganization/", entity).Result;

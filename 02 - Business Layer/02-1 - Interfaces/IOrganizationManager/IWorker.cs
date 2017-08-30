@@ -12,6 +12,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         List<Organization> GetAllOrganizations();
         List<UnitCategory> GetAllUnitCategories();
         List<Unit> GetUnits(int organizationId);
+        List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
 
         bool SaveUnits(List<Unit> entities);
 
