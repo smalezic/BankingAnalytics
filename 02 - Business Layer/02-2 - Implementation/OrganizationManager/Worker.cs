@@ -60,6 +60,28 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
+        public List<UnitCategory> GetAllUnitCategories()
+        {
+            List<UnitCategory> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetAllUnitCategories'");
+
+                retVal = _genericRepository.GetAll<UnitCategory>().ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetAllUnitCategories' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+
+            return retVal;
+        }
+
         public List<Unit> GetUnits(int organizationId)
         {
             List<Unit> retVal;

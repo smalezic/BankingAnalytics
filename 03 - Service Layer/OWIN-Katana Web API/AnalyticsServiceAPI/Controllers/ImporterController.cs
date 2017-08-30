@@ -52,6 +52,13 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, _worker.GetAllOrganizations());
         }
 
+        [Route("GetAllUnitCategories")]
+        [HttpGet]
+        public IHttpActionResult GetAllUnitCategories()
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAllUnitCategories());
+        }
+
         [Route("GetUnits/{organizationId}")]
         [HttpGet]
         public IHttpActionResult GetUnits(int organizationId)
@@ -72,6 +79,14 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         public IHttpActionResult SaveUnits(List<Unit> units)
         {
             var retVal = _worker.SaveUnits(units);
+            return Content(HttpStatusCode.OK, retVal);
+        }
+
+        [Route("SaveUnitCategory")]
+        [HttpPost]
+        public IHttpActionResult SaveUnitCategory(UnitCategory unitCategory)
+        {
+            var retVal = _worker.SaveSimpleEntity(unitCategory);
             return Content(HttpStatusCode.OK, retVal);
         }
     }

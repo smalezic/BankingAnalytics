@@ -19,6 +19,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private ImporterClient _importerClient;
         private Organization _selectedOrganization;
+        private UnitCategory _selectedUnitCategory;
         private Unit _selectedUnit;
 
         private List<Unit> _units;
@@ -42,7 +43,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         {
             _importerClient = new ImporterClient("http://localhost:8081");
 
-            GetAllOrganizations();
+            GetAllOrganizationsAndUnitCategories();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -70,6 +71,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             }
         }
 
+        private void cmbUnitCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedUnitCategory = (UnitCategory)cmbUnitCategories.SelectedItem;
+        }
+
         private void cmbUnits_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedUnit = (Unit)cmbUnits.SelectedItem;
@@ -84,43 +90,46 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
                 rchAdditionalFields.Clear();
 
-                var expandedUnit = _importerClient.GetUnit(_selectedUnit.Id);
-
-                if (expandedUnit.Expansion != null)
+                if (_selectedUnit.Id > 0)
                 {
-                    foreach (var field in ((ExpandableEntity)expandedUnit.Expansion).AdditionalFields)
+                    var expandedUnit = _importerClient.GetUnit(_selectedUnit.Id);
+
+                    if (expandedUnit.Expansion != null)
                     {
-                        String name = field.AdditionalFieldDefinition.Name;
-                        object value;
-
-                        switch(field.AdditionalFieldDefinition.FieldValueType)
+                        foreach (var field in ((ExpandableEntity)expandedUnit.Expansion).AdditionalFields)
                         {
-                            case FieldType.String:
-                                value = field.StringValue;
-                                break;
+                            String name = field.AdditionalFieldDefinition.Name;
+                            object value;
 
-                            case FieldType.Int:
-                                value = field.IntValue;
-                                break;
+                            switch (field.AdditionalFieldDefinition.FieldValueType)
+                            {
+                                case FieldType.String:
+                                    value = field.StringValue;
+                                    break;
 
-                            case FieldType.Decimal:
-                                value = field.DecimalValue;
-                                break;
+                                case FieldType.Int:
+                                    value = field.IntValue;
+                                    break;
 
-                            case FieldType.DateTime:
-                                value = field.DateTimeValue;
-                                break;
+                                case FieldType.Decimal:
+                                    value = field.DecimalValue;
+                                    break;
 
-                            case FieldType.Bool:
-                                value = field.BooleanValue;
-                                break;
+                                case FieldType.DateTime:
+                                    value = field.DateTimeValue;
+                                    break;
 
-                            default:
-                                value = null;
-                                break;
+                                case FieldType.Bool:
+                                    value = field.BooleanValue;
+                                    break;
+
+                                default:
+                                    value = null;
+                                    break;
+                            }
+
+                            rchAdditionalFields.AppendText(String.Format("Field name - {0}, has value - {1}{2}", name, value, Environment.NewLine));
                         }
-
-                        rchAdditionalFields.AppendText(String.Format("Field name - {0}, has value - {1}{2}", name, value, Environment.NewLine));
                     }
                 }
             }
@@ -140,9 +149,9 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                     Name = txtOrganizationName.Text
                 };
 
-                var x = _importerClient.SaveSimpleEntity(org);
+                var x = _importerClient.SaveOrganization(org);
 
-                GetAllOrganizations();
+                GetAllOrganizationsAndUnitCategories();
             }
             else
             {
@@ -152,14 +161,15 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private void btnAddUnitToList_Click(object sender, EventArgs e)
         {
-            if(_selectedOrganization != null)
+            if(_selectedOrganization != null && _selectedUnitCategory != null)
             {
                 if (String.IsNullOrWhiteSpace(txtUnitName.Text) == false)
                 {
                     var unit = new Unit()
                     {
                         Name = txtUnitName.Text,
-                        OrganizationId = _selectedOrganization.Id
+                        OrganizationId = _selectedOrganization.Id,
+                        UnitCategoryId = _selectedUnitCategory.Id
                     };
 
                     if (chkHasParent.Checked)
@@ -183,80 +193,85 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private void btnSaveUnitList_Click(object sender, EventArgs e)
         {
-            var units = new List<Unit>();
+            //var units = new List<Unit>();
 
-            var board = new Unit()
-            {
-                Name = "Board of directors",
-                OrganizationId = _selectedOrganization.Id
-            };
-
-            units.Add(board);
-
-            var operations = new Unit()
-            {
-                Name = "Operations",
-                OrganizationId = _selectedOrganization.Id,
-                ParentUnit = board
-            };
-
-            units.Add(operations);
-
-            var hr = new Unit()
-            {
-                Name = "HR",
-                OrganizationId = _selectedOrganization.Id,
-                ParentUnit = board
-            };
-
-            units.Add(hr);
-
-            var claims = new Unit()
-            {
-                Name = "Claims",
-                OrganizationId = _selectedOrganization.Id,
-                ParentUnit = operations
-            };
-
-            units.Add(claims);
-
-            var branches = new Unit()
-            {
-                Name = "Branches",
-                OrganizationId = _selectedOrganization.Id,
-                ParentUnit = claims
-            };
-
-            units.Add(branches);
-
-            var x = _importerClient.SaveUnits(units);
-
-            //if (_units.Count() > 0)
+            //var board = new Unit()
             //{
-            //    var x = _importerClient.SaveUnits(_units);
+            //    Name = "Board of directors",
+            //    OrganizationId = _selectedOrganization.Id
+            //};
 
-            //    if(x == true)
-            //    {
-            //        _units.Clear();
-            //        MessageBox.Show("Ok");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Not Ok");
-            //    }
-            //}
+            //units.Add(board);
+
+            //var operations = new Unit()
+            //{
+            //    Name = "Operations",
+            //    OrganizationId = _selectedOrganization.Id,
+            //    ParentUnit = board
+            //};
+
+            //units.Add(operations);
+
+            //var hr = new Unit()
+            //{
+            //    Name = "HR",
+            //    OrganizationId = _selectedOrganization.Id,
+            //    ParentUnit = board
+            //};
+
+            //units.Add(hr);
+
+            //var claims = new Unit()
+            //{
+            //    Name = "Claims",
+            //    OrganizationId = _selectedOrganization.Id,
+            //    ParentUnit = operations
+            //};
+
+            //units.Add(claims);
+
+            //var branches = new Unit()
+            //{
+            //    Name = "Branches",
+            //    OrganizationId = _selectedOrganization.Id,
+            //    ParentUnit = claims
+            //};
+
+            //units.Add(branches);
+
+            //var x = _importerClient.SaveUnits(units);
+
+            if (_units.Count() > 0)
+            {
+                var x = _importerClient.SaveUnits(_units);
+
+                if (x == true)
+                {
+                    _units.Clear();
+                    MessageBox.Show("Ok");
+                }
+                else
+                {
+                    MessageBox.Show("Not Ok");
+                }
+            }
         }
 
         #endregion Event Handlers
 
         #region Private Methods
 
-        private void GetAllOrganizations()
+        private void GetAllOrganizationsAndUnitCategories()
         {
             var organizations = _importerClient.GetAllOrganizations();
 
             cmbOrganizations.Items.Clear();
             cmbOrganizations.Items.AddRange(organizations.ToArray());
+
+            var categories = _importerClient.GetAllUnitCategories();
+
+            cmbUnitCategories.Items.Clear();
+            cmbUnitCategories.Items.AddRange(categories.ToArray());
         }
 
         #endregion Private Methods

@@ -10,6 +10,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
     public interface IWorker
     {
         List<Organization> GetAllOrganizations();
+        List<UnitCategory> GetAllUnitCategories();
         List<Unit> GetUnits(int organizationId);
 
         bool SaveUnits(List<Unit> entities);

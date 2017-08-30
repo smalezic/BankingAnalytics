@@ -53,13 +53,19 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<List<Organization>>().Result;
         }
 
+        public List<UnitCategory> GetAllUnitCategories()
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAllUnitCategories/").Result;
+            return response.Content.ReadAsAsync<List<UnitCategory>>().Result;
+        }
+
         public List<Unit> GetUnits(int organizationId)
         {
             var response = _client.GetAsync(_client.BaseAddress + "GetUnits/" + organizationId.ToString() + "/").Result;
             return response.Content.ReadAsAsync<List<Unit>>().Result;
         }
 
-        public Organization SaveSimpleEntity(Organization entity)
+        public Organization SaveOrganization(Organization entity)
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveOrganization/", entity).Result;
             return response.Content.ReadAsAsync<Organization>().Result;
@@ -69,6 +75,12 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", units).Result;
             return response.Content.ReadAsAsync<bool>().Result;
+        }
+
+        public UnitCategory SaveUnitCategory(UnitCategory entity)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnitCategory/", entity).Result;
+            return response.Content.ReadAsAsync<UnitCategory>().Result;
         }
 
         #endregion Controller's Methods invocations

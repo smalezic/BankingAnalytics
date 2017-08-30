@@ -35,6 +35,14 @@
             this.btnAddOrganization = new System.Windows.Forms.Button();
             this.cmbOrganizations = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rchAdditionalFields = new System.Windows.Forms.RichTextBox();
+            this.lblSelectedUnitParentName = new System.Windows.Forms.Label();
+            this.lblSelectedUnitName = new System.Windows.Forms.Label();
+            this.lblSelectedUnitId = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblUnitName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,14 +53,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
             this.cmbUnits = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblSelectedUnitId = new System.Windows.Forms.Label();
-            this.lblSelectedUnitName = new System.Windows.Forms.Label();
-            this.lblSelectedUnitParentName = new System.Windows.Forms.Label();
-            this.rchAdditionalFields = new System.Windows.Forms.RichTextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbUnitCategories = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -70,13 +73,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtOrganizationName);
             this.groupBox1.Controls.Add(this.btnAddOrganization);
             this.groupBox1.Controls.Add(this.cmbOrganizations);
+            this.groupBox1.Controls.Add(this.cmbUnits);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(411, 295);
+            this.groupBox1.Size = new System.Drawing.Size(411, 524);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Organizations";
@@ -118,7 +124,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel1);
+            this.groupBox2.Controls.Add(this.cmbUnitCategories);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.lblUnitName);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
@@ -128,13 +135,92 @@
             this.groupBox2.Controls.Add(this.txtUnitName);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.chkHasParent);
-            this.groupBox2.Controls.Add(this.cmbUnits);
             this.groupBox2.Location = new System.Drawing.Point(430, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(442, 487);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Units";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rchAdditionalFields);
+            this.panel1.Controls.Add(this.lblSelectedUnitParentName);
+            this.panel1.Controls.Add(this.lblSelectedUnitName);
+            this.panel1.Controls.Add(this.lblSelectedUnitId);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Location = new System.Drawing.Point(6, 243);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(399, 275);
+            this.panel1.TabIndex = 11;
+            // 
+            // rchAdditionalFields
+            // 
+            this.rchAdditionalFields.Location = new System.Drawing.Point(6, 123);
+            this.rchAdditionalFields.Name = "rchAdditionalFields";
+            this.rchAdditionalFields.Size = new System.Drawing.Size(379, 147);
+            this.rchAdditionalFields.TabIndex = 6;
+            this.rchAdditionalFields.Text = "";
+            // 
+            // lblSelectedUnitParentName
+            // 
+            this.lblSelectedUnitParentName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitParentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitParentName.Location = new System.Drawing.Point(50, 86);
+            this.lblSelectedUnitParentName.Name = "lblSelectedUnitParentName";
+            this.lblSelectedUnitParentName.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitParentName.TabIndex = 5;
+            this.lblSelectedUnitParentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedUnitName
+            // 
+            this.lblSelectedUnitName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitName.Location = new System.Drawing.Point(50, 52);
+            this.lblSelectedUnitName.Name = "lblSelectedUnitName";
+            this.lblSelectedUnitName.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitName.TabIndex = 4;
+            this.lblSelectedUnitName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSelectedUnitId
+            // 
+            this.lblSelectedUnitId.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelectedUnitId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSelectedUnitId.Location = new System.Drawing.Point(50, 18);
+            this.lblSelectedUnitId.Name = "lblSelectedUnitId";
+            this.lblSelectedUnitId.Size = new System.Drawing.Size(100, 23);
+            this.lblSelectedUnitId.TabIndex = 3;
+            this.lblSelectedUnitId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Parent:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Name:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(19, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Id:";
             // 
             // lblUnitName
             // 
@@ -176,7 +262,7 @@
             // 
             // btnSaveUnitList
             // 
-            this.btnSaveUnitList.Location = new System.Drawing.Point(302, 156);
+            this.btnSaveUnitList.Location = new System.Drawing.Point(247, 174);
             this.btnSaveUnitList.Name = "btnSaveUnitList";
             this.btnSaveUnitList.Size = new System.Drawing.Size(75, 23);
             this.btnSaveUnitList.TabIndex = 5;
@@ -186,7 +272,7 @@
             // 
             // btnAddUnitToList
             // 
-            this.btnAddUnitToList.Location = new System.Drawing.Point(218, 156);
+            this.btnAddUnitToList.Location = new System.Drawing.Point(247, 143);
             this.btnAddUnitToList.Name = "btnAddUnitToList";
             this.btnAddUnitToList.Size = new System.Drawing.Size(75, 23);
             this.btnAddUnitToList.TabIndex = 4;
@@ -196,7 +282,7 @@
             // 
             // txtUnitName
             // 
-            this.txtUnitName.Location = new System.Drawing.Point(50, 157);
+            this.txtUnitName.Location = new System.Drawing.Point(81, 176);
             this.txtUnitName.Name = "txtUnitName";
             this.txtUnitName.Size = new System.Drawing.Size(160, 20);
             this.txtUnitName.TabIndex = 3;
@@ -204,7 +290,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 160);
+            this.label2.Location = new System.Drawing.Point(37, 179);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 2;
@@ -213,7 +299,7 @@
             // chkHasParent
             // 
             this.chkHasParent.AutoSize = true;
-            this.chkHasParent.Location = new System.Drawing.Point(50, 183);
+            this.chkHasParent.Location = new System.Drawing.Point(81, 202);
             this.chkHasParent.Name = "chkHasParent";
             this.chkHasParent.Size = new System.Drawing.Size(101, 17);
             this.chkHasParent.TabIndex = 1;
@@ -223,91 +309,38 @@
             // cmbUnits
             // 
             this.cmbUnits.FormattingEnabled = true;
-            this.cmbUnits.Location = new System.Drawing.Point(51, 19);
+            this.cmbUnits.Location = new System.Drawing.Point(50, 110);
             this.cmbUnits.Name = "cmbUnits";
             this.cmbUnits.Size = new System.Drawing.Size(160, 21);
             this.cmbUnits.TabIndex = 0;
             this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
             // 
-            // panel1
+            // label8
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rchAdditionalFields);
-            this.panel1.Controls.Add(this.lblSelectedUnitParentName);
-            this.panel1.Controls.Add(this.lblSelectedUnitName);
-            this.panel1.Controls.Add(this.lblSelectedUnitId);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(9, 206);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(427, 275);
-            this.panel1.TabIndex = 11;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 117);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Unit:";
             // 
-            // label5
+            // label9
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(19, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Id:";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(23, 148);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Category:";
             // 
-            // label6
+            // cmbUnitCategories
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Name:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 91);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Parent:";
-            // 
-            // lblSelectedUnitId
-            // 
-            this.lblSelectedUnitId.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblSelectedUnitId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedUnitId.Location = new System.Drawing.Point(50, 18);
-            this.lblSelectedUnitId.Name = "lblSelectedUnitId";
-            this.lblSelectedUnitId.Size = new System.Drawing.Size(100, 23);
-            this.lblSelectedUnitId.TabIndex = 3;
-            this.lblSelectedUnitId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSelectedUnitName
-            // 
-            this.lblSelectedUnitName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblSelectedUnitName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedUnitName.Location = new System.Drawing.Point(50, 52);
-            this.lblSelectedUnitName.Name = "lblSelectedUnitName";
-            this.lblSelectedUnitName.Size = new System.Drawing.Size(100, 23);
-            this.lblSelectedUnitName.TabIndex = 4;
-            this.lblSelectedUnitName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSelectedUnitParentName
-            // 
-            this.lblSelectedUnitParentName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblSelectedUnitParentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSelectedUnitParentName.Location = new System.Drawing.Point(50, 86);
-            this.lblSelectedUnitParentName.Name = "lblSelectedUnitParentName";
-            this.lblSelectedUnitParentName.Size = new System.Drawing.Size(100, 23);
-            this.lblSelectedUnitParentName.TabIndex = 5;
-            this.lblSelectedUnitParentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // rchAdditionalFields
-            // 
-            this.rchAdditionalFields.Location = new System.Drawing.Point(6, 123);
-            this.rchAdditionalFields.Name = "rchAdditionalFields";
-            this.rchAdditionalFields.Size = new System.Drawing.Size(416, 147);
-            this.rchAdditionalFields.TabIndex = 6;
-            this.rchAdditionalFields.Text = "";
+            this.cmbUnitCategories.FormattingEnabled = true;
+            this.cmbUnitCategories.Location = new System.Drawing.Point(81, 145);
+            this.cmbUnitCategories.Name = "cmbUnitCategories";
+            this.cmbUnitCategories.Size = new System.Drawing.Size(160, 21);
+            this.cmbUnitCategories.TabIndex = 12;
+            this.cmbUnitCategories.SelectedIndexChanged += new System.EventHandler(this.cmbUnitCategories_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -357,6 +390,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbUnitCategories;
+        private System.Windows.Forms.Label label9;
     }
 }
 

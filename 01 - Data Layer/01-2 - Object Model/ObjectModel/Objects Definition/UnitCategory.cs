@@ -10,5 +10,10 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
     {
         public String Name { get; set; }
         public virtual ICollection<Unit> Units { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
