@@ -79,8 +79,21 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
 
         public bool SaveUnits(List<Unit> units)
         {
-            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", units).Result;
+            var serializedUnits = JsonConvert.SerializeObject(
+                units,
+                Formatting.Indented,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
+            
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serializedUnits).Result;
             return response.Content.ReadAsAsync<bool>().Result;
+
+
+
+            //var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", units).Result;
+            //return response.Content.ReadAsAsync<bool>().Result;
         }
 
         public UnitCategory SaveUnitCategory(UnitCategory entity)

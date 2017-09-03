@@ -60,9 +60,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("ExpandableEntityId");
-
-                    b.Property<int?>("ExpandableEntityTypeId");
+                    b.Property<int>("ExpandableEntityTypeId");
 
                     b.Property<int>("FieldValueType");
 
@@ -73,8 +71,6 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     b.Property<int?>("Order");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExpandableEntityId");
 
                     b.HasIndex("ExpandableEntityTypeId");
 
@@ -164,7 +160,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         .HasForeignKey("AdditionalFieldDefinitionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity", "ExpandableEntity")
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity")
                         .WithMany("AdditionalFields")
                         .HasForeignKey("ExpandableEntityId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -172,14 +168,10 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.AdditionalFieldDefinition", b =>
                 {
-                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity", "ExpandableEntity")
-                        .WithMany()
-                        .HasForeignKey("ExpandableEntityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntityType")
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntityType", "ExpandableEntityType")
                         .WithMany("AdditionalFieldDefinitions")
-                        .HasForeignKey("ExpandableEntityTypeId");
+                        .HasForeignKey("ExpandableEntityTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.Unit", b =>

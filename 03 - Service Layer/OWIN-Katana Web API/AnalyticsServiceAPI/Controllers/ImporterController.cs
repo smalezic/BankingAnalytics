@@ -83,9 +83,20 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         
         [Route("SaveUnits")]
         [HttpPost]
-        public IHttpActionResult SaveUnits(List<Unit> units)
+        public IHttpActionResult SaveUnits([FromBody] String units)
         {
-            var retVal = _worker.SaveUnits(units);
+            var x = JsonConvert.DeserializeObject<List<object>>(units);
+            var retVal = _worker.SaveUnits(null);
+            return Content(HttpStatusCode.OK, retVal);
+        }
+
+        [Route("SaveSerializedUnits")]
+        [HttpPost]
+        public IHttpActionResult SaveSerializedUnits(String units)
+        {
+            var x = JsonConvert.DeserializeObject<List<Unit>>(units);
+
+            var retVal = _worker.SaveUnits(x);
             return Content(HttpStatusCode.OK, retVal);
         }
 

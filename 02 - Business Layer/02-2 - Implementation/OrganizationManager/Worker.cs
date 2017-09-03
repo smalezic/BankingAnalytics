@@ -118,7 +118,8 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 _logger.Trace("Parameter: organizationId - {0}", unitCategoryId);
 
                 retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
-                    it => it.ExpandableEntityId == unitCategoryId
+                    //it => it.ExpandableEntityId == unitCategoryId
+                    it => it.ExpandableEntityTypeId == unitCategoryId
                     // dodaj i tip entiteta kao kriterijum pretrage
                     ).ToList();
             }

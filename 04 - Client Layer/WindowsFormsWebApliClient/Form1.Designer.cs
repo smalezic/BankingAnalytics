@@ -30,11 +30,7 @@
         {
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtOrganizationName = new System.Windows.Forms.TextBox();
-            this.btnAddOrganization = new System.Windows.Forms.Button();
-            this.cmbOrganizations = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rchAdditionalFields = new System.Windows.Forms.RichTextBox();
             this.lblSelectedUnitParentName = new System.Windows.Forms.Label();
@@ -43,6 +39,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOrganizationName = new System.Windows.Forms.TextBox();
+            this.btnAddOrganization = new System.Windows.Forms.Button();
+            this.cmbOrganizations = new System.Windows.Forms.ComboBox();
+            this.cmbUnits = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAddAdditionalFieldValue = new System.Windows.Forms.Button();
+            this.txtAdditionalFieldValue = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbAdditionalFields = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmbUnitCategories = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.lblUnitName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,18 +61,9 @@
             this.txtUnitName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
-            this.cmbUnits = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbUnitCategories = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cmbAdditionalFields = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtAdditionalFieldValue = new System.Windows.Forms.TextBox();
-            this.btnAddAdditionalFieldValue = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -92,65 +92,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Organizations";
             // 
-            // label1
+            // label8
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Name:";
-            // 
-            // txtOrganizationName
-            // 
-            this.txtOrganizationName.Location = new System.Drawing.Point(50, 66);
-            this.txtOrganizationName.Name = "txtOrganizationName";
-            this.txtOrganizationName.Size = new System.Drawing.Size(160, 20);
-            this.txtOrganizationName.TabIndex = 2;
-            // 
-            // btnAddOrganization
-            // 
-            this.btnAddOrganization.Location = new System.Drawing.Point(217, 63);
-            this.btnAddOrganization.Name = "btnAddOrganization";
-            this.btnAddOrganization.Size = new System.Drawing.Size(108, 23);
-            this.btnAddOrganization.TabIndex = 1;
-            this.btnAddOrganization.Text = "Add Organization";
-            this.btnAddOrganization.UseVisualStyleBackColor = true;
-            this.btnAddOrganization.Click += new System.EventHandler(this.btnAddOrganization_Click);
-            // 
-            // cmbOrganizations
-            // 
-            this.cmbOrganizations.FormattingEnabled = true;
-            this.cmbOrganizations.Location = new System.Drawing.Point(50, 19);
-            this.cmbOrganizations.Name = "cmbOrganizations";
-            this.cmbOrganizations.Size = new System.Drawing.Size(160, 21);
-            this.cmbOrganizations.TabIndex = 0;
-            this.cmbOrganizations.SelectedIndexChanged += new System.EventHandler(this.cmbOrganizations_SelectedIndexChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnAddAdditionalFieldValue);
-            this.groupBox2.Controls.Add(this.txtAdditionalFieldValue);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.cmbAdditionalFields);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.cmbUnitCategories);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.lblUnitName);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.lblOrganizationName);
-            this.groupBox2.Controls.Add(this.btnSaveUnitList);
-            this.groupBox2.Controls.Add(this.btnAddUnitToList);
-            this.groupBox2.Controls.Add(this.txtUnitName);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.chkHasParent);
-            this.groupBox2.Location = new System.Drawing.Point(430, 13);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(442, 487);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Units";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 117);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Unit:";
             // 
             // panel1
             // 
@@ -232,6 +181,136 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Id:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Name:";
+            // 
+            // txtOrganizationName
+            // 
+            this.txtOrganizationName.Location = new System.Drawing.Point(50, 66);
+            this.txtOrganizationName.Name = "txtOrganizationName";
+            this.txtOrganizationName.Size = new System.Drawing.Size(160, 20);
+            this.txtOrganizationName.TabIndex = 2;
+            // 
+            // btnAddOrganization
+            // 
+            this.btnAddOrganization.Location = new System.Drawing.Point(217, 63);
+            this.btnAddOrganization.Name = "btnAddOrganization";
+            this.btnAddOrganization.Size = new System.Drawing.Size(108, 23);
+            this.btnAddOrganization.TabIndex = 1;
+            this.btnAddOrganization.Text = "Add Organization";
+            this.btnAddOrganization.UseVisualStyleBackColor = true;
+            this.btnAddOrganization.Click += new System.EventHandler(this.btnAddOrganization_Click);
+            // 
+            // cmbOrganizations
+            // 
+            this.cmbOrganizations.FormattingEnabled = true;
+            this.cmbOrganizations.Location = new System.Drawing.Point(50, 19);
+            this.cmbOrganizations.Name = "cmbOrganizations";
+            this.cmbOrganizations.Size = new System.Drawing.Size(160, 21);
+            this.cmbOrganizations.TabIndex = 0;
+            this.cmbOrganizations.SelectedIndexChanged += new System.EventHandler(this.cmbOrganizations_SelectedIndexChanged);
+            // 
+            // cmbUnits
+            // 
+            this.cmbUnits.FormattingEnabled = true;
+            this.cmbUnits.Location = new System.Drawing.Point(50, 110);
+            this.cmbUnits.Name = "cmbUnits";
+            this.cmbUnits.Size = new System.Drawing.Size(160, 21);
+            this.cmbUnits.TabIndex = 0;
+            this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnAddAdditionalFieldValue);
+            this.groupBox2.Controls.Add(this.txtAdditionalFieldValue);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.cmbAdditionalFields);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.cmbUnitCategories);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.lblUnitName);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.lblOrganizationName);
+            this.groupBox2.Controls.Add(this.btnSaveUnitList);
+            this.groupBox2.Controls.Add(this.btnAddUnitToList);
+            this.groupBox2.Controls.Add(this.txtUnitName);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.chkHasParent);
+            this.groupBox2.Location = new System.Drawing.Point(430, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(442, 487);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Units";
+            // 
+            // btnAddAdditionalFieldValue
+            // 
+            this.btnAddAdditionalFieldValue.Location = new System.Drawing.Point(259, 269);
+            this.btnAddAdditionalFieldValue.Name = "btnAddAdditionalFieldValue";
+            this.btnAddAdditionalFieldValue.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAdditionalFieldValue.TabIndex = 17;
+            this.btnAddAdditionalFieldValue.Text = "Add Value";
+            this.btnAddAdditionalFieldValue.UseVisualStyleBackColor = true;
+            this.btnAddAdditionalFieldValue.Click += new System.EventHandler(this.btnAddAdditionalFieldValue_Click);
+            // 
+            // txtAdditionalFieldValue
+            // 
+            this.txtAdditionalFieldValue.Location = new System.Drawing.Point(93, 271);
+            this.txtAdditionalFieldValue.Name = "txtAdditionalFieldValue";
+            this.txtAdditionalFieldValue.Size = new System.Drawing.Size(160, 20);
+            this.txtAdditionalFieldValue.TabIndex = 16;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(50, 274);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Value:";
+            // 
+            // cmbAdditionalFields
+            // 
+            this.cmbAdditionalFields.FormattingEnabled = true;
+            this.cmbAdditionalFields.Location = new System.Drawing.Point(93, 240);
+            this.cmbAdditionalFields.Name = "cmbAdditionalFields";
+            this.cmbAdditionalFields.Size = new System.Drawing.Size(160, 21);
+            this.cmbAdditionalFields.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 243);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Additional Field:";
+            // 
+            // cmbUnitCategories
+            // 
+            this.cmbUnitCategories.FormattingEnabled = true;
+            this.cmbUnitCategories.Location = new System.Drawing.Point(93, 146);
+            this.cmbUnitCategories.Name = "cmbUnitCategories";
+            this.cmbUnitCategories.Size = new System.Drawing.Size(160, 21);
+            this.cmbUnitCategories.TabIndex = 12;
+            this.cmbUnitCategories.SelectedIndexChanged += new System.EventHandler(this.cmbUnitCategories_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(35, 149);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Category:";
+            // 
             // lblUnitName
             // 
             this.lblUnitName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -272,7 +351,7 @@
             // 
             // btnSaveUnitList
             // 
-            this.btnSaveUnitList.Location = new System.Drawing.Point(259, 175);
+            this.btnSaveUnitList.Location = new System.Drawing.Point(259, 313);
             this.btnSaveUnitList.Name = "btnSaveUnitList";
             this.btnSaveUnitList.Size = new System.Drawing.Size(75, 23);
             this.btnSaveUnitList.TabIndex = 5;
@@ -316,84 +395,6 @@
             this.chkHasParent.Text = "Has Parent Unit";
             this.chkHasParent.UseVisualStyleBackColor = true;
             // 
-            // cmbUnits
-            // 
-            this.cmbUnits.FormattingEnabled = true;
-            this.cmbUnits.Location = new System.Drawing.Point(50, 110);
-            this.cmbUnits.Name = "cmbUnits";
-            this.cmbUnits.Size = new System.Drawing.Size(160, 21);
-            this.cmbUnits.TabIndex = 0;
-            this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 117);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Unit:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(35, 149);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 13);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Category:";
-            // 
-            // cmbUnitCategories
-            // 
-            this.cmbUnitCategories.FormattingEnabled = true;
-            this.cmbUnitCategories.Location = new System.Drawing.Point(93, 146);
-            this.cmbUnitCategories.Name = "cmbUnitCategories";
-            this.cmbUnitCategories.Size = new System.Drawing.Size(160, 21);
-            this.cmbUnitCategories.TabIndex = 12;
-            this.cmbUnitCategories.SelectedIndexChanged += new System.EventHandler(this.cmbUnitCategories_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 243);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Additional Field:";
-            // 
-            // cmbAdditionalFields
-            // 
-            this.cmbAdditionalFields.FormattingEnabled = true;
-            this.cmbAdditionalFields.Location = new System.Drawing.Point(93, 240);
-            this.cmbAdditionalFields.Name = "cmbAdditionalFields";
-            this.cmbAdditionalFields.Size = new System.Drawing.Size(160, 21);
-            this.cmbAdditionalFields.TabIndex = 14;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(50, 274);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Value:";
-            // 
-            // txtAdditionalFieldValue
-            // 
-            this.txtAdditionalFieldValue.Location = new System.Drawing.Point(93, 271);
-            this.txtAdditionalFieldValue.Name = "txtAdditionalFieldValue";
-            this.txtAdditionalFieldValue.Size = new System.Drawing.Size(160, 20);
-            this.txtAdditionalFieldValue.TabIndex = 16;
-            // 
-            // btnAddAdditionalFieldValue
-            // 
-            this.btnAddAdditionalFieldValue.Location = new System.Drawing.Point(259, 269);
-            this.btnAddAdditionalFieldValue.Name = "btnAddAdditionalFieldValue";
-            this.btnAddAdditionalFieldValue.Size = new System.Drawing.Size(75, 23);
-            this.btnAddAdditionalFieldValue.TabIndex = 17;
-            this.btnAddAdditionalFieldValue.Text = "Add Value";
-            this.btnAddAdditionalFieldValue.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,10 +408,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }

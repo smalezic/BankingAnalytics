@@ -23,6 +23,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         private Unit _selectedUnit;
 
         private List<Unit> _units;
+        private List<AdditionalField> _additionalFields;
 
         #endregion Fields
 
@@ -33,6 +34,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             InitializeComponent();
 
             _units = new List<Unit>();
+            _additionalFields = new List<AdditionalField>();
         }
 
         #endregion Constructor
@@ -189,6 +191,22 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                         unit.ParentUnit = _selectedUnit;
                     }
 
+                    if(_additionalFields.Count() > 0)
+                    {
+                        var expandable = new ExpandableEntity();
+                        unit.AdditionalFields2 = new List<AdditionalField>();
+
+                        _additionalFields.ForEach(it =>
+                        {
+                            expandable.AdditionalFields.Add(it);
+                            unit.AdditionalFields2.Add(it);
+                        });
+
+                        _additionalFields.Clear();
+
+                        unit.Expansion = expandable;
+                    }
+
                     _units.Add(unit);
                     cmbUnits.Items.Add(unit);
                 }
@@ -203,6 +221,48 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             }
         }
 
+        private void btnAddAdditionalFieldValue_Click(object sender, EventArgs e)
+        {
+            var additionalFieldDefinition = (AdditionalFieldDefinition)cmbAdditionalFields.SelectedItem;
+
+            if (additionalFieldDefinition != null)
+            {
+                var additionalField = new AdditionalField()
+                {
+                    AdditionalFieldDefinitionId = additionalFieldDefinition.Id,
+                };
+                String name = additionalFieldDefinition.Name;
+
+                switch (additionalFieldDefinition.FieldValueType)
+                {
+                    case FieldType.String:
+                        additionalField.StringValue = txtAdditionalFieldValue.Text;
+                        break;
+
+                    case FieldType.Int:
+                        additionalField.IntValue = int.Parse(txtAdditionalFieldValue.Text);
+                        break;
+
+                    case FieldType.Decimal:
+                        additionalField.DecimalValue = decimal.Parse(txtAdditionalFieldValue.Text);
+                        break;
+
+                    case FieldType.DateTime:
+                        additionalField.DateTimeValue = DateTime.Parse(txtAdditionalFieldValue.Text);
+                        break;
+
+                    case FieldType.Bool:
+                        additionalField.BooleanValue = txtAdditionalFieldValue.Text.ToLower() == "true" ? true : false;
+                        break;
+
+                    default:
+                        break;
+                }
+                
+                _additionalFields.Add(additionalField);
+            }
+        }
+
         private void btnSaveUnitList_Click(object sender, EventArgs e)
         {
             //var units = new List<Unit>();
@@ -210,7 +270,8 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             //var board = new Unit()
             //{
             //    Name = "Board of directors",
-            //    OrganizationId = _selectedOrganization.Id
+            //    OrganizationId = _selectedOrganization.Id,
+            //    UnitCategoryId = 1
             //};
 
             //units.Add(board);
@@ -219,6 +280,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             //{
             //    Name = "Operations",
             //    OrganizationId = _selectedOrganization.Id,
+            //    UnitCategoryId = 2,
             //    ParentUnit = board
             //};
 
@@ -228,6 +290,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             //{
             //    Name = "HR",
             //    OrganizationId = _selectedOrganization.Id,
+            //    UnitCategoryId = 2,
             //    ParentUnit = board
             //};
 
@@ -237,6 +300,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             //{
             //    Name = "Claims",
             //    OrganizationId = _selectedOrganization.Id,
+            //    UnitCategoryId = 3,
             //    ParentUnit = operations
             //};
 
@@ -246,12 +310,14 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             //{
             //    Name = "Branches",
             //    OrganizationId = _selectedOrganization.Id,
+            //    UnitCategoryId = 3,
             //    ParentUnit = claims
             //};
 
             //units.Add(branches);
 
             //var x = _importerClient.SaveUnits(units);
+
 
             if (_units.Count() > 0)
             {
