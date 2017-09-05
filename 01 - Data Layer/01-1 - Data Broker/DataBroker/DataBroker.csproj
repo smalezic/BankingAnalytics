@@ -198,6 +198,10 @@
     <Compile Include="Migrations\20170903112554_RemovedReferenceAFDandExpandableEntity.designer.cs">
       <DependentUpon>20170903112554_RemovedReferenceAFDandExpandableEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170905183140_MinorChanges.cs" />
+    <Compile Include="Migrations\20170905183140_MinorChanges.designer.cs">
+      <DependentUpon>20170905183140_MinorChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

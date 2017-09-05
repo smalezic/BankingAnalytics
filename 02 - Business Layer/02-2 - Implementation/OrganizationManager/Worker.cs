@@ -173,8 +173,10 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                     unit.ParentUnitId = parentUnit.Id;
                 }
 
+                Unit unitDb;
+
                 // Check if a unit in the same organization and with the same name already exists
-                var unitDb = _genericRepository.GetByCriteria<Unit>(
+                unitDb = _genericRepository.GetByCriteria<Unit>(
                         it => it.OrganizationId == unit.OrganizationId
                             && it.Name.ToLower().Trim() == unit.Name.ToLower().Trim()
                     )
@@ -190,6 +192,11 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 
                 // Save the entity
                 retVal = (Unit)SaveSimpleEntity(unitDb);
+
+                ((ExpandableEntity)unit.Expansion).MetaEntityId = retVal.Id;
+                ((ExpandableEntity)unit.Expansion).MetaEntityType = retVal.TypeName;
+
+                SaveExpandableEntity((ExpandableEntity)unit.Expansion);
             }
             catch (Exception exc)
             {

@@ -340,15 +340,22 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private void GetAllOrganizationsAndUnitCategories()
         {
-            var organizations = _importerClient.GetAllOrganizations();
+            try
+            {
+                var organizations = _importerClient.GetAllOrganizations();
 
-            cmbOrganizations.Items.Clear();
-            cmbOrganizations.Items.AddRange(organizations.ToArray());
+                cmbOrganizations.Items.Clear();
+                cmbOrganizations.Items.AddRange(organizations.ToArray());
 
-            var categories = _importerClient.GetAllUnitCategories();
+                var categories = _importerClient.GetAllUnitCategories();
 
-            cmbUnitCategories.Items.Clear();
-            cmbUnitCategories.Items.AddRange(categories.ToArray());
+                cmbUnitCategories.Items.Clear();
+                cmbUnitCategories.Items.AddRange(categories.ToArray());
+            }
+            catch
+            {
+
+            }
         }
 
         #endregion Private Methods
@@ -358,7 +365,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             var jsonFile = new StreamReader("..\\..\\JsonTest.txt");
             var json = jsonFile.ReadToEnd();
 
-            _importerClient.SaveUnitsTemp(json);
+            _importerClient.SaveUnit(json);
         }
     }
 }

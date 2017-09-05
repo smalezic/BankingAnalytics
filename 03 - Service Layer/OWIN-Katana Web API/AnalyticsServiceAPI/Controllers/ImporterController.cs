@@ -91,23 +91,23 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, retVal);
         }
 
-        [Route("SaveSerializedUnits")]
+        [Route("SaveSerializedUnit")]
         [HttpPost]
-        public IHttpActionResult SaveSerializedUnits([FromBody] String units)
+        public IHttpActionResult SaveSerializedUnit([FromBody] String serializedUnit)
         {
-            units = units.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
-            JObject googleSearch = JObject.Parse(units);
+            serializedUnit = serializedUnit.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
+            JObject jsonParsed = JObject.Parse(serializedUnit);
 
-            // get JSON result objects into a list
-            IList<JToken> results = googleSearch["Expansion"]["AdditionalFields"].Children().ToList();
+            // Get JSON result objects into a list
+            IList<JToken> tokenLinst = jsonParsed["Expansion"]["AdditionalFields"].Children().ToList();
 
-            // serialize JSON results into .NET objects
-            IList<AdditionalField> searchResults = new List<AdditionalField>();
-            foreach (JToken result in results)
+            // Serialize JSON results into .NET objects
+            IList<AdditionalField> additionalFields = new List<AdditionalField>();
+            foreach (JToken token in tokenLinst)
             {
                 // JToken.ToObject is a helper method that uses JsonSerializer internally
-                AdditionalField searchResult = result.ToObject<AdditionalField>();
-                searchResults.Add(searchResult);
+                AdditionalField searchResult = token.ToObject<AdditionalField>();
+                additionalFields.Add(searchResult);
             }
 
 
@@ -116,9 +116,14 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
 
             //var x = JsonConvert.DeserializeObject<List<Unit>>(units, new PersonConverter());
-            var x = JsonConvert.DeserializeObject<List<Unit>>(units);
+            var unit = JsonConvert.DeserializeObject<Unit>(serializedUnit);
+            ExpandableEntity expansion = new ExpandableEntity()
+            {
+                AdditionalFields = additionalFields
+            };
+            unit.Expansion = expansion;
 
-            var retVal = _worker.SaveUnits(x);
+            var retVal = _worker.SaveUnit(unit);
             return Content(HttpStatusCode.OK, retVal);
         }
 

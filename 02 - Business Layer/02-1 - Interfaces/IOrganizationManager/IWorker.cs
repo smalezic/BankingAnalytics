@@ -15,6 +15,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
 
         bool SaveUnits(List<Unit> entities);
+        Unit SaveUnit(Unit unit);
 
         MetaEntity SaveSimpleEntity(MetaEntity entity);
         ExpandableEntity SaveExpandableEntity(ExpandableEntity entity);

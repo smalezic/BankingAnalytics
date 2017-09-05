@@ -4,14 +4,28 @@
       "AdditionalFields": [
         {
           "Expansion": null,
-          "StringValue": "Kopaonik office",
+          "StringValue": null,
+          "IntValue": 3,
+          "DecimalValue": null,
+          "DateTimeValue": null,
+          "BooleanValue": null,
+          "DeletedAt": null,
+          "ExpandableEntityId": 0,
+          "AdditionalFieldDefinitionId": 3,
+          "AdditionalFieldDefinition": null,
+          "Id": 0,
+          "TypeName": "AdditionalField"
+        },
+        {
+          "Expansion": null,
+          "StringValue": "Test 1",
           "IntValue": null,
           "DecimalValue": null,
           "DateTimeValue": null,
           "BooleanValue": null,
           "DeletedAt": null,
           "ExpandableEntityId": 0,
-          "AdditionalFieldDefinitionId": 1,
+          "AdditionalFieldDefinitionId": 4,
           "AdditionalFieldDefinition": null,
           "Id": 0,
           "TypeName": "AdditionalField"
@@ -21,13 +35,13 @@
       "MetaEntityId": 0,
       "MetaEntityType": null
     },
-    "Name": "Board of Directors",
-    "OrganizationId": 3,
+    "Name": "HR 2",
+    "OrganizationId": 1,
     "Organization": null,
     "ParentUnitId": null,
     "ParentUnit": null,
     "ChildUnits": null,
-    "UnitCategoryId": 1,
+    "UnitCategoryId": 2,
     "UnitCategory": null,
     "Id": 0,
     "TypeName": "Unit"
