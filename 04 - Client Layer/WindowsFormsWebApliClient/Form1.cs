@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ADS.BankingAnalytics.DataEntities.Enumerations.CommonEnumerations;
+using System.IO;
 
 namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 {
@@ -194,12 +195,10 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                     if(_additionalFields.Count() > 0)
                     {
                         var expandable = new ExpandableEntity();
-                        unit.AdditionalFields2 = new List<AdditionalField>();
 
                         _additionalFields.ForEach(it =>
                         {
                             expandable.AdditionalFields.Add(it);
-                            unit.AdditionalFields2.Add(it);
                         });
 
                         _additionalFields.Clear();
@@ -353,5 +352,13 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         }
 
         #endregion Private Methods
+
+        private void btnTemp_Click(object sender, EventArgs e)
+        {
+            var jsonFile = new StreamReader("..\\..\\JsonTest.txt");
+            var json = jsonFile.ReadToEnd();
+
+            _importerClient.SaveUnitsTemp(json);
+        }
     }
 }

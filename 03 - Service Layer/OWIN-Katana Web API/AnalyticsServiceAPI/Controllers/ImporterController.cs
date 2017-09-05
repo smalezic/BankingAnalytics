@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 {
@@ -85,15 +86,36 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpPost]
         public IHttpActionResult SaveUnits([FromBody] String units)
         {
-            var x = JsonConvert.DeserializeObject<List<object>>(units);
+            var x = JsonConvert.DeserializeObject<List<Unit>>(units);
             var retVal = _worker.SaveUnits(null);
             return Content(HttpStatusCode.OK, retVal);
         }
 
         [Route("SaveSerializedUnits")]
         [HttpPost]
-        public IHttpActionResult SaveSerializedUnits(String units)
+        public IHttpActionResult SaveSerializedUnits([FromBody] String units)
         {
+            units = units.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
+            JObject googleSearch = JObject.Parse(units);
+
+            // get JSON result objects into a list
+            IList<JToken> results = googleSearch["Expansion"]["AdditionalFields"].Children().ToList();
+
+            // serialize JSON results into .NET objects
+            IList<AdditionalField> searchResults = new List<AdditionalField>();
+            foreach (JToken result in results)
+            {
+                // JToken.ToObject is a helper method that uses JsonSerializer internally
+                AdditionalField searchResult = result.ToObject<AdditionalField>();
+                searchResults.Add(searchResult);
+            }
+
+
+
+
+
+
+            //var x = JsonConvert.DeserializeObject<List<Unit>>(units, new PersonConverter());
             var x = JsonConvert.DeserializeObject<List<Unit>>(units);
 
             var retVal = _worker.SaveUnits(x);

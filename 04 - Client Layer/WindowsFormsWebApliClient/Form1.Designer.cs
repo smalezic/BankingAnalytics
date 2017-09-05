@@ -61,6 +61,7 @@
             this.txtUnitName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
+            this.btnTemp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -227,6 +228,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnTemp);
             this.groupBox2.Controls.Add(this.btnAddAdditionalFieldValue);
             this.groupBox2.Controls.Add(this.txtAdditionalFieldValue);
             this.groupBox2.Controls.Add(this.label11);
@@ -395,6 +397,16 @@
             this.chkHasParent.Text = "Has Parent Unit";
             this.chkHasParent.UseVisualStyleBackColor = true;
             // 
+            // btnTemp
+            // 
+            this.btnTemp.Location = new System.Drawing.Point(80, 382);
+            this.btnTemp.Name = "btnTemp";
+            this.btnTemp.Size = new System.Drawing.Size(75, 23);
+            this.btnTemp.TabIndex = 18;
+            this.btnTemp.Text = "Temp";
+            this.btnTemp.UseVisualStyleBackColor = true;
+            this.btnTemp.Click += new System.EventHandler(this.btnTemp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,6 +463,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmbAdditionalFields;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnTemp;
     }
 }
 

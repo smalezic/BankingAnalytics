@@ -1,0 +1,35 @@
+[
+  {
+    "Expansion": {
+      "AdditionalFields": [
+        {
+          "Expansion": null,
+          "StringValue": "Kopaonik office",
+          "IntValue": null,
+          "DecimalValue": null,
+          "DateTimeValue": null,
+          "BooleanValue": null,
+          "DeletedAt": null,
+          "ExpandableEntityId": 0,
+          "AdditionalFieldDefinitionId": 1,
+          "AdditionalFieldDefinition": null,
+          "Id": 0,
+          "TypeName": "AdditionalField"
+        }
+      ],
+      "Id": 0,
+      "MetaEntityId": 0,
+      "MetaEntityType": null
+    },
+    "Name": "Board of Directors",
+    "OrganizationId": 3,
+    "Organization": null,
+    "ParentUnitId": null,
+    "ParentUnit": null,
+    "ChildUnits": null,
+    "UnitCategoryId": 1,
+    "UnitCategory": null,
+    "Id": 0,
+    "TypeName": "Unit"
+  }
+]
