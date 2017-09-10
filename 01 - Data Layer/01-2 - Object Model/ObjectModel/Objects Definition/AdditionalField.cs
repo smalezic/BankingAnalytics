@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public Nullable<System.DateTime> DeletedAt { get; set; }
         
         public int ExpandableEntityId { get; set; }
+        [NotMapped]
+        public Expandable Expandable { get; set; }
 
         public int AdditionalFieldDefinitionId { get; set; }
         public AdditionalFieldDefinition AdditionalFieldDefinition { get; set; }

@@ -86,15 +86,29 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpPost]
         public IHttpActionResult SaveUnits([FromBody] String units)
         {
-            var x = JsonConvert.DeserializeObject<List<Unit>>(units);
-            var retVal = _worker.SaveUnits(null);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            var deserialized = JsonConvert.DeserializeObject<List<Unit>>(units, settings);
+
+            var retVal = _worker.SaveUnits(deserialized);
             return Content(HttpStatusCode.OK, retVal);
+
+
+
+            //var x = JsonConvert.DeserializeObject<List<Unit>>(units);
+            //var retVal = _worker.SaveUnits(null);
+            //return Content(HttpStatusCode.OK, retVal);
         }
 
         [Route("SaveSerializedUnit")]
         [HttpPost]
         public IHttpActionResult SaveSerializedUnit([FromBody] String serializedUnit)
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            //string Serialized = JsonConvert.SerializeObject(inheritanceList, settings);
+            //List<Base> deserializedList = JsonConvert.DeserializeObject<List<Base>>(Serialized, settings);
+            var x = JsonConvert.DeserializeObject<List<Unit>>(serializedUnit, settings);
+
+
             serializedUnit = serializedUnit.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
             JObject jsonParsed = JObject.Parse(serializedUnit);
 

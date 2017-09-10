@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
@@ -12,7 +13,8 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         [Key]
         public int Id { get; set; }
 
-        public Expandable Expansion;
+        [NotMapped]
+        public Expandable Expansion { get; set; }
         
         public override String ToString()
         {

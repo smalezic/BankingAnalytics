@@ -365,7 +365,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             var jsonFile = new StreamReader("..\\..\\JsonTest.txt");
             var json = jsonFile.ReadToEnd();
 
-            _importerClient.SaveUnit(json);
+            _importerClient.SaveUnits(json);
         }
     }
 }

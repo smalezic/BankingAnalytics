@@ -79,16 +79,24 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
 
         public bool SaveUnits(List<Unit> units)
         {
-            var serializedUnits = JsonConvert.SerializeObject(
-                units,
-                Formatting.Indented,
-                new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                });
-            
-            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serializedUnits).Result;
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            string serialized = JsonConvert.SerializeObject(units, settings);
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serialized).Result;
             return response.Content.ReadAsAsync<bool>().Result;
+
+
+
+
+            //var serializedUnits = JsonConvert.SerializeObject(
+            //    units,
+            //    Formatting.Indented,
+            //    new JsonSerializerSettings()
+            //    {
+            //        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    });
+            
+            //var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serializedUnits).Result;
+            //return response.Content.ReadAsAsync<bool>().Result;
 
 
 
@@ -96,9 +104,9 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             //return response.Content.ReadAsAsync<bool>().Result;
         }
 
-        public Unit SaveUnit(String unit)
+        public Unit SaveUnits(String unit)
         {
-            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveSerializedUnit/", unit).Result;
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", unit).Result;
             return response.Content.ReadAsAsync<Unit>().Result;
         }
 
