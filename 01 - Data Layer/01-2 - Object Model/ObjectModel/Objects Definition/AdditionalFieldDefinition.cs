@@ -18,10 +18,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public String ChoiceItems { get; set; }
         public String BusinessMeaning { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-
-        //public int ExpandableEntityId { get; set; }
-        //public ExpandableEntity ExpandableEntity { get; set; }
-
+        
         public int ExpandableEntityTypeId { get; set; }
         public ExpandableEntityType ExpandableEntityType { get; set; }
 

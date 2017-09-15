@@ -14,7 +14,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
         public int Id { get; set; }
 
         [NotMapped]
-        public Expandable Expansion { get; set; }
+        public Expandable Expansion;
         
         public override String ToString()
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ADS.BankingAnalytics.DataEntities.ObjectModel
 {
-    public class Expandable
+    public abstract partial class Expandable
     {
         [Key]
         public int Id { get; set; }

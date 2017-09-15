@@ -190,17 +190,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20170903111250_Initial.cs" />
-    <Compile Include="Migrations\20170903111250_Initial.designer.cs">
-      <DependentUpon>20170903111250_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20170903112554_RemovedReferenceAFDandExpandableEntity.cs" />
-    <Compile Include="Migrations\20170903112554_RemovedReferenceAFDandExpandableEntity.designer.cs">
-      <DependentUpon>20170903112554_RemovedReferenceAFDandExpandableEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20170905183140_MinorChanges.cs" />
-    <Compile Include="Migrations\20170905183140_MinorChanges.designer.cs">
-      <DependentUpon>20170905183140_MinorChanges.cs</DependentUpon>
+    <Compile Include="Migrations\20170914170344_Initial.cs" />
+    <Compile Include="Migrations\20170914170344_Initial.designer.cs">
+      <DependentUpon>20170914170344_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />
