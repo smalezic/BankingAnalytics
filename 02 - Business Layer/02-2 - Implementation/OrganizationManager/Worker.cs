@@ -38,6 +38,8 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region IWorker Interface Implementation
 
+        #region Organization & Unit
+
         public List<Organization> GetAllOrganizations()
         {
             List<Organization> retVal;
@@ -60,24 +62,21 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public List<UnitCategory> GetAllUnitCategories()
+        public Unit FindUnit(int id)
         {
-            List<UnitCategory> retVal;
-            var startTime = DateTime.Now;
+            Unit retVal = null;
 
             try
             {
-                _logger.Debug("Entered method 'GetAllUnitCategories'");
-
-                retVal = _genericRepository.GetAll<UnitCategory>().ToList();
+                _logger.Trace("Fetching unit with Id - {0}", id);
+                retVal = _genericRepository.GetById<Unit>(id);
+                retVal = (Unit)_expansionCreator.Expand(retVal);
             }
             catch (Exception exc)
             {
                 _logger.Error(exc);
-                retVal = null;
+                throw;
             }
-
-            _logger.Debug("Method 'GetAllUnitCategories' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
 
             return retVal;
         }
@@ -94,33 +93,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
                 retVal = _genericRepository.GetByCriteria<Unit>(
                     it => it.OrganizationId == organizationId
-                    ).ToList();
-            }
-            catch (Exception exc)
-            {
-                _logger.Error(exc);
-                retVal = null;
-            }
-
-            _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
-            
-            return retVal;
-        }
-
-        public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)
-        {
-            List<AdditionalFieldDefinition> retVal;
-            var startTime = DateTime.Now;
-
-            try
-            {
-                _logger.Debug("Entered method 'GetUnits'");
-                _logger.Trace("Parameter: organizationId - {0}", unitCategoryId);
-
-                retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
-                    //it => it.ExpandableEntityId == unitCategoryId
-                    it => it.ExpandableEntityTypeId == unitCategoryId
-                    // dodaj i tip entiteta kao kriterijum pretrage
                     ).ToList();
             }
             catch (Exception exc)
@@ -167,7 +139,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 _logger.Debug("Entered method 'SaveUnit'");
 
-                if(unit.ParentUnit != null)
+                if (unit.ParentUnit != null)
                 {
                     var parentUnit = SaveUnit(unit.ParentUnit);
                     unit.ParentUnitId = parentUnit.Id;
@@ -182,14 +154,14 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                     )
                     .FirstOrDefault();
 
-                if(unitDb == null)
+                if (unitDb == null)
                 {
                     unitDb = new Unit();
                 }
 
                 // Update the existing entity or create the new one with the data from the passed entity
                 unitDb.InjectFrom<PrimitiveTypesExcludeId>(unit);
-                
+
                 // Save the entity
                 retVal = (Unit)SaveSimpleEntity(unitDb);
 
@@ -208,6 +180,68 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
+        public List<UnitCategory> GetAllUnitCategories()
+        {
+            List<UnitCategory> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetAllUnitCategories'");
+
+                retVal = _genericRepository.GetAll<UnitCategory>().ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetAllUnitCategories' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+
+            return retVal;
+        }
+
+        #endregion Organization & Unit
+
+        #region Additional Fields
+
+        public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)
+        {
+            List<AdditionalFieldDefinition> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetUnits'");
+                _logger.Trace("Parameter: organizationId - {0}", unitCategoryId);
+
+                retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
+                    //it => it.ExpandableEntityId == unitCategoryId
+                    it => it.ExpandableEntityTypeId == unitCategoryId
+                    // dodaj i tip entiteta kao kriterijum pretrage
+                    ).ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+
+            return retVal;
+        }
+
+        public List<AdditionalFieldDefinition> SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Additional Fields
+
+        #region Common Methods
+
         public MetaEntity SaveSimpleEntity(MetaEntity entity)
         {
             MetaEntity retVal;
@@ -219,7 +253,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
                 _logger.Trace("Saving entity with Id - {0}", entity.Id);
                 retVal = _genericRepository.Save<MetaEntity>(entity, entity.Id);
-
             }
             catch (Exception exc)
             {
@@ -250,6 +283,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
                 foreach (var field in entity.AdditionalFields)
                 {
+                    field.ExpandableEntityId = retVal.Id;
                     _genericRepository.Save<AdditionalField>(field);
                 }
             }
@@ -263,24 +297,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public Unit FindUnit(int id)
-        {
-            Unit retVal = null;
-
-            try
-            {
-                _logger.Trace("Fetching unit with Id - {0}", id);
-                retVal = _genericRepository.GetById<Unit>(id);
-                retVal = (Unit) _expansionCreator.Expand(retVal);
-            }
-            catch (Exception exc)
-            {
-                _logger.Error(exc);
-                throw;
-            }
-
-            return retVal;
-        }
+        #endregion Common Methods
 
         #endregion IWorker Interface Implementation
     }

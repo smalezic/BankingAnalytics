@@ -104,10 +104,10 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             //return response.Content.ReadAsAsync<bool>().Result;
         }
 
-        public Unit SaveUnits(String unit)
+        public bool SaveUnits(String unit)
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", unit).Result;
-            return response.Content.ReadAsAsync<Unit>().Result;
+            return response.Content.ReadAsAsync<bool>().Result;
         }
 
         public UnitCategory SaveUnitCategory(UnitCategory entity)

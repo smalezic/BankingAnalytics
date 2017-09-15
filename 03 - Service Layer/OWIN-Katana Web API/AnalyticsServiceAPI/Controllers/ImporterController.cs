@@ -19,11 +19,38 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
     [RoutePrefix("api/Importer")]
     public class ImporterController : ApiController
     {
+        #region Fields
+
         private IWorker _worker;
-        
+
+        #endregion Fields
+
+        #region Constructors
+
         public ImporterController(IWorker worker)
         {
             _worker = worker;
+        }
+
+        #endregion Constructors
+
+        #region Exposed Methods
+
+        #region Organization & Unit
+
+        [Route("GetAllOrganizations")]
+        [HttpGet]
+        public IHttpActionResult GetAllOrganizations()
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAllOrganizations());
+        }
+
+        [Route("SaveOrganization")]
+        [HttpPost]
+        public IHttpActionResult SaveOrganization(Organization org)
+        {
+            var orgDb = _worker.SaveSimpleEntity(org);
+            return Content(HttpStatusCode.OK, orgDb);
         }
 
         [Route("FindUnit/{id}")]
@@ -46,20 +73,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, serializedExpansion + "|" + serializedUnit);
         }
 
-        [Route("GetAllOrganizations")]
-        [HttpGet]
-        public IHttpActionResult GetAllOrganizations()
-        {
-            return Content(HttpStatusCode.OK, _worker.GetAllOrganizations());
-        }
-
-        [Route("GetAllUnitCategories")]
-        [HttpGet]
-        public IHttpActionResult GetAllUnitCategories()
-        {
-            return Content(HttpStatusCode.OK, _worker.GetAllUnitCategories());
-        }
-
         [Route("GetUnits/{organizationId}")]
         [HttpGet]
         public IHttpActionResult GetUnits(int organizationId)
@@ -67,21 +80,6 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, _worker.GetUnits(organizationId));
         }
 
-        [Route("GetAdditionalFieldDefinitions/{unitCategoryId}")]
-        [HttpGet]
-        public IHttpActionResult GetAdditionalFieldDefinitions(int unitCategoryId)
-        {
-            return Content(HttpStatusCode.OK, _worker.GetAdditionalFieldDefinitions(unitCategoryId));
-        }
-
-        [Route("SaveOrganization")]
-        [HttpPost]
-        public IHttpActionResult SaveOrganization(Organization org)
-        {
-            var orgDb = _worker.SaveSimpleEntity(org);
-            return Content(HttpStatusCode.OK, orgDb);
-        }
-        
         [Route("SaveUnits")]
         [HttpPost]
         public IHttpActionResult SaveUnits([FromBody] String units)
@@ -91,54 +89,13 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
             var retVal = _worker.SaveUnits(deserialized);
             return Content(HttpStatusCode.OK, retVal);
-
-
-
-            //var x = JsonConvert.DeserializeObject<List<Unit>>(units);
-            //var retVal = _worker.SaveUnits(null);
-            //return Content(HttpStatusCode.OK, retVal);
         }
 
-        [Route("SaveSerializedUnit")]
-        [HttpPost]
-        public IHttpActionResult SaveSerializedUnit([FromBody] String serializedUnit)
+        [Route("GetAllUnitCategories")]
+        [HttpGet]
+        public IHttpActionResult GetAllUnitCategories()
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            //string Serialized = JsonConvert.SerializeObject(inheritanceList, settings);
-            //List<Base> deserializedList = JsonConvert.DeserializeObject<List<Base>>(Serialized, settings);
-            var x = JsonConvert.DeserializeObject<List<Unit>>(serializedUnit, settings);
-
-
-            serializedUnit = serializedUnit.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
-            JObject jsonParsed = JObject.Parse(serializedUnit);
-
-            // Get JSON result objects into a list
-            IList<JToken> tokenLinst = jsonParsed["Expansion"]["AdditionalFields"].Children().ToList();
-
-            // Serialize JSON results into .NET objects
-            IList<AdditionalField> additionalFields = new List<AdditionalField>();
-            foreach (JToken token in tokenLinst)
-            {
-                // JToken.ToObject is a helper method that uses JsonSerializer internally
-                AdditionalField searchResult = token.ToObject<AdditionalField>();
-                additionalFields.Add(searchResult);
-            }
-
-
-
-
-
-
-            //var x = JsonConvert.DeserializeObject<List<Unit>>(units, new PersonConverter());
-            var unit = JsonConvert.DeserializeObject<Unit>(serializedUnit);
-            ExpandableEntity expansion = new ExpandableEntity()
-            {
-                AdditionalFields = additionalFields
-            };
-            unit.Expansion = expansion;
-
-            var retVal = _worker.SaveUnit(unit);
-            return Content(HttpStatusCode.OK, retVal);
+            return Content(HttpStatusCode.OK, _worker.GetAllUnitCategories());
         }
 
         [Route("SaveUnitCategory")]
@@ -148,5 +105,31 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             var retVal = _worker.SaveSimpleEntity(unitCategory);
             return Content(HttpStatusCode.OK, retVal);
         }
+        
+        #endregion Unit & Organization
+
+        #region Additional Fields
+
+        [Route("GetAdditionalFieldDefinitions/{unitCategoryId}")]
+        [HttpGet]
+        public IHttpActionResult GetAdditionalFieldDefinitions(int unitCategoryId)
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAdditionalFieldDefinitions(unitCategoryId));
+        }
+
+        [Route("SaveAdditionalFieldDefinitions")]
+        [HttpPost]
+        public IHttpActionResult SaveAdditionalFieldDefinitions([FromBody] String additionalFieldDefinitions)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            var deserialized = JsonConvert.DeserializeObject<List<AdditionalFieldDefinition>>(additionalFieldDefinitions, settings);
+
+            var retVal = _worker.SaveAdditionalFieldDefinitions(deserialized);
+            return Content(HttpStatusCode.OK, retVal);
+        }
+
+        #endregion Additional Fields
+
+        #endregion Exposed Methods
     }
 }

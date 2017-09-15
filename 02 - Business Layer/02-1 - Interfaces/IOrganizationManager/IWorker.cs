@@ -9,17 +9,29 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 {
     public interface IWorker
     {
-        List<Organization> GetAllOrganizations();
-        List<UnitCategory> GetAllUnitCategories();
-        List<Unit> GetUnits(int organizationId);
-        List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
+        #region Organization & Unit
 
+        List<Organization> GetAllOrganizations();
+        Unit FindUnit(int id);
+        List<Unit> GetUnits(int organizationId);
         bool SaveUnits(List<Unit> entities);
         Unit SaveUnit(Unit unit);
+        List<UnitCategory> GetAllUnitCategories();
+
+        #endregion Organization & Unit
+
+        #region Additional Fields
+
+        List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
+        List<AdditionalFieldDefinition> SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions);
+
+        #endregion Additional Fields
+
+        #region Common Methods
 
         MetaEntity SaveSimpleEntity(MetaEntity entity);
         ExpandableEntity SaveExpandableEntity(ExpandableEntity entity);
 
-        Unit FindUnit(int id);
+        #endregion Common Methods
     }
 }
