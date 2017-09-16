@@ -30,6 +30,20 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
         #endregion Constructor
 
         #region Controller's Methods invocations
+
+        #region Organization & Unit
+
+        public List<Organization> GetAllOrganizations()
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAllOrganizations/").Result;
+            return response.Content.ReadAsAsync<List<Organization>>().Result;
+        }
+
+        public Organization SaveOrganization(Organization entity)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveOrganization/", entity).Result;
+            return response.Content.ReadAsAsync<Organization>().Result;
+        }
         
         public Unit GetUnit(int id)
         {
@@ -47,34 +61,10 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return expandedUnit;
         }
 
-        public List<Organization> GetAllOrganizations()
-        {
-            var response = _client.GetAsync(_client.BaseAddress + "GetAllOrganizations/").Result;
-            return response.Content.ReadAsAsync<List<Organization>>().Result;
-        }
-
-        public List<UnitCategory> GetAllUnitCategories()
-        {
-            var response = _client.GetAsync(_client.BaseAddress + "GetAllUnitCategories/").Result;
-            return response.Content.ReadAsAsync<List<UnitCategory>>().Result;
-        }
-
         public List<Unit> GetUnits(int organizationId)
         {
             var response = _client.GetAsync(_client.BaseAddress + "GetUnits/" + organizationId.ToString() + "/").Result;
             return response.Content.ReadAsAsync<List<Unit>>().Result;
-        }
-
-        public List<AdditionalFieldDefinition> GetAdditionalFieldsDefinitions(int unitCategoryId)
-        {
-            var response = _client.GetAsync(_client.BaseAddress + "GetAdditionalFieldDefinitions/" + unitCategoryId.ToString() + "/").Result;
-            return response.Content.ReadAsAsync<List<AdditionalFieldDefinition>>().Result;
-        }
-
-        public Organization SaveOrganization(Organization entity)
-        {
-            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveOrganization/", entity).Result;
-            return response.Content.ReadAsAsync<Organization>().Result;
         }
 
         public bool SaveUnits(List<Unit> units)
@@ -83,31 +73,23 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             string serialized = JsonConvert.SerializeObject(units, settings);
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serialized).Result;
             return response.Content.ReadAsAsync<bool>().Result;
-
-
-
-
-            //var serializedUnits = JsonConvert.SerializeObject(
-            //    units,
-            //    Formatting.Indented,
-            //    new JsonSerializerSettings()
-            //    {
-            //        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //    });
-            
-            //var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", serializedUnits).Result;
-            //return response.Content.ReadAsAsync<bool>().Result;
-
-
-
-            //var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", units).Result;
-            //return response.Content.ReadAsAsync<bool>().Result;
         }
 
+        /// <summary>
+        /// This method exists for testing purpose only!
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <returns></returns>
         public bool SaveUnits(String unit)
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnits/", unit).Result;
             return response.Content.ReadAsAsync<bool>().Result;
+        }
+
+        public List<UnitCategory> GetAllUnitCategories()
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAllUnitCategories/").Result;
+            return response.Content.ReadAsAsync<List<UnitCategory>>().Result;
         }
 
         public UnitCategory SaveUnitCategory(UnitCategory entity)
@@ -115,6 +97,26 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveUnitCategory/", entity).Result;
             return response.Content.ReadAsAsync<UnitCategory>().Result;
         }
+
+        #endregion Unit & Organization
+
+        #region Additional Fields
+
+        public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAdditionalFieldDefinitions/" + unitCategoryId.ToString() + "/").Result;
+            return response.Content.ReadAsAsync<List<AdditionalFieldDefinition>>().Result;
+        }
+
+        public bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinition)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            string serialized = JsonConvert.SerializeObject(additionalFieldDefinition, settings);
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveAdditionalFieldDefinitions/", serialized).Result;
+            return response.Content.ReadAsAsync<bool>().Result;
+        }
+
+        #endregion Additional Fields
 
         #endregion Controller's Methods invocations
     }

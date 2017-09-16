@@ -233,9 +233,28 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public List<AdditionalFieldDefinition> SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions)
+        public bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions)
         {
-            throw new NotImplementedException();
+            bool retVal = true;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveAdditionalFieldDefinitions'");
+
+                additionalFieldDefinitions.ForEach(it =>
+                {
+                    SaveSimpleEntity(it);
+                });
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = false;
+            }
+
+            _logger.Debug("Method 'SaveAdditionalFieldDefinitions' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
         }
 
         #endregion Additional Fields

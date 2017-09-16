@@ -23,7 +23,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         #region Additional Fields
 
         List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
-        List<AdditionalFieldDefinition> SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions);
+        bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions);
 
         #endregion Additional Fields
 

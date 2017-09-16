@@ -80,7 +80,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             if (_selectedUnitCategory != null)
             {
-                var addFieldsDefinitions = _importerClient.GetAdditionalFieldsDefinitions(_selectedUnitCategory.Id);
+                var addFieldsDefinitions = _importerClient.GetAdditionalFieldDefinitions(_selectedUnitCategory.Id);
 
                 cmbAdditionalFields.Items.Clear();
                 cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
