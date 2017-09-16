@@ -157,21 +157,10 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private void btnAddOrganization_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrWhiteSpace(txtOrganizationName.Text) == false)
-            {
-                var org = new Organization()
-                {
-                    Name = txtOrganizationName.Text
-                };
+            OrganizationForm orgForm = new OrganizationForm(_importerClient);
+            orgForm.ShowDialog();
 
-                var x = _importerClient.SaveOrganization(org);
-
-                GetAllOrganizationsAndUnitCategories();
-            }
-            else
-            {
-                MessageBox.Show("Please enter the name of the organization!");
-            }
+            GetAllOrganizationsAndUnitCategories();
         }
 
         private void btnAddUnitToList_Click(object sender, EventArgs e)

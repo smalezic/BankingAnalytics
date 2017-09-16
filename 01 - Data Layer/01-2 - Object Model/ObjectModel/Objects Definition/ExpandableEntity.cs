@@ -14,7 +14,6 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
             AdditionalFields = new HashSet<AdditionalField>();
         }
 
-        [NotMapped]
         public ICollection<AdditionalField> AdditionalFields { get; set; }
     }
 }
