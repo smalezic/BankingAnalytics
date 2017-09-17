@@ -30,7 +30,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region Common Methods
 
-        MetaEntity SaveSimpleEntity(MetaEntity entity);
+        TEntity SaveSimpleEntity<TEntity>(TEntity entity) where TEntity : MetaEntity;
         ExpandableEntity SaveExpandableEntity(ExpandableEntity entity);
 
         #endregion Common Methods

@@ -114,6 +114,9 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 
             cmbAdditionalFields.Items.Clear();
             cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
+
+            _definedFields.Clear();
+            _definedFields.AddRange(addFieldsDefinitions);
         }
 
         private void cmbAdditionalFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -179,13 +182,25 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 
         private void btnAddField_Click(object sender, EventArgs e)
         {
-            var additionalFieldDefinition = new AdditionalFieldDefinition()
+            var additionalFieldDefinition = CreateAdditionalFieldDefinition(new AdditionalFieldDefinition());
+            _definedFields.Add(additionalFieldDefinition);
+        }
+
+        private void btnChange_Click(object sender, EventArgs e)
+        {
+            if(cmbAdditionalFields.SelectedItem != null)
             {
-                Name = txtAdditionalFieldName.Text,
-                Description = txtAdditionalFieldDescription.Text,
-                BusinessMeaning = txtAdditionalFieldBusinessMeaning.Text,
-                IsMandatory = chkIsMandatory.Checked
-            };
+                var additionalFieldDefinition = (AdditionalFieldDefinition) cmbAdditionalFields.SelectedItem;
+                CreateAdditionalFieldDefinition(additionalFieldDefinition);
+            }
+        }
+
+        private AdditionalFieldDefinition CreateAdditionalFieldDefinition(AdditionalFieldDefinition additionalFieldDefinition)
+        {
+            additionalFieldDefinition.Name = txtAdditionalFieldName.Text;
+            additionalFieldDefinition.Description = txtAdditionalFieldDescription.Text;
+            additionalFieldDefinition.BusinessMeaning = txtAdditionalFieldBusinessMeaning.Text;
+            additionalFieldDefinition.IsMandatory = chkIsMandatory.Checked;
 
             if (rbString.Checked)
             {
@@ -208,9 +223,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
                 additionalFieldDefinition.FieldValueType = DataEntities.Enumerations.CommonEnumerations.FieldType.Bool;
             }
 
-            _definedFields.Add(additionalFieldDefinition);
+            //_definedFields.Add(additionalFieldDefinition);
 
             ClearFields();
+
+            return additionalFieldDefinition;
         }
 
         private void btnSaveDefinitions_Click(object sender, EventArgs e)

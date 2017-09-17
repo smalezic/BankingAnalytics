@@ -267,7 +267,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 expandableEntityType.AdditionalFieldDefinitions.ToList().ForEach(it =>
                 {
                     it.ExpandableEntityTypeId = savedExpandableEntityType.Id;
-                    SaveSimpleEntity(it);
+                    SaveSimpleEntity<AdditionalFieldDefinition>(it);
                 });
             }
             catch (Exception exc)
@@ -284,9 +284,9 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region Common Methods
 
-        public MetaEntity SaveSimpleEntity(MetaEntity entity)
+        public TEntity SaveSimpleEntity<TEntity>(TEntity entity) where TEntity : MetaEntity
         {
-            MetaEntity retVal;
+            TEntity retVal;
             var startTime = DateTime.Now;
 
             try
@@ -294,7 +294,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 _logger.Debug("Entered method 'SaveSimpleEntity'");
                 _logger.Info("Saving entity with Id - {0}", entity.Id);
 
-                retVal = _genericRepository.Save<MetaEntity>(entity, entity.Id);
+                retVal = _genericRepository.Save<TEntity>(entity, entity.Id);
             }
             catch (Exception exc)
             {
