@@ -65,10 +65,13 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         public Unit FindUnit(int id)
         {
             Unit retVal = null;
+            var startTime = DateTime.Now;
 
             try
             {
-                _logger.Trace("Fetching unit with Id - {0}", id);
+                _logger.Debug("Entered method 'FindUnit'");
+                _logger.Info("Fetching unit with Id - {0}", id);
+
                 retVal = _genericRepository.GetById<Unit>(id);
                 retVal = (Unit)_expansionCreator.Expand(retVal);
             }
@@ -78,6 +81,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 throw;
             }
 
+            _logger.Debug("Method 'FindUnit' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
             return retVal;
         }
 
@@ -89,7 +93,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             try
             {
                 _logger.Debug("Entered method 'GetUnits'");
-                _logger.Trace("Parameter: organizationId - {0}", organizationId);
+                _logger.Info("Parameter: organizationId - {0}", organizationId);
 
                 retVal = _genericRepository.GetByCriteria<Unit>(
                     it => it.OrganizationId == organizationId
@@ -102,7 +106,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             }
 
             _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
-
             return retVal;
         }
 
@@ -113,7 +116,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
             try
             {
-                _logger.Debug("Entered method 'SaveCollectionOfSimpleEntities'");
+                _logger.Debug("Entered method 'SaveUnits'");
 
                 units.ForEach(it =>
                 {
@@ -126,7 +129,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 retVal = false;
             }
 
-            _logger.Debug("Method 'SaveCollectionOfSimpleEntities' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            _logger.Debug("Method 'SaveUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
             return retVal;
         }
 
@@ -180,16 +183,17 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public List<UnitCategory> GetAllUnitCategories()
+        public List<UnitCategory> GetUnitCategories(int organizationId)
         {
             List<UnitCategory> retVal;
             var startTime = DateTime.Now;
 
             try
             {
-                _logger.Debug("Entered method 'GetAllUnitCategories'");
+                _logger.Debug("Entered method 'GetUnitCategories'");
+                _logger.Info("Parameter: organizationId - {0}", organizationId);
 
-                retVal = _genericRepository.GetAll<UnitCategory>().ToList();
+                retVal = _genericRepository.GetAll<UnitCategory>(it => it.OrganizationId == organizationId).ToList();
             }
             catch (Exception exc)
             {
@@ -197,7 +201,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 retVal = null;
             }
 
-            _logger.Debug("Method 'GetAllUnitCategories' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            _logger.Debug("Method 'GetUnitCategories' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
 
             return retVal;
         }
@@ -213,11 +217,10 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
             try
             {
-                _logger.Debug("Entered method 'GetUnits'");
-                _logger.Trace("Parameter: organizationId - {0}", unitCategoryId);
+                _logger.Debug("Entered method 'GetAdditionalFieldDefinitions'");
+                _logger.Info("Parameter: unitCategoryId - {0}", unitCategoryId);
 
                 retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
-                    //it => it.ExpandableEntityId == unitCategoryId
                     it => it.ExpandableEntityTypeId == unitCategoryId
                     // dodaj i tip entiteta kao kriterijum pretrage
                     ).ToList();
@@ -228,12 +231,13 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 retVal = null;
             }
 
-            _logger.Debug("Method 'GetUnits' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            _logger.Debug("Method 'GetAdditionalFieldDefinitions' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
 
             return retVal;
         }
 
-        public bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions)
+        //public bool SaveAdditionalFieldDefinitions(MetaEntity metaEntity, List<AdditionalFieldDefinition> additionalFieldDefinitions)
+        public bool SaveAdditionalFieldDefinitions(ExpandableEntityType expandableEntityType)
         {
             bool retVal = true;
             var startTime = DateTime.Now;
@@ -242,8 +246,27 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 _logger.Debug("Entered method 'SaveAdditionalFieldDefinitions'");
 
-                additionalFieldDefinitions.ForEach(it =>
+                var expandableEntityTypeFromDB = _genericRepository.GetByCriteria<ExpandableEntityType>(
+                    it =>
+                        it.Id == expandableEntityType.MetaEntityId
+                        && it.MetaEntityType == expandableEntityType.MetaEntityType
+                    )
+                    .FirstOrDefault();
+
+                if(expandableEntityTypeFromDB == null)
                 {
+                    expandableEntityTypeFromDB = new ExpandableEntityType()
+                    {
+                        MetaEntityId = expandableEntityType.MetaEntityId,
+                        MetaEntityType = expandableEntityType.MetaEntityType
+                    };
+                }
+
+                var savedExpandableEntityType = _genericRepository.Save<ExpandableEntityType>(expandableEntityTypeFromDB);
+
+                expandableEntityType.AdditionalFieldDefinitions.ToList().ForEach(it =>
+                {
+                    it.ExpandableEntityTypeId = savedExpandableEntityType.Id;
                     SaveSimpleEntity(it);
                 });
             }
@@ -269,8 +292,8 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             try
             {
                 _logger.Debug("Entered method 'SaveSimpleEntity'");
+                _logger.Info("Saving entity with Id - {0}", entity.Id);
 
-                _logger.Trace("Saving entity with Id - {0}", entity.Id);
                 retVal = _genericRepository.Save<MetaEntity>(entity, entity.Id);
             }
             catch (Exception exc)

@@ -190,9 +190,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20170914170344_Initial.cs" />
-    <Compile Include="Migrations\20170914170344_Initial.designer.cs">
-      <DependentUpon>20170914170344_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\20170917093220_InitialCreate.cs" />
+    <Compile Include="Migrations\20170917093220_InitialCreate.designer.cs">
+      <DependentUpon>20170917093220_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\OrganizationalStructureDbContextModelSnapshot.cs" />
     <Compile Include="OrganizationalStructureDbContext.cs" />

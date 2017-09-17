@@ -91,11 +91,11 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             return Content(HttpStatusCode.OK, retVal);
         }
 
-        [Route("GetAllUnitCategories")]
+        [Route("GetUnitCategories/{organizationId}")]
         [HttpGet]
-        public IHttpActionResult GetAllUnitCategories()
+        public IHttpActionResult GetUnitCategories(int organizationId)
         {
-            return Content(HttpStatusCode.OK, _worker.GetAllUnitCategories());
+            return Content(HttpStatusCode.OK, _worker.GetUnitCategories(organizationId));
         }
 
         [Route("SaveUnitCategory")]
@@ -119,14 +119,22 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
         [Route("SaveAdditionalFieldDefinitions")]
         [HttpPost]
-        public IHttpActionResult SaveAdditionalFieldDefinitions([FromBody] String additionalFieldDefinitions)
+        public IHttpActionResult SaveAdditionalFieldDefinitions(ExpandableEntityType expandableEntityType)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            var deserialized = JsonConvert.DeserializeObject<List<AdditionalFieldDefinition>>(additionalFieldDefinitions, settings);
-
-            var retVal = _worker.SaveAdditionalFieldDefinitions(deserialized);
+            var retVal = _worker.SaveAdditionalFieldDefinitions(expandableEntityType);
             return Content(HttpStatusCode.OK, retVal);
         }
+
+        //[Route("SaveAdditionalFieldDefinitions")]
+        //[HttpPost]
+        //public IHttpActionResult SaveAdditionalFieldDefinitions([FromBody] String additionalFieldDefinitions)
+        //{
+        //    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        //    var deserialized = JsonConvert.DeserializeObject<List<AdditionalFieldDefinition>>(additionalFieldDefinitions, settings);
+
+        //    var retVal = _worker.SaveAdditionalFieldDefinitions(deserialized);
+        //    return Content(HttpStatusCode.OK, retVal);
+        //}
 
         #endregion Additional Fields
 

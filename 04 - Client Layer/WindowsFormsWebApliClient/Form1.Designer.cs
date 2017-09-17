@@ -60,6 +60,8 @@
             this.txtUnitName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddUnitCategory = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,11 +79,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddUnitCategory);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.btnAddOrganization);
             this.groupBox1.Controls.Add(this.cmbOrganizations);
             this.groupBox1.Controls.Add(this.cmbUnits);
+            this.groupBox1.Controls.Add(this.cmbUnitCategories);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(411, 524);
@@ -92,7 +98,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 117);
+            this.label8.Location = new System.Drawing.Point(46, 108);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 13);
             this.label8.TabIndex = 12;
@@ -180,18 +186,18 @@
             // 
             // btnAddOrganization
             // 
-            this.btnAddOrganization.Location = new System.Drawing.Point(245, 17);
+            this.btnAddOrganization.Location = new System.Drawing.Point(271, 17);
             this.btnAddOrganization.Name = "btnAddOrganization";
-            this.btnAddOrganization.Size = new System.Drawing.Size(108, 23);
+            this.btnAddOrganization.Size = new System.Drawing.Size(121, 23);
             this.btnAddOrganization.TabIndex = 1;
-            this.btnAddOrganization.Text = "Add Organization";
+            this.btnAddOrganization.Text = "Add Organization...";
             this.btnAddOrganization.UseVisualStyleBackColor = true;
             this.btnAddOrganization.Click += new System.EventHandler(this.btnAddOrganization_Click);
             // 
             // cmbOrganizations
             // 
             this.cmbOrganizations.FormattingEnabled = true;
-            this.cmbOrganizations.Location = new System.Drawing.Point(50, 19);
+            this.cmbOrganizations.Location = new System.Drawing.Point(81, 19);
             this.cmbOrganizations.Name = "cmbOrganizations";
             this.cmbOrganizations.Size = new System.Drawing.Size(160, 21);
             this.cmbOrganizations.TabIndex = 0;
@@ -200,7 +206,7 @@
             // cmbUnits
             // 
             this.cmbUnits.FormattingEnabled = true;
-            this.cmbUnits.Location = new System.Drawing.Point(50, 110);
+            this.cmbUnits.Location = new System.Drawing.Point(81, 105);
             this.cmbUnits.Name = "cmbUnits";
             this.cmbUnits.Size = new System.Drawing.Size(160, 21);
             this.cmbUnits.TabIndex = 0;
@@ -214,8 +220,6 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.cmbAdditionalFields);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.cmbUnitCategories);
-            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.lblUnitName);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
@@ -288,7 +292,7 @@
             // cmbUnitCategories
             // 
             this.cmbUnitCategories.FormattingEnabled = true;
-            this.cmbUnitCategories.Location = new System.Drawing.Point(93, 146);
+            this.cmbUnitCategories.Location = new System.Drawing.Point(81, 62);
             this.cmbUnitCategories.Name = "cmbUnitCategories";
             this.cmbUnitCategories.Size = new System.Drawing.Size(160, 21);
             this.cmbUnitCategories.TabIndex = 12;
@@ -297,7 +301,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(35, 149);
+            this.label9.Location = new System.Drawing.Point(23, 65);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 11;
@@ -387,6 +391,25 @@
             this.chkHasParent.Text = "Has Parent Unit";
             this.chkHasParent.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Organization:";
+            // 
+            // btnAddUnitCategory
+            // 
+            this.btnAddUnitCategory.Location = new System.Drawing.Point(271, 60);
+            this.btnAddUnitCategory.Name = "btnAddUnitCategory";
+            this.btnAddUnitCategory.Size = new System.Drawing.Size(121, 23);
+            this.btnAddUnitCategory.TabIndex = 20;
+            this.btnAddUnitCategory.Text = "Add Unit Category...";
+            this.btnAddUnitCategory.UseVisualStyleBackColor = true;
+            this.btnAddUnitCategory.Click += new System.EventHandler(this.btnAddUnitCategory_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +465,8 @@
         private System.Windows.Forms.ComboBox cmbAdditionalFields;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnTemp;
+        private System.Windows.Forms.Button btnAddUnitCategory;
+        private System.Windows.Forms.Label label1;
     }
 }
 

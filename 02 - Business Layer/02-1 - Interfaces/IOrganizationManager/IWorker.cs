@@ -16,14 +16,15 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         List<Unit> GetUnits(int organizationId);
         bool SaveUnits(List<Unit> entities);
         Unit SaveUnit(Unit unit);
-        List<UnitCategory> GetAllUnitCategories();
+        List<UnitCategory> GetUnitCategories(int organizationId);
 
         #endregion Organization & Unit
 
         #region Additional Fields
 
         List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
-        bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinitions);
+        //bool SaveAdditionalFieldDefinitions(MetaEntity metaEntity, List<AdditionalFieldDefinition> additionalFieldDefinitions);
+        bool SaveAdditionalFieldDefinitions(ExpandableEntityType expandableEntityType);
 
         #endregion Additional Fields
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ADS.BankingAnalytics.DataEntities.Enumerations.CommonEnumerations;
 using System.IO;
+using ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms;
 
 namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 {
@@ -161,6 +162,21 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             orgForm.ShowDialog();
 
             GetAllOrganizationsAndUnitCategories();
+        }
+
+        private void btnAddUnitCategory_Click(object sender, EventArgs e)
+        {
+            if (_selectedOrganization != null)
+            {
+                UnitCategoryForm unitCategoryForm = new UnitCategoryForm(_importerClient, _selectedOrganization);
+                unitCategoryForm.ShowDialog();
+
+                GetAllOrganizationsAndUnitCategories();
+            }
+            else
+            {
+                MessageBox.Show("An organization must be selected!");
+            }
         }
 
         private void btnAddUnitToList_Click(object sender, EventArgs e)
@@ -336,10 +352,13 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 cmbOrganizations.Items.Clear();
                 cmbOrganizations.Items.AddRange(organizations.ToArray());
 
-                var categories = _importerClient.GetAllUnitCategories();
+                if (_selectedOrganization != null)
+                {
+                    var categories = _importerClient.GetUnitCategories(_selectedOrganization.Id);
 
-                cmbUnitCategories.Items.Clear();
-                cmbUnitCategories.Items.AddRange(categories.ToArray());
+                    cmbUnitCategories.Items.Clear();
+                    cmbUnitCategories.Items.AddRange(categories.ToArray());
+                }
             }
             catch
             {

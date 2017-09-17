@@ -86,9 +86,9 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<bool>().Result;
         }
 
-        public List<UnitCategory> GetAllUnitCategories()
+        public List<UnitCategory> GetUnitCategories(int organizationId)
         {
-            var response = _client.GetAsync(_client.BaseAddress + "GetAllUnitCategories/").Result;
+            var response = _client.GetAsync(_client.BaseAddress + "GetUnitCategories/" + organizationId.ToString() + "/").Result;
             return response.Content.ReadAsAsync<List<UnitCategory>>().Result;
         }
 
@@ -108,13 +108,19 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<List<AdditionalFieldDefinition>>().Result;
         }
 
-        public bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinition)
+        public bool SaveAdditionalFieldDefinitions(ExpandableEntityType expandableEntityType)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            string serialized = JsonConvert.SerializeObject(additionalFieldDefinition, settings);
-            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveAdditionalFieldDefinitions/", serialized).Result;
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveAdditionalFieldDefinitions/", expandableEntityType).Result;
             return response.Content.ReadAsAsync<bool>().Result;
         }
+
+        //public bool SaveAdditionalFieldDefinitions(List<AdditionalFieldDefinition> additionalFieldDefinition)
+        //{
+        //    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        //    string serialized = JsonConvert.SerializeObject(additionalFieldDefinition, settings);
+        //    var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveAdditionalFieldDefinitions/", serialized).Result;
+        //    return response.Content.ReadAsAsync<bool>().Result;
+        //}
 
         #endregion Additional Fields
 

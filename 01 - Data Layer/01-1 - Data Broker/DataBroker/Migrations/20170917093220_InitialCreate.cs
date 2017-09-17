@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,19 +51,6 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UnitCategory",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UnitCategory", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AdditionalFieldDefinitions",
                 columns: table => new
                 {
@@ -86,6 +73,58 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         name: "FK_AdditionalFieldDefinitions_ExpandableEntityType_ExpandableEntityTypeId",
                         column: x => x.ExpandableEntityTypeId,
                         principalTable: "ExpandableEntityType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnitCategory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnitCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UnitCategory_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdditionalFields",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AdditionalFieldDefinitionId = table.Column<int>(nullable: false),
+                    BooleanValue = table.Column<bool>(nullable: true),
+                    DateTimeValue = table.Column<DateTime>(nullable: true),
+                    DecimalValue = table.Column<decimal>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    ExpandableEntityId = table.Column<int>(nullable: false),
+                    IntValue = table.Column<int>(nullable: true),
+                    StringValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdditionalFields", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AdditionalFields_AdditionalFieldDefinitions_AdditionalFieldDefinitionId",
+                        column: x => x.AdditionalFieldDefinitionId,
+                        principalTable: "AdditionalFieldDefinitions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AdditionalFields_ExpandableEntities_ExpandableEntityId",
+                        column: x => x.ExpandableEntityId,
+                        principalTable: "ExpandableEntities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -124,38 +163,6 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AdditionalFields",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AdditionalFieldDefinitionId = table.Column<int>(nullable: false),
-                    BooleanValue = table.Column<bool>(nullable: true),
-                    DateTimeValue = table.Column<DateTime>(nullable: true),
-                    DecimalValue = table.Column<decimal>(nullable: true),
-                    DeletedAt = table.Column<DateTime>(nullable: true),
-                    ExpandableEntityId = table.Column<int>(nullable: false),
-                    IntValue = table.Column<int>(nullable: true),
-                    StringValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AdditionalFields", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AdditionalFields_AdditionalFieldDefinitions_AdditionalFieldDefinitionId",
-                        column: x => x.AdditionalFieldDefinitionId,
-                        principalTable: "AdditionalFieldDefinitions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AdditionalFields_ExpandableEntities_ExpandableEntityId",
-                        column: x => x.ExpandableEntityId,
-                        principalTable: "ExpandableEntities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AdditionalFields_AdditionalFieldDefinitionId",
                 table: "AdditionalFields",
@@ -185,6 +192,11 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 name: "IX_Units_UnitCategoryId",
                 table: "Units",
                 column: "UnitCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitCategory_OrganizationId",
+                table: "UnitCategory",
+                column: "OrganizationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -202,13 +214,13 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 name: "ExpandableEntities");
 
             migrationBuilder.DropTable(
-                name: "Organizations");
-
-            migrationBuilder.DropTable(
                 name: "UnitCategory");
 
             migrationBuilder.DropTable(
                 name: "ExpandableEntityType");
+
+            migrationBuilder.DropTable(
+                name: "Organizations");
         }
     }
 }

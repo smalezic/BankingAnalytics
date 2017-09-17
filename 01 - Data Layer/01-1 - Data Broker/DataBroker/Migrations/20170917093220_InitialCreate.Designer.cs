@@ -9,8 +9,8 @@ using ADS.BankingAnalytics.DataEntities.Enumerations;
 namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 {
     [DbContext(typeof(OrganizationalStructureDbContext))]
-    [Migration("20170914170344_Initial")]
-    partial class Initial
+    [Migration("20170917093220_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -149,7 +149,11 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("OrganizationId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("UnitCategory");
                 });
@@ -162,7 +166,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.ExpandableEntity", "ExpandableEntity")
-                        .WithMany()
+                        .WithMany("AdditionalFields")
                         .HasForeignKey("ExpandableEntityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -189,6 +193,14 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.UnitCategory", "UnitCategory")
                         .WithMany("Units")
                         .HasForeignKey("UnitCategoryId");
+                });
+
+            modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.UnitCategory", b =>
+                {
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
