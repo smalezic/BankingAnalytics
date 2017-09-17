@@ -221,8 +221,9 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 _logger.Info("Parameter: unitCategoryId - {0}", unitCategoryId);
 
                 retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
-                    it => it.ExpandableEntityTypeId == unitCategoryId
-                    // dodaj i tip entiteta kao kriterijum pretrage
+                    it =>
+                        it.ExpandableEntityTypeId == unitCategoryId
+                        && it.DeletedAt == null
                     ).ToList();
             }
             catch (Exception exc)

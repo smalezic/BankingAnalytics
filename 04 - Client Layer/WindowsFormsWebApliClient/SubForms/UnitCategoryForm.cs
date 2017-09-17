@@ -180,6 +180,17 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
             rbBoolean.Checked = false;
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (cmbAdditionalFields.SelectedItem != null)
+            {
+                var additionalFieldDefinition = (AdditionalFieldDefinition)cmbAdditionalFields.SelectedItem;
+                additionalFieldDefinition.DeletedAt = DateTime.Now;
+
+                ClearFields();
+            }
+        }
+
         private void btnAddField_Click(object sender, EventArgs e)
         {
             var additionalFieldDefinition = CreateAdditionalFieldDefinition(new AdditionalFieldDefinition());

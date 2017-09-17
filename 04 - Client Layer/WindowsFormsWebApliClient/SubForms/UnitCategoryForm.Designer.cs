@@ -60,6 +60,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnChange = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -137,6 +138,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnDelete);
             this.panel3.Controls.Add(this.btnChange);
             this.panel3.Controls.Add(this.btnSaveDefinitions);
             this.panel3.Controls.Add(this.btnClearField);
@@ -172,7 +174,7 @@
             // 
             // btnClearField
             // 
-            this.btnClearField.Location = new System.Drawing.Point(275, 181);
+            this.btnClearField.Location = new System.Drawing.Point(276, 152);
             this.btnClearField.Name = "btnClearField";
             this.btnClearField.Size = new System.Drawing.Size(75, 23);
             this.btnClearField.TabIndex = 17;
@@ -390,6 +392,16 @@
             this.btnChange.UseVisualStyleBackColor = true;
             this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(276, 181);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 20;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // UnitCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,5 +456,6 @@
         private System.Windows.Forms.Button btnClearField;
         private System.Windows.Forms.Button btnSaveDefinitions;
         private System.Windows.Forms.Button btnChange;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
