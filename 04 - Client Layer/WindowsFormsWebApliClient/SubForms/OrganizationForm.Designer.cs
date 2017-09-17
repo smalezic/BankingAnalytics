@@ -1,4 +1,4 @@
-﻿namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
+﻿namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 {
     partial class OrganizationForm
     {

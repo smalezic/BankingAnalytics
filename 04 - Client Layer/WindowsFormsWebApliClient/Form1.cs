@@ -61,6 +61,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             if (_selectedOrganization != null)
             {
+                var categories = _importerClient.GetUnitCategories(_selectedOrganization.Id);
+
+                cmbUnitCategories.Items.Clear();
+                cmbUnitCategories.Items.AddRange(categories.ToArray());
+
                 var units = _importerClient.GetUnits(_selectedOrganization.Id);
 
                 cmbUnits.Items.Clear();
@@ -177,6 +182,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             {
                 MessageBox.Show("An organization must be selected!");
             }
+        }
+
+        private void btnAddUnit_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnAddUnitToList_Click(object sender, EventArgs e)

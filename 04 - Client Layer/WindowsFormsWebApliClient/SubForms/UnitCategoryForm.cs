@@ -233,9 +233,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
             {
                 additionalFieldDefinition.FieldValueType = DataEntities.Enumerations.CommonEnumerations.FieldType.Bool;
             }
-
-            //_definedFields.Add(additionalFieldDefinition);
-
+            
             ClearFields();
 
             return additionalFieldDefinition;
@@ -243,8 +241,6 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 
         private void btnSaveDefinitions_Click(object sender, EventArgs e)
         {
-            //_importerClient.SaveAdditionalFieldDefinitions(_selectedUnitCategory, _definedFields);
-
             var expandableEntityType = new ExpandableEntityType()
             {
                 MetaEntityId = _selectedUnitCategory.Id,

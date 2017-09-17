@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
+namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 {
     public partial class OrganizationForm : Form
     {

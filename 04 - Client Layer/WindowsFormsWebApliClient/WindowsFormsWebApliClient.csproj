@@ -68,10 +68,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrganizationForm.cs">
+    <Compile Include="SubForms\OrganizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrganizationForm.Designer.cs">
+    <Compile Include="SubForms\OrganizationForm.Designer.cs">
       <DependentUpon>OrganizationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -85,7 +85,7 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrganizationForm.resx">
+    <EmbeddedResource Include="SubForms\OrganizationForm.resx">
       <DependentUpon>OrganizationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
