@@ -351,6 +351,25 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             }
         }
 
+        private void chkHasParent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkHasParent.Checked)
+            {
+                if (_selectedUnit != null)
+                {
+                    lblParenUnitName.Text = "--> " + _selectedUnit.Name;
+                }
+                else
+                {
+                    MessageBox.Show("Parent unit must be selected!");
+                }
+            }
+            else
+            {
+                lblParenUnitName.Text = String.Empty;
+            }
+        }
+        
         #endregion Event Handlers
 
         #region Private Methods
@@ -386,25 +405,6 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             var json = jsonFile.ReadToEnd();
 
             _importerClient.SaveUnits(json);
-        }
-
-        private void chkHasParent_CheckedChanged(object sender, EventArgs e)
-        {
-            if(chkHasParent.Checked)
-            {
-                if (_selectedUnit != null)
-                {
-                    lblParenUnitName.Text = "--> " + _selectedUnit.Name;
-                }
-                else
-                {
-                    MessageBox.Show("Parent unit must be selected!");
-                }
-            }
-            else
-            {
-                lblParenUnitName.Text = String.Empty;
-            }
         }
     }
 }
