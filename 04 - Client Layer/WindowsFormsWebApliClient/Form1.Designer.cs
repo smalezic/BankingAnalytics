@@ -30,6 +30,7 @@
         {
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddUnit = new System.Windows.Forms.Button();
             this.btnAddUnitCategory = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             this.txtUnitName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
-            this.btnAddUnit = new System.Windows.Forms.Button();
+            this.lblParenUnitName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -96,6 +97,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Organizations";
+            // 
+            // btnAddUnit
+            // 
+            this.btnAddUnit.Location = new System.Drawing.Point(271, 103);
+            this.btnAddUnit.Name = "btnAddUnit";
+            this.btnAddUnit.Size = new System.Drawing.Size(121, 23);
+            this.btnAddUnit.TabIndex = 21;
+            this.btnAddUnit.Text = "Add Unit...";
+            this.btnAddUnit.UseVisualStyleBackColor = true;
+            this.btnAddUnit.Click += new System.EventHandler(this.btnAddUnit_Click);
             // 
             // btnAddUnitCategory
             // 
@@ -253,6 +264,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblParenUnitName);
             this.groupBox2.Controls.Add(this.btnTemp);
             this.groupBox2.Controls.Add(this.btnAddAdditionalFieldValue);
             this.groupBox2.Controls.Add(this.txtAdditionalFieldValue);
@@ -378,7 +390,7 @@
             // 
             // btnAddUnitToList
             // 
-            this.btnAddUnitToList.Location = new System.Drawing.Point(259, 144);
+            this.btnAddUnitToList.Location = new System.Drawing.Point(259, 175);
             this.btnAddUnitToList.Name = "btnAddUnitToList";
             this.btnAddUnitToList.Size = new System.Drawing.Size(75, 23);
             this.btnAddUnitToList.TabIndex = 4;
@@ -411,16 +423,16 @@
             this.chkHasParent.TabIndex = 1;
             this.chkHasParent.Text = "Has Parent Unit";
             this.chkHasParent.UseVisualStyleBackColor = true;
+            this.chkHasParent.CheckedChanged += new System.EventHandler(this.chkHasParent_CheckedChanged);
             // 
-            // btnAddUnit
+            // lblParenUnitName
             // 
-            this.btnAddUnit.Location = new System.Drawing.Point(271, 103);
-            this.btnAddUnit.Name = "btnAddUnit";
-            this.btnAddUnit.Size = new System.Drawing.Size(121, 23);
-            this.btnAddUnit.TabIndex = 21;
-            this.btnAddUnit.Text = "Add Unit...";
-            this.btnAddUnit.UseVisualStyleBackColor = true;
-            this.btnAddUnit.Click += new System.EventHandler(this.btnAddUnit_Click);
+            this.lblParenUnitName.Location = new System.Drawing.Point(192, 202);
+            this.lblParenUnitName.Name = "lblParenUnitName";
+            this.lblParenUnitName.Size = new System.Drawing.Size(180, 17);
+            this.lblParenUnitName.TabIndex = 19;
+            this.lblParenUnitName.Text = "--> parent unit name";
+            this.lblParenUnitName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -480,6 +492,7 @@
         private System.Windows.Forms.Button btnAddUnitCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddUnit;
+        private System.Windows.Forms.Label lblParenUnitName;
     }
 }
 
