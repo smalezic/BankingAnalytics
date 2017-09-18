@@ -108,6 +108,18 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         
         #endregion Unit & Organization
 
+        #region KPI Operations
+        
+        [Route("SaveWorkbook")]
+        [HttpPost]
+        public IHttpActionResult SaveWorkbook(Workbook workbook)
+        {
+            var retVal = _worker.SaveWorkbook(workbook);
+            return Content(HttpStatusCode.OK, retVal);
+        }
+
+        #endregion KPI Operations
+
         #region Additional Fields
 
         [Route("GetAdditionalFieldDefinitions/{unitCategoryId}")]

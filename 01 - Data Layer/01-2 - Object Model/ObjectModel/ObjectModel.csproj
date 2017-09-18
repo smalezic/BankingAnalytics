@@ -195,6 +195,8 @@
     <Compile Include="Objects Definition\Organization.cs" />
     <Compile Include="Objects Definition\Unit.cs" />
     <Compile Include="Objects Definition\UnitCategory.cs" />
+    <Compile Include="Objects Definition\Workbook.cs" />
+    <Compile Include="Objects Definition\WorkbookTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

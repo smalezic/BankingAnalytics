@@ -100,6 +100,16 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
 
         #endregion Unit & Organization
 
+        #region KPI Operations
+
+        public bool SaveWorkbook(Workbook workbook)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveWorkbook/", workbook).Result;
+            return response.Content.ReadAsAsync<bool>().Result;
+        }
+
+        #endregion KPI Operations
+
         #region Additional Fields
 
         public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)

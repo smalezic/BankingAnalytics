@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using static ADS.BankingAnalytics.DataEntities.Enumerations.CommonEnumerations;
 using System.IO;
 using ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 
 namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 {
@@ -408,6 +410,71 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             var json = jsonFile.ReadToEnd();
 
             _importerClient.SaveUnits(json);
+        }
+
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            //var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx");
+            //var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", @"C:\Projects\Sale Notification\Documents\3m za unos u MAGACIN tri nove radnje 25.06.2017.xls");
+
+            //String query = String.Format("SELECT * FROM [{0}$]", "Sheet1");
+            //var adapter = new System.Data.OleDb.OleDbDataAdapter(query, connectionString);
+            //var ds = new DataSet();
+
+            //adapter.Fill(ds, "Codebook");
+
+            //var data = ds.Tables["Codebook"];
+
+
+
+
+
+            //create the Application object we can use in the member functions.
+            Microsoft.Office.Interop.Excel.Application _excelApp = new Microsoft.Office.Interop.Excel.Application();
+            _excelApp.Visible = true;
+
+            string fileName = @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx";
+
+            //open the workbook
+            Microsoft.Office.Interop.Excel.Workbook workbook = _excelApp.Workbooks.Open(fileName,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing);
+
+            //select the first sheet        
+            Worksheet worksheet = (Worksheet)workbook.Worksheets[1];
+
+            //find the used range in worksheet
+            Range excelRange = worksheet.UsedRange;
+
+            //get an object array of all of the cells in the worksheet (their values)
+            object[,] valueArray = (object[,])excelRange.get_Value(
+                        XlRangeValueDataType.xlRangeValueDefault);
+
+            //access the cells
+            for (int row = 1; row <= worksheet.UsedRange.Rows.Count; ++row)
+            {
+                for (int col = 1; col <= worksheet.UsedRange.Columns.Count; ++col)
+                {
+                    //access each cell
+                    //Debug.Print(valueArray[row, col].ToString());
+                }
+            }
+
+            //clean up stuffs
+            workbook.Close(false, Type.Missing, Type.Missing);
+            Marshal.ReleaseComObject(workbook);
+
+            _excelApp.Quit();
+            Marshal.FinalReleaseComObject(_excelApp);
+
+
+
+
+
+
+            MessageBox.Show("");
         }
     }
 }

@@ -208,6 +208,56 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #endregion Organization & Unit
 
+        #region KPI Operations
+
+        public bool SaveWorkbook(Workbook workbook)
+        {
+            bool retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'SaveWorkbook'");
+
+                Workbook workbookDb;
+
+                // Check if a unit in the same organization and with the same name already exists
+                workbookDb = _genericRepository.GetByCriteria<Workbook>(
+                        it => it.UnitId == workbook.UnitId
+                            && it.Name.ToLower().Trim() == workbook.Name.ToLower().Trim()
+                    )
+                    .FirstOrDefault();
+
+                if (workbookDb == null)
+                {
+                    workbookDb = new Workbook();
+                }
+
+                // Update the existing entity or create the new one with the data from the passed entity
+                workbookDb.InjectFrom<PrimitiveTypesExcludeId>(workbook);
+
+                // Save the entity
+                var savedWorkbook = (Workbook)SaveSimpleEntity(workbookDb);
+
+                ((ExpandableEntity)workbook.Expansion).MetaEntityId = savedWorkbook.Id;
+                ((ExpandableEntity)workbook.Expansion).MetaEntityType = savedWorkbook.TypeName;
+
+                SaveExpandableEntity((ExpandableEntity)workbook.Expansion);
+
+                retVal = true;
+            }
+            catch (Exception exc)
+            {
+                retVal = false;
+                _logger.Error(exc);
+            }
+
+            _logger.Debug("Method 'SaveWorkbook' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
+        }
+
+        #endregion KPI Operations
+
         #region Additional Fields
 
         public List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId)

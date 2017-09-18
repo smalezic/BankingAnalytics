@@ -47,6 +47,7 @@
             this.cmbUnitCategories = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.lblParenUnitName = new System.Windows.Forms.Label();
             this.btnTemp = new System.Windows.Forms.Button();
             this.btnAddAdditionalFieldValue = new System.Windows.Forms.Button();
@@ -63,7 +64,7 @@
             this.txtUnitName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -277,6 +278,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Units";
             // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(90, 311);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(202, 70);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "First, add value for additional field(s), then click on \'Add To List\' to create t" +
+    "he unit. Repeat this procedure for as many units as you want. After that, save t" +
+    "hem by clicking on the \'Save List\'.";
+            // 
             // lblParenUnitName
             // 
             this.lblParenUnitName.Location = new System.Drawing.Point(192, 202);
@@ -425,21 +436,22 @@
             this.chkHasParent.UseVisualStyleBackColor = true;
             this.chkHasParent.CheckedChanged += new System.EventHandler(this.chkHasParent_CheckedChanged);
             // 
-            // label12
+            // btnLoadFile
             // 
-            this.label12.Location = new System.Drawing.Point(90, 311);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(202, 70);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "First, add value for additional field(s), then click on \'Add To List\' to create t" +
-    "he unit. Repeat this procedure for as many units as you want. After that, save t" +
-    "hem by clicking on the \'Save List\'.";
+            this.btnLoadFile.Location = new System.Drawing.Point(439, 513);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadFile.TabIndex = 3;
+            this.btnLoadFile.Text = "Load File...";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 595);
+            this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExit);
@@ -494,6 +506,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblParenUnitName;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnLoadFile;
     }
 }
 

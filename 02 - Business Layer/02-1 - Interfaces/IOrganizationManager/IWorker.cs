@@ -20,10 +20,15 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #endregion Organization & Unit
 
+        #region KPI Operations
+
+        bool SaveWorkbook(Workbook workbook);
+
+        #endregion KPI Operations
+
         #region Additional Fields
 
         List<AdditionalFieldDefinition> GetAdditionalFieldDefinitions(int unitCategoryId);
-        //bool SaveAdditionalFieldDefinitions(MetaEntity metaEntity, List<AdditionalFieldDefinition> additionalFieldDefinitions);
         bool SaveAdditionalFieldDefinitions(ExpandableEntityType expandableEntityType);
 
         #endregion Additional Fields
