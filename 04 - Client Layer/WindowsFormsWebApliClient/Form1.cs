@@ -185,12 +185,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 MessageBox.Show("An organization must be selected!");
             }
         }
-
-        private void btnAddUnit_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void btnAddUnitToList_Click(object sender, EventArgs e)
         {
             if(_selectedOrganization != null && _selectedUnitCategory != null)
@@ -206,7 +201,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
                     if (chkHasParent.Checked)
                     {
-                        unit.ParentUnit = _selectedUnit;
+                        unit.ParentUnitId = _selectedUnit.Id;
                     }
 
                     if(_additionalFields.Count() > 0)
@@ -224,7 +219,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                     }
 
                     _units.Add(unit);
-                    cmbUnits.Items.Add(unit);
+                    //cmbUnits.Items.Add(unit);
                 }
                 else
                 {
@@ -276,6 +271,9 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 }
                 
                 _additionalFields.Add(additionalField);
+
+                cmbAdditionalFields.SelectedItem = null;
+                txtAdditionalFieldValue.Text = String.Empty;
             }
         }
 
@@ -343,6 +341,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 {
                     _units.Clear();
                     MessageBox.Show("Ok");
+
+                    var units = _importerClient.GetUnits(_selectedOrganization.Id);
+
+                    cmbUnits.Items.Clear();
+                    cmbUnits.Items.AddRange(units.ToArray());
                 }
                 else
                 {
