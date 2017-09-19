@@ -102,7 +102,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExpandableEntityType");
+                    b.ToTable("ExpandableEntityTypes");
                 });
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.Organization", b =>
@@ -130,6 +130,8 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.Property<int?>("UnitCategoryId");
 
+                    b.Property<int?>("WorkbookTemplateId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationId");
@@ -137,6 +139,8 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     b.HasIndex("ParentUnitId");
 
                     b.HasIndex("UnitCategoryId");
+
+                    b.HasIndex("WorkbookTemplateId");
 
                     b.ToTable("Units");
                 });
@@ -154,7 +158,43 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("UnitCategory");
+                    b.ToTable("UnitCategories");
+                });
+
+            modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.Workbook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("UnitId");
+
+                    b.Property<int?>("WorkbookTemplateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.HasIndex("WorkbookTemplateId");
+
+                    b.ToTable("Workbooks");
+                });
+
+            modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.WorkbookTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrganizationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("WorkbookTemplates");
                 });
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.AdditionalField", b =>
@@ -192,9 +232,33 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.UnitCategory", "UnitCategory")
                         .WithMany("Units")
                         .HasForeignKey("UnitCategoryId");
+
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.WorkbookTemplate")
+                        .WithMany("Units")
+                        .HasForeignKey("WorkbookTemplateId");
                 });
 
             modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.UnitCategory", b =>
+                {
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.Workbook", b =>
+                {
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.WorkbookTemplate", "WorkbookTemplate")
+                        .WithMany()
+                        .HasForeignKey("WorkbookTemplateId");
+                });
+
+            modelBuilder.Entity("ADS.BankingAnalytics.DataEntities.ObjectModel.WorkbookTemplate", b =>
                 {
                     b.HasOne("ADS.BankingAnalytics.DataEntities.ObjectModel.Organization", "Organization")
                         .WithMany()

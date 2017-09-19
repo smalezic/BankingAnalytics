@@ -108,6 +108,12 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<bool>().Result;
         }
 
+        public WorkbookTemplate SaveWorkbookTemplate(WorkbookTemplate entity)
+        {
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveWorkbookTemplate/", entity).Result;
+            return response.Content.ReadAsAsync<WorkbookTemplate>().Result;
+        }
+
         #endregion KPI Operations
 
         #region Additional Fields

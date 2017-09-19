@@ -105,16 +105,24 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
             var retVal = _worker.SaveSimpleEntity(unitCategory);
             return Content(HttpStatusCode.OK, retVal);
         }
-        
+
         #endregion Unit & Organization
 
         #region KPI Operations
-        
+
         [Route("SaveWorkbook")]
         [HttpPost]
         public IHttpActionResult SaveWorkbook(Workbook workbook)
         {
             var retVal = _worker.SaveWorkbook(workbook);
+            return Content(HttpStatusCode.OK, retVal);
+        }
+
+        [Route("SaveWorkbookTemplate")]
+        [HttpPost]
+        public IHttpActionResult SaveWorkbookTemplate(WorkbookTemplate workbookTemplate)
+        {
+            var retVal = _worker.SaveSimpleEntity(workbookTemplate);
             return Content(HttpStatusCode.OK, retVal);
         }
 

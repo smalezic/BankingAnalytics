@@ -16,8 +16,10 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
         public DbSet<AdditionalField> AdditionalFields { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<UnitCategory> UnitCategory { get; set; }
-        public DbSet<ExpandableEntityType> ExpandableEntityType { get; set; }
+        public DbSet<UnitCategory> UnitCategories { get; set; }
+        public DbSet<ExpandableEntityType> ExpandableEntityTypes { get; set; }
+        public DbSet<Workbook> Workbooks { get; set; }
+        public DbSet<WorkbookTemplate> WorkbookTemplate { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,6 +47,12 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker
 
             modelBuilder.Entity<Unit>()
                 .ToTable("Units");
+
+            modelBuilder.Entity<WorkbookTemplate>()
+                .ToTable("WorkbookTemplates");
+
+            modelBuilder.Entity<Workbook>()
+                .ToTable("Workbooks");
         }
     }
 }

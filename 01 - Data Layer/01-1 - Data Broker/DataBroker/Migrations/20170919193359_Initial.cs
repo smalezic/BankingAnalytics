@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,7 +24,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExpandableEntityType",
+                name: "ExpandableEntityTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -34,7 +34,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExpandableEntityType", x => x.Id);
+                    table.PrimaryKey("PK_ExpandableEntityTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,15 +70,15 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 {
                     table.PrimaryKey("PK_AdditionalFieldDefinitions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AdditionalFieldDefinitions_ExpandableEntityType_ExpandableEntityTypeId",
+                        name: "FK_AdditionalFieldDefinitions_ExpandableEntityTypes_ExpandableEntityTypeId",
                         column: x => x.ExpandableEntityTypeId,
-                        principalTable: "ExpandableEntityType",
+                        principalTable: "ExpandableEntityTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UnitCategory",
+                name: "UnitCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -88,9 +88,29 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UnitCategory", x => x.Id);
+                    table.PrimaryKey("PK_UnitCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UnitCategory_Organizations_OrganizationId",
+                        name: "FK_UnitCategories_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkbookTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkbookTemplates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkbookTemplates_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
                         principalColumn: "Id",
@@ -138,7 +158,8 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                     Name = table.Column<string>(nullable: true),
                     OrganizationId = table.Column<int>(nullable: false),
                     ParentUnitId = table.Column<int>(nullable: true),
-                    UnitCategoryId = table.Column<int>(nullable: true)
+                    UnitCategoryId = table.Column<int>(nullable: true),
+                    WorkbookTemplateId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,9 +177,42 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Units_UnitCategory_UnitCategoryId",
+                        name: "FK_Units_UnitCategories_UnitCategoryId",
                         column: x => x.UnitCategoryId,
-                        principalTable: "UnitCategory",
+                        principalTable: "UnitCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Units_WorkbookTemplates_WorkbookTemplateId",
+                        column: x => x.WorkbookTemplateId,
+                        principalTable: "WorkbookTemplates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Workbooks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    UnitId = table.Column<int>(nullable: false),
+                    WorkbookTemplateId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workbooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Workbooks_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Workbooks_WorkbookTemplates_WorkbookTemplateId",
+                        column: x => x.WorkbookTemplateId,
+                        principalTable: "WorkbookTemplates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -194,8 +248,28 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 column: "UnitCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UnitCategory_OrganizationId",
-                table: "UnitCategory",
+                name: "IX_Units_WorkbookTemplateId",
+                table: "Units",
+                column: "WorkbookTemplateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitCategories_OrganizationId",
+                table: "UnitCategories",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workbooks_UnitId",
+                table: "Workbooks",
+                column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workbooks_WorkbookTemplateId",
+                table: "Workbooks",
+                column: "WorkbookTemplateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkbookTemplates_OrganizationId",
+                table: "WorkbookTemplates",
                 column: "OrganizationId");
         }
 
@@ -205,7 +279,7 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 name: "AdditionalFields");
 
             migrationBuilder.DropTable(
-                name: "Units");
+                name: "Workbooks");
 
             migrationBuilder.DropTable(
                 name: "AdditionalFieldDefinitions");
@@ -214,10 +288,16 @@ namespace ADS.BankingAnalytics.DataEntities.DataBroker.Migrations
                 name: "ExpandableEntities");
 
             migrationBuilder.DropTable(
-                name: "UnitCategory");
+                name: "Units");
 
             migrationBuilder.DropTable(
-                name: "ExpandableEntityType");
+                name: "ExpandableEntityTypes");
+
+            migrationBuilder.DropTable(
+                name: "UnitCategories");
+
+            migrationBuilder.DropTable(
+                name: "WorkbookTemplates");
 
             migrationBuilder.DropTable(
                 name: "Organizations");

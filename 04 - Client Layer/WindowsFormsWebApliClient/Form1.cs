@@ -443,7 +443,8 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             Microsoft.Office.Interop.Excel.Application _excelApp = new Microsoft.Office.Interop.Excel.Application();
             _excelApp.Visible = false;
 
-            string fileName = @"C:\Projects\Research\BankingAnalytics\10 - Working documents\benchmark v1.xlsx";
+            //string fileName = @"C:\Projects\Research\BankingAnalytics\10 - Working documents\benchmark v1.xlsx";
+            string fileName = @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx";
 
             //open the workbook
             Microsoft.Office.Interop.Excel.Workbook workbook = _excelApp.Workbooks.Open(fileName,
@@ -517,6 +518,8 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 Name = "TestWB",
                 OrganizationId = _selectedOrganization.Id
             };
+
+            workbookType = _importerClient.SaveWorkbookTemplate(workbookType);
 
             var expandableEntityType = new ExpandableEntityType()
             {
