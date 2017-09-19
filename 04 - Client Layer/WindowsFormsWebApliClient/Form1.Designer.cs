@@ -148,6 +148,7 @@
             this.rchAdditionalFields.Size = new System.Drawing.Size(379, 147);
             this.rchAdditionalFields.TabIndex = 6;
             this.rchAdditionalFields.Text = "";
+            this.rchAdditionalFields.WordWrap = false;
             // 
             // lblSelectedUnitParentName
             // 

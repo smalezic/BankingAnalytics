@@ -29,6 +29,16 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         private List<Unit> _units;
         private List<AdditionalField> _additionalFields;
 
+        struct Line
+        {
+            public Line(int length)
+            {
+                row = new String[length];
+            }
+
+            public String[] row;
+        };
+
         #endregion Fields
 
         #region Constructor
@@ -431,9 +441,9 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             //create the Application object we can use in the member functions.
             Microsoft.Office.Interop.Excel.Application _excelApp = new Microsoft.Office.Interop.Excel.Application();
-            _excelApp.Visible = true;
+            _excelApp.Visible = false;
 
-            string fileName = @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx";
+            string fileName = @"C:\Projects\Research\BankingAnalytics\10 - Working documents\benchmark v1.xlsx";
 
             //open the workbook
             Microsoft.Office.Interop.Excel.Workbook workbook = _excelApp.Workbooks.Open(fileName,
@@ -452,14 +462,25 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             object[,] valueArray = (object[,])excelRange.get_Value(
                         XlRangeValueDataType.xlRangeValueDefault);
 
+            var matrix = new Line[worksheet.UsedRange.Rows.Count];
+
             //access the cells
             for (int row = 1; row <= worksheet.UsedRange.Rows.Count; ++row)
             {
+                var line = new String[worksheet.UsedRange.Columns.Count];
                 for (int col = 1; col <= worksheet.UsedRange.Columns.Count; ++col)
                 {
                     //access each cell
                     //Debug.Print(valueArray[row, col].ToString());
+                    var valueObject = valueArray[row, col];
+                    if (valueObject != null)
+                    {
+                        line[col - 1] = valueObject.ToString();
+                        rchAdditionalFields.AppendText(valueObject.ToString() + "\t");
+                    }
                 }
+                matrix[row - 1].row = line;
+                rchAdditionalFields.AppendText(Environment.NewLine);
             }
 
             //clean up stuffs
@@ -470,11 +491,46 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             Marshal.FinalReleaseComObject(_excelApp);
 
 
+            var addFieldDefinititions = new List<AdditionalFieldDefinition>();
+
+            for(int i=0; i < matrix.Length; i++)
+            {
+                if(matrix[i].row != null
+                    && matrix[i].row[0] != null
+                    && matrix[i].row[1] != null)
+                {
+                    var def = new AdditionalFieldDefinition()
+                    {
+                        Name = matrix[i].row[0],
+                        Description = matrix[i].row[1],
+                        BusinessMeaning = null,
+                        IsMandatory = false,
+                        FieldValueType = DataEntities.Enumerations.CommonEnumerations.FieldType.String
+                    };
+
+                    addFieldDefinititions.Add(def);
+                }
+            }
+
+            var workbookType = new WorkbookTemplate()
+            {
+                Name = "TestWB",
+                OrganizationId = _selectedOrganization.Id
+            };
+
+            var expandableEntityType = new ExpandableEntityType()
+            {
+                MetaEntityId = workbookType.Id,
+                MetaEntityType = workbookType.TypeName,
+                AdditionalFieldDefinitions = addFieldDefinititions
+            };
+
+            var retVal = _importerClient.SaveAdditionalFieldDefinitions(expandableEntityType);
 
 
 
 
-            MessageBox.Show("");
+            //MessageBox.Show("");
         }
     }
 }
