@@ -23,6 +23,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         #region KPI Operations
 
         bool SaveWorkbook(Workbook workbook);
+        bool UploadFile(byte[] content);
 
         #endregion KPI Operations
 

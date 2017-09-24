@@ -65,6 +65,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkHasParent = new System.Windows.Forms.CheckBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
+            this.btnUploadFile = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -447,11 +448,22 @@
             this.btnLoadFile.UseVisualStyleBackColor = true;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
+            // btnUploadFile
+            // 
+            this.btnUploadFile.Location = new System.Drawing.Point(520, 513);
+            this.btnUploadFile.Name = "btnUploadFile";
+            this.btnUploadFile.Size = new System.Drawing.Size(79, 23);
+            this.btnUploadFile.TabIndex = 4;
+            this.btnUploadFile.Text = "Upload File...";
+            this.btnUploadFile.UseVisualStyleBackColor = true;
+            this.btnUploadFile.Click += new System.EventHandler(this.btnUploadFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 595);
+            this.Controls.Add(this.btnUploadFile);
             this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -508,6 +520,7 @@
         private System.Windows.Forms.Label lblParenUnitName;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.Button btnUploadFile;
     }
 }
 

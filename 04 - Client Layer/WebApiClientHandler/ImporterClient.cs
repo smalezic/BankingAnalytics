@@ -114,6 +114,19 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<WorkbookTemplate>().Result;
         }
 
+        public bool UploadFile(byte[] fileContent)
+        {
+            HttpRequestMessage message = new HttpRequestMessage();
+            message.Content = new ByteArrayContent(fileContent);
+            var response = _client.PostAsync(_client.BaseAddress + "UploadFile/", message.Content).Result;
+            return response.Content.ReadAsAsync<bool>().Result;
+
+            //MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+            //multipartContent.Add(new ByteArrayContent(fileContent));
+            //var response = _client.PostAsync(_client.BaseAddress + "UploadFile/", multipartContent).Result;
+            //return response.Content.ReadAsAsync<bool>().Result;
+        }
+
         #endregion KPI Operations
 
         #region Additional Fields

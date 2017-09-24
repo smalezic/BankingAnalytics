@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Omu.ValueInjecter;
+using System.IO;
 
 namespace ADS.BankingAnalytics.Business.OrganizationManager
 {
@@ -253,6 +254,29 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             }
 
             _logger.Debug("Method 'SaveWorkbook' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            return retVal;
+        }
+
+        public bool UploadFile(byte[] content)
+        {
+            bool retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'UploadFile'");
+
+                File.WriteAllBytes(@"C:\Temp\Upload.xlsx", content);
+
+                retVal = true;
+            }
+            catch (Exception exc)
+            {
+                retVal = false;
+                _logger.Error(exc);
+            }
+
+            _logger.Debug("Method 'UploadFile' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
             return retVal;
         }
 

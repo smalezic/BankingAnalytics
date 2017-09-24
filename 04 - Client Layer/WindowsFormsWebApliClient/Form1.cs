@@ -535,5 +535,16 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             //MessageBox.Show("");
         }
+
+        private void btnUploadFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            var dialogResult = ofd.ShowDialog();
+            var fileName = ofd.FileName;
+            var content = File.ReadAllBytes(fileName);
+
+            _importerClient.UploadFile(content);
+        }
     }
 }

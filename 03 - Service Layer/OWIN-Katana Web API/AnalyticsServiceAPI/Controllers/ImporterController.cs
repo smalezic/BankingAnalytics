@@ -13,6 +13,7 @@ using System.Web.Http;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 {
@@ -124,6 +125,29 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         {
             var retVal = _worker.SaveSimpleEntity(workbookTemplate);
             return Content(HttpStatusCode.OK, retVal);
+        }
+
+        [Route("UploadFile")]
+        [HttpPost]
+        public IHttpActionResult UploadFile()
+        {
+            //if (!Request.Content.IsMimeMultipartContent())
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            //}
+
+            //var provider = new MultipartMemoryStreamProvider();
+            //Request.Content.ReadAsMultipartAsync(provider);
+            //foreach(var file in provider.Contents)
+            //{
+            //    var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+            //    var buffer = file.ReadAsByteArrayAsync();
+            //}
+
+            var content = Request.Content.ReadAsByteArrayAsync().Result;
+            _worker.UploadFile(content);
+
+            return Content(HttpStatusCode.OK, true);
         }
 
         #endregion KPI Operations
