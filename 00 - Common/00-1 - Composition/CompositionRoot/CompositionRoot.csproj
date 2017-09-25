@@ -225,6 +225,14 @@
       <Project>{967eea56-a698-47e2-9cf2-f1b4e12c1b10}</Project>
       <Name>NLogLogger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\00-5 - Utility\00-5-1 - Interfaces\IFileUtility\IFileUtility.csproj">
+      <Project>{fd3b4bc9-0058-4640-b9bb-f36c584ec09a}</Project>
+      <Name>IFileUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\00-5 - Utility\00-5-2 - Implementation\FileUtility\FileUtility.csproj">
+      <Project>{7bd2dee9-b8fa-4b5e-80f8-82c49eb0dd99}</Project>
+      <Name>FileUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

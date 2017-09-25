@@ -55,6 +55,10 @@
       <Project>{dfac7784-65e9-46fc-a021-c8db004e2ed1}</Project>
       <Name>OmuValueInjectorExtension</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\00 - Common\00-5 - Utility\00-5-1 - Interfaces\IFileUtility\IFileUtility.csproj">
+      <Project>{fd3b4bc9-0058-4640-b9bb-f36c584ec09a}</Project>
+      <Name>IFileUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>

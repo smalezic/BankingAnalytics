@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Omu.ValueInjecter;
 using System.IO;
+using ADS.BankingAnalytics.Utility.FileUtility;
+using System.Data;
 
 namespace ADS.BankingAnalytics.Business.OrganizationManager
 {
@@ -16,23 +18,25 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
     {
         #region Fields
 
-        // Instance of repository activity
         private IGenericRepositoryActivity _genericRepository;
-
-        // Instance of ILogger
         private readonly ILogger _logger;
-
         private IExpandableEntityCreator _expansionCreator;
+        private IExcelFileTool _excelFileTool;
 
         #endregion Fields
 
         #region Constructor
 
-        public Worker(IGenericRepositoryActivity genericRepository, ILogger logger, IExpandableEntityCreator expansionCreator)
+        public Worker(
+            IGenericRepositoryActivity genericRepository,
+            ILogger logger,
+            IExpandableEntityCreator expansionCreator,
+            IExcelFileTool excelFileTool)
         {
             _genericRepository = genericRepository;
             _logger = logger;
             _expansionCreator = expansionCreator;
+            _excelFileTool = excelFileTool;
         }
 
         #endregion Constructor
@@ -266,7 +270,39 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 _logger.Debug("Entered method 'UploadFile'");
 
-                File.WriteAllBytes(@"C:\Temp\Upload.xlsx", content);
+                //String fileName = _excelFileTool.CreateFile(content);
+                //var dt = _excelFileTool.GetFileContent(fileName);
+
+                var dt = _excelFileTool.GetFileContent(content);
+                // TODO: Process the content of the excel file
+
+
+
+
+
+
+
+
+
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr != null && dr.ItemArray != null && dr.ItemArray.Length > 2)
+                    {
+                        var field1 = dr[0]; // name of the data
+                        var field2 = dr[1]; // description
+                        var field3 = dr[3]; // value for processing
+                    }
+                }
+
+
+
+
+
+
+
+
+
 
                 retVal = true;
             }

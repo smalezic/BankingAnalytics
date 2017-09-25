@@ -15,6 +15,7 @@ using System.Web.Http;
 using System.Reflection;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntityFactory;
+using ADS.BankingAnalytics.Utility.FileUtility;
 
 namespace ADS.BankingAnalytics.Common.CompositionRoot
 {
@@ -81,6 +82,7 @@ namespace ADS.BankingAnalytics.Common.CompositionRoot
             builder.RegisterType<GenericRepositoryActivity>().As<IGenericRepositoryActivity>();
             builder.RegisterType<Logger>().As<ILogger>();
             builder.RegisterType<ExpandableEntityCreator>().As<IExpandableEntityCreator>();
+            builder.RegisterType<ExcelFileTool>().As<IExcelFileTool>();
 
             // Build the container
             _container = builder.Build();

@@ -14,6 +14,7 @@ using System.IO;
 using ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.Data.OleDb;
 
 namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 {
@@ -424,16 +425,20 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-            //var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx");
-            //var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", @"C:\Projects\Sale Notification\Documents\3m za unos u MAGACIN tri nove radnje 25.06.2017.xls");
-
+            //var connectionString = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties='Excel 12.0;HDR=yes'", @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx");
+            //System.Data.DataTable dt = new System.Data.DataTable();
             //String query = String.Format("SELECT * FROM [{0}$]", "Sheet1");
-            //var adapter = new System.Data.OleDb.OleDbDataAdapter(query, connectionString);
-            //var ds = new DataSet();
-
-            //adapter.Fill(ds, "Codebook");
-
-            //var data = ds.Tables["Codebook"];
+            //using (OleDbConnection conn = new OleDbConnection(connectionString))
+            //{
+            //    conn.Open();
+            //    using(OleDbCommand cmd = new OleDbCommand(query, conn))
+            //    {
+            //        using(OleDbDataReader rdr = cmd.ExecuteReader())
+            //        {
+            //            dt.Load(rdr);
+            //        }
+            //    }
+            //}
 
 
 
@@ -529,11 +534,6 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             };
 
             var retVal = _importerClient.SaveAdditionalFieldDefinitions(expandableEntityType);
-
-
-
-
-            //MessageBox.Show("");
         }
 
         private void btnUploadFile_Click(object sender, EventArgs e)
