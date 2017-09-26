@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ADS.BankingAnalytics.DataEntities.ObjectModel;
+using ADS.BankingAnalytics.HelperObjects;
 
 namespace ADS.BankingAnalytics.Business.OrganizationManager
 {
@@ -23,7 +24,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         #region KPI Operations
 
         bool SaveWorkbook(Workbook workbook);
-        bool UploadFile(byte[] content);
+        bool UploadFile(WorkbookTransport transport);
 
         #endregion KPI Operations
 

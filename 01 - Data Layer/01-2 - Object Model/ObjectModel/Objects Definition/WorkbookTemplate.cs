@@ -10,7 +10,7 @@ namespace ADS.BankingAnalytics.DataEntities.ObjectModel
     public partial class WorkbookTemplate : MetaEntity
     {
         public String Name { get; set; }
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }    // TODO: Get rid of this. Use collection of Workbooks instead of Units.
 
         [Required]
         public int OrganizationId { get; set; }

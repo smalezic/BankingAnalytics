@@ -51,6 +51,10 @@
       <Project>{3bf8ddce-0e82-4bae-9b5a-3f6962d7870c}</Project>
       <Name>ILogging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\00 - Common\00-3 - Extensions and Helpers\HelperObjects\HelperObjects.csproj">
+      <Project>{21f63c9f-a259-4c60-978a-ad95a80f7050}</Project>
+      <Name>HelperObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\00 - Common\00-3 - Extensions and Helpers\OmuValueInjectorExtension\OmuValueInjectorExtension.csproj">
       <Project>{dfac7784-65e9-46fc-a021-c8db004e2ed1}</Project>
       <Name>OmuValueInjectorExtension</Name>

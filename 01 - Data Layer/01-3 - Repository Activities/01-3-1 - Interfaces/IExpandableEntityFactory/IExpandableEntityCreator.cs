@@ -10,5 +10,6 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntit
     public interface IExpandableEntityCreator
     {
         MetaEntity Expand(MetaEntity entity);
+        MetaEntity ExpandType(MetaEntity entity);
     }
 }

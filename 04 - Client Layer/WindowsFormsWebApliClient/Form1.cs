@@ -544,7 +544,14 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             var fileName = ofd.FileName;
             var content = File.ReadAllBytes(fileName);
 
-            _importerClient.UploadFile(content);
+            var workbook = new DataEntities.ObjectModel.Workbook()
+            {
+                Name = "Second report",
+                UnitId = 1,
+                WorkbookTemplateId = 1
+            };
+
+            _importerClient.UploadFile(workbook, content);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ADS.BankingAnalytics.Business.OrganizationManager;
 using ADS.BankingAnalytics.DataEntities.ObjectModel;
+using ADS.BankingAnalytics.HelperObjects;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ContextFactory;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
@@ -129,25 +130,12 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
         [Route("UploadFile")]
         [HttpPost]
-        public IHttpActionResult UploadFile()
+        public IHttpActionResult UploadFile(WorkbookTransport transport)
         {
-            //if (!Request.Content.IsMimeMultipartContent())
-            //{
-            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            //}
+            //var content = Request.Content.ReadAsByteArrayAsync().Result;
 
-            //var provider = new MultipartMemoryStreamProvider();
-            //Request.Content.ReadAsMultipartAsync(provider);
-            //foreach(var file in provider.Contents)
-            //{
-            //    var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-            //    var buffer = file.ReadAsByteArrayAsync();
-            //}
-
-            var content = Request.Content.ReadAsByteArrayAsync().Result;
-            _worker.UploadFile(content);
-
-            return Content(HttpStatusCode.OK, true);
+            var retVal = _worker.UploadFile(transport);
+            return Content(HttpStatusCode.OK, retVal);
         }
 
         #endregion KPI Operations

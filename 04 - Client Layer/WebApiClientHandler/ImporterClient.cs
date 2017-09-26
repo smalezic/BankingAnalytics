@@ -1,4 +1,5 @@
 ﻿using ADS.BankingAnalytics.DataEntities.ObjectModel;
+using ADS.BankingAnalytics.HelperObjects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -114,17 +115,21 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<WorkbookTemplate>().Result;
         }
 
-        public bool UploadFile(byte[] fileContent)
+        public bool UploadFile(Workbook workbook, byte[] fileContent)
         {
-            HttpRequestMessage message = new HttpRequestMessage();
-            message.Content = new ByteArrayContent(fileContent);
-            var response = _client.PostAsync(_client.BaseAddress + "UploadFile/", message.Content).Result;
-            return response.Content.ReadAsAsync<bool>().Result;
-
-            //MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-            //multipartContent.Add(new ByteArrayContent(fileContent));
-            //var response = _client.PostAsync(_client.BaseAddress + "UploadFile/", multipartContent).Result;
+            //HttpRequestMessage message = new HttpRequestMessage();
+            //message.Content = new ByteArrayContent(fileContent);
+            //var response = _client.PostAsync(_client.BaseAddress + "UploadFile/", message.Content).Result;
             //return response.Content.ReadAsAsync<bool>().Result;
+
+            var transport = new WorkbookTransport()
+            {
+                Workbook = workbook,
+                Content = fileContent
+            };
+
+            var response = _client.PostAsJsonAsync(_client.BaseAddress + "UploadFile/", transport).Result;
+            return response.Content.ReadAsAsync<bool>().Result;
         }
 
         #endregion KPI Operations

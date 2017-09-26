@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\00 - Common\00-3 - Extensions and Helpers\HelperObjects\HelperObjects.csproj">
+      <Project>{21f63c9f-a259-4c60-978a-ad95a80f7050}</Project>
+      <Name>HelperObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\01 - Data Layer\01-2 - Object Model\ObjectModel\ObjectModel.csproj">
       <Project>{3a055aea-e635-4e08-93a5-108f21890096}</Project>
       <Name>ObjectModel</Name>

@@ -40,7 +40,7 @@ namespace ADS.BankingAnalytics.Utility.FileUtility
         {
             DataTable retVal = new DataTable();
 
-            var connectionString = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties='Excel 12.0;HDR=no'", @"C:\Projects\Banking Analytics\Banking Analytics Solution\10 - Working documents\benchmark v1.xlsx");
+            var connectionString = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties='Excel 12.0;HDR=no'", fileName);
             
             String query = String.Format("SELECT * FROM [{0}$]", "Sheet1");
 

@@ -2,6 +2,7 @@
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities;
 using ADS.BankingAnalytics.DataEntities.RepositoryActivities.ExpandableEntityFactory;
 using ADS.BankingAnalytics.Logging.LoggingInterface;
+using ADS.BankingAnalytics.HelperObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -261,7 +262,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public bool UploadFile(byte[] content)
+        public bool UploadFile(WorkbookTransport transport)
         {
             bool retVal;
             var startTime = DateTime.Now;
@@ -270,31 +271,72 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             {
                 _logger.Debug("Entered method 'UploadFile'");
 
-                //String fileName = _excelFileTool.CreateFile(content);
-                //var dt = _excelFileTool.GetFileContent(fileName);
+                var workbook = transport.Workbook;
+                var dt = _excelFileTool.GetFileContent(transport.Content);
 
-                var dt = _excelFileTool.GetFileContent(content);
+                var workbookTemplate = _genericRepository.GetById<WorkbookTemplate>(workbook.WorkbookTemplateId.Value);
+                workbookTemplate = (WorkbookTemplate) _expansionCreator.ExpandType(workbookTemplate);
+
+                IList<AdditionalFieldDefinition> additionalFieldDefinitions = null;
+                if(workbookTemplate.Expansion != null)
+                {
+                    var expandableType = (ExpandableEntityType)workbookTemplate.Expansion;
+                    additionalFieldDefinitions = expandableType.AdditionalFieldDefinitions.ToList();
+                }
+                else
+                {
+                    // TODO: Do proper handling here!
+                    throw new NullReferenceException();
+                }
+
+                List<AdditionalField> addFields = new List<AdditionalField>(additionalFieldDefinitions.Count());
+                
                 // TODO: Process the content of the excel file
-
-
-
-
-
-
-
-
-
-
                 foreach (DataRow dr in dt.Rows)
                 {
                     if (dr != null && dr.ItemArray != null && dr.ItemArray.Length > 2)
                     {
-                        var field1 = dr[0]; // name of the data
-                        var field2 = dr[1]; // description
-                        var field3 = dr[3]; // value for processing
+                        var name = dr[0].GetType() != typeof(System.DBNull) ? (String) dr[0] : String.Empty; // name of the data
+                        var description = dr[1].GetType() != typeof(System.DBNull) ? (String) dr[1] : String.Empty; // description
+                        var val = dr[2].GetType() != typeof(System.DBNull) ? (String) dr[2] : String.Empty; // value for processing
+
+                        if(String.IsNullOrWhiteSpace(val))
+                        {
+                            continue;
+                        }
+
+                        // Find the field in WorkbookTemplate
+                        var addFieldDef = additionalFieldDefinitions
+                            .Where(it => it.Name == name)
+                            .FirstOrDefault();
+
+                        var addField = new AdditionalField()
+                        {
+                            StringValue = val,
+                            AdditionalFieldDefinitionId = addFieldDef.Id
+                        };
+
+                        addFields.Add(addField);
                     }
                 }
+                
+                //var expandable = new ExpandableEntity()
+                //{
+                //    MetaEntityId = workbook.Id,
+                //    MetaEntityType = workbook.TypeName,
+                //    AdditionalFields = addFields
+                //};
 
+                var expandable = new ExpandableEntity();
+
+                addFields.ForEach(it =>
+                {
+                    expandable.AdditionalFields.Add(it);
+                });
+                
+                workbook.Expansion = expandable;
+
+                SaveWorkbook(workbook);
 
 
 
