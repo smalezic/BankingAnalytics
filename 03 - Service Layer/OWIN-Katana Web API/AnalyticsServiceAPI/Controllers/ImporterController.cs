@@ -59,8 +59,9 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         [HttpGet]
         public IHttpActionResult FindUnit(int id)
         {
-            var unit = _worker.FindUnit(id);
-            
+            //var unit = _worker.FindUnit(id);
+            var unit = _worker.FindEntityWithExpansion<Unit>(id);
+
             var serializedExpansion = JsonConvert.SerializeObject(
                 unit.Expansion,
                 Formatting.Indented,
@@ -71,6 +72,27 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
             unit.Expansion = null;
             var serializedUnit = JsonConvert.SerializeObject(unit);
+
+            return Content(HttpStatusCode.OK, serializedExpansion + "|" + serializedUnit);
+        }
+
+        [Route("FindWorkbook/{id}")]
+        [HttpGet]
+        public IHttpActionResult Workbook(int id)
+        {
+            //var workbook = _worker.FindWorkbook(id);
+            var workbook = _worker.FindEntityWithExpansion<Workbook>(id);
+
+            var serializedExpansion = JsonConvert.SerializeObject(
+                workbook.Expansion,
+                Formatting.Indented,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
+
+            workbook.Expansion = null;
+            var serializedUnit = JsonConvert.SerializeObject(workbook);
 
             return Content(HttpStatusCode.OK, serializedExpansion + "|" + serializedUnit);
         }
@@ -112,6 +134,13 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
 
         #region KPI Operations
 
+        [Route("GetAllWorkbookTemplates")]
+        [HttpGet]
+        public IHttpActionResult GetAllWorkbookTemplates()
+        {
+            return Content(HttpStatusCode.OK, _worker.GetAllWorkbookTemplates());
+        }
+
         [Route("SaveWorkbook")]
         [HttpPost]
         public IHttpActionResult SaveWorkbook(Workbook workbook)
@@ -134,7 +163,7 @@ namespace ADS.BankingAnalytics.AnalyticsServiceAPI.Controllers
         {
             //var content = Request.Content.ReadAsByteArrayAsync().Result;
 
-            var retVal = _worker.UploadFile(transport);
+            var retVal = _worker.SaveWorkbook(transport);
             return Content(HttpStatusCode.OK, retVal);
         }
 

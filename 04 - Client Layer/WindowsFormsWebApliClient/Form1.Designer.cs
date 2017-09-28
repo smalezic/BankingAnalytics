@@ -66,9 +66,17 @@
             this.chkHasParent = new System.Windows.Forms.CheckBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.btnUploadFile = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtWorkbookTemplateName = new System.Windows.Forms.TextBox();
+            this.txtReportName = new System.Windows.Forms.TextBox();
+            this.cmbWorkbookTemplates = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -275,7 +283,7 @@
             this.groupBox2.Controls.Add(this.chkHasParent);
             this.groupBox2.Location = new System.Drawing.Point(430, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(442, 487);
+            this.groupBox2.Size = new System.Drawing.Size(442, 383);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Units";
@@ -301,7 +309,7 @@
             // 
             // btnTemp
             // 
-            this.btnTemp.Location = new System.Drawing.Point(361, 458);
+            this.btnTemp.Location = new System.Drawing.Point(361, 19);
             this.btnTemp.Name = "btnTemp";
             this.btnTemp.Size = new System.Drawing.Size(75, 23);
             this.btnTemp.TabIndex = 18;
@@ -440,9 +448,9 @@
             // 
             // btnLoadFile
             // 
-            this.btnLoadFile.Location = new System.Drawing.Point(439, 513);
+            this.btnLoadFile.Location = new System.Drawing.Point(276, 14);
             this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadFile.Size = new System.Drawing.Size(79, 22);
             this.btnLoadFile.TabIndex = 3;
             this.btnLoadFile.Text = "Load File...";
             this.btnLoadFile.UseVisualStyleBackColor = true;
@@ -450,21 +458,86 @@
             // 
             // btnUploadFile
             // 
-            this.btnUploadFile.Location = new System.Drawing.Point(520, 513);
+            this.btnUploadFile.Location = new System.Drawing.Point(276, 66);
             this.btnUploadFile.Name = "btnUploadFile";
-            this.btnUploadFile.Size = new System.Drawing.Size(79, 23);
+            this.btnUploadFile.Size = new System.Drawing.Size(79, 22);
             this.btnUploadFile.TabIndex = 4;
             this.btnUploadFile.Text = "Upload File...";
             this.btnUploadFile.UseVisualStyleBackColor = true;
             this.btnUploadFile.Click += new System.EventHandler(this.btnUploadFile_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.cmbWorkbookTemplates);
+            this.panel2.Controls.Add(this.txtReportName);
+            this.panel2.Controls.Add(this.txtWorkbookTemplateName);
+            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.btnLoadFile);
+            this.panel2.Controls.Add(this.btnUploadFile);
+            this.panel2.Location = new System.Drawing.Point(430, 402);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(442, 129);
+            this.panel2.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(70, 44);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "Report Name:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(36, 70);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(107, 13);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Workbook Template:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(5, 18);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(138, 13);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Workbook Template Name:";
+            // 
+            // txtWorkbookTemplateName
+            // 
+            this.txtWorkbookTemplateName.Location = new System.Drawing.Point(149, 15);
+            this.txtWorkbookTemplateName.Name = "txtWorkbookTemplateName";
+            this.txtWorkbookTemplateName.Size = new System.Drawing.Size(121, 20);
+            this.txtWorkbookTemplateName.TabIndex = 8;
+            // 
+            // txtReportName
+            // 
+            this.txtReportName.Location = new System.Drawing.Point(149, 41);
+            this.txtReportName.Name = "txtReportName";
+            this.txtReportName.Size = new System.Drawing.Size(121, 20);
+            this.txtReportName.TabIndex = 9;
+            // 
+            // cmbWorkbookTemplates
+            // 
+            this.cmbWorkbookTemplates.FormattingEnabled = true;
+            this.cmbWorkbookTemplates.Location = new System.Drawing.Point(149, 67);
+            this.cmbWorkbookTemplates.Name = "cmbWorkbookTemplates";
+            this.cmbWorkbookTemplates.Size = new System.Drawing.Size(121, 21);
+            this.cmbWorkbookTemplates.TabIndex = 10;
+            this.cmbWorkbookTemplates.SelectedIndexChanged += new System.EventHandler(this.cmbWorkbookTemplates_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 595);
-            this.Controls.Add(this.btnUploadFile);
-            this.Controls.Add(this.btnLoadFile);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExit);
@@ -477,6 +550,8 @@
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -521,6 +596,13 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.Button btnUploadFile;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ComboBox cmbWorkbookTemplates;
+        private System.Windows.Forms.TextBox txtReportName;
+        private System.Windows.Forms.TextBox txtWorkbookTemplateName;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
 

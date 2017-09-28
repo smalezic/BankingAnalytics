@@ -26,6 +26,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
         private Organization _selectedOrganization;
         private UnitCategory _selectedUnitCategory;
         private Unit _selectedUnit;
+        private WorkbookTemplate _selectedWorkbookTemplate;
 
         private List<Unit> _units;
         private List<AdditionalField> _additionalFields;
@@ -63,6 +64,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             _importerClient = new ImporterClient("http://localhost:8081");
 
             GetAllOrganizationsAndUnitCategories();
+            GetAllWorkbookTemplates();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -174,6 +176,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 lblUnitName.Text = String.Empty;
                 MessageBox.Show("There is no any unit selected!");
             }
+        }
+
+        private void cmbWorkbookTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedWorkbookTemplate = (WorkbookTemplate) cmbWorkbookTemplates.SelectedItem;
         }
 
         private void btnAddOrganization_Click(object sender, EventArgs e)
@@ -367,54 +374,6 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             }
         }
 
-        private void chkHasParent_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkHasParent.Checked)
-            {
-                if (_selectedUnit != null)
-                {
-                    lblParenUnitName.Text = "--> " + _selectedUnit.Name;
-                }
-                else
-                {
-                    MessageBox.Show("Parent unit must be selected!");
-                }
-            }
-            else
-            {
-                lblParenUnitName.Text = String.Empty;
-            }
-        }
-        
-        #endregion Event Handlers
-
-        #region Private Methods
-
-        private void GetAllOrganizationsAndUnitCategories()
-        {
-            try
-            {
-                var organizations = _importerClient.GetAllOrganizations();
-
-                cmbOrganizations.Items.Clear();
-                cmbOrganizations.Items.AddRange(organizations.ToArray());
-
-                if (_selectedOrganization != null)
-                {
-                    var categories = _importerClient.GetUnitCategories(_selectedOrganization.Id);
-
-                    cmbUnitCategories.Items.Clear();
-                    cmbUnitCategories.Items.AddRange(categories.ToArray());
-                }
-            }
-            catch
-            {
-
-            }
-        }
-
-        #endregion Private Methods
-
         private void btnTemp_Click(object sender, EventArgs e)
         {
             var jsonFile = new StreamReader("..\\..\\JsonTest.txt");
@@ -499,9 +458,9 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             var addFieldDefinititions = new List<AdditionalFieldDefinition>();
 
-            for(int i=0; i < matrix.Length; i++)
+            for (int i = 0; i < matrix.Length; i++)
             {
-                if(matrix[i].row != null
+                if (matrix[i].row != null
                     && matrix[i].row[0] != null
                     && matrix[i].row[1] != null)
                 {
@@ -534,24 +493,113 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
             };
 
             var retVal = _importerClient.SaveAdditionalFieldDefinitions(expandableEntityType);
+
+            if (retVal)
+            {
+                cmbWorkbookTemplates.Items.Add(workbookType);
+            }
         }
 
         private void btnUploadFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            var dialogResult = ofd.ShowDialog();
-            var fileName = ofd.FileName;
-            var content = File.ReadAllBytes(fileName);
-
-            var workbook = new DataEntities.ObjectModel.Workbook()
+            if (_selectedWorkbookTemplate == null)
             {
-                Name = "Second report",
-                UnitId = 1,
-                WorkbookTemplateId = 1
-            };
+                MessageBox.Show("Workbook Template must be selected before a file is uploaded.");
+            }
+            else if (String.IsNullOrWhiteSpace(txtReportName.Text))
+            {
+                MessageBox.Show("Report name must be specified.");
+            }
+            else
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
 
-            _importerClient.UploadFile(workbook, content);
+                var dialogResult = ofd.ShowDialog();
+                var fileName = ofd.FileName;
+                var content = File.ReadAllBytes(fileName);
+
+                var workbook = new DataEntities.ObjectModel.Workbook()
+                {
+                    Name = txtReportName.Text,
+                    UnitId = _selectedUnit.Id,
+                    WorkbookTemplateId = _selectedWorkbookTemplate.Id
+                };
+
+                var success = _importerClient.UploadFile(workbook, content);
+
+                var savedWorkbook = _importerClient.GetWorkbook(success);
+
+                var definitions = _importerClient.GetAdditionalFieldDefinitions(workbook.WorkbookTemplateId.Value);
+
+                foreach (var field in ((ExpandableEntity)savedWorkbook.Expansion).AdditionalFields)
+                {
+                    var def = definitions.FirstOrDefault(it => it.Id == field.AdditionalFieldDefinitionId);
+                    rchAdditionalFields.AppendText(String.Format("Field name - {0}, has value - {1}{2}", field.AdditionalFieldDefinition.Name, field.StringValue, Environment.NewLine));
+                }
+            }
         }
+
+        private void chkHasParent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkHasParent.Checked)
+            {
+                if (_selectedUnit != null)
+                {
+                    lblParenUnitName.Text = "--> " + _selectedUnit.Name;
+                }
+                else
+                {
+                    MessageBox.Show("Parent unit must be selected!");
+                }
+            }
+            else
+            {
+                lblParenUnitName.Text = String.Empty;
+            }
+        }
+        
+        #endregion Event Handlers
+
+        #region Private Methods
+
+        private void GetAllOrganizationsAndUnitCategories()
+        {
+            try
+            {
+                var organizations = _importerClient.GetAllOrganizations();
+
+                cmbOrganizations.Items.Clear();
+                cmbOrganizations.Items.AddRange(organizations.ToArray());
+
+                if (_selectedOrganization != null)
+                {
+                    var categories = _importerClient.GetUnitCategories(_selectedOrganization.Id);
+
+                    cmbUnitCategories.Items.Clear();
+                    cmbUnitCategories.Items.AddRange(categories.ToArray());
+                }
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show(String.Format("Error ocured - {0}", exc.Message));
+            }
+        }
+
+        private void GetAllWorkbookTemplates()
+        {
+            try
+            {
+                var workbookTemplates = _importerClient.GetAllWorkbookTemplates();
+
+                cmbWorkbookTemplates.Items.Clear();
+                cmbWorkbookTemplates.Items.AddRange(workbookTemplates.ToArray());
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(String.Format("Error ocured - {0}", exc.Message));
+            }
+        }
+
+        #endregion Private Methods
     }
 }

@@ -206,6 +206,27 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
             }
         }
 
+        private void btnSaveDefinitions_Click(object sender, EventArgs e)
+        {
+            var expandableEntityType = new ExpandableEntityType()
+            {
+                MetaEntityId = _selectedUnitCategory.Id,
+                MetaEntityType = _selectedUnitCategory.TypeName,
+                AdditionalFieldDefinitions = _definedFields
+            };
+
+            var retVal = _importerClient.SaveAdditionalFieldDefinitions(expandableEntityType);
+
+            if (retVal)
+            {
+                GetAdditionalFieldDefinitions();
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong...");
+            }
+        }
+
         private AdditionalFieldDefinition CreateAdditionalFieldDefinition(AdditionalFieldDefinition additionalFieldDefinition)
         {
             additionalFieldDefinition.Name = txtAdditionalFieldName.Text;
@@ -237,27 +258,6 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
             ClearFields();
 
             return additionalFieldDefinition;
-        }
-
-        private void btnSaveDefinitions_Click(object sender, EventArgs e)
-        {
-            var expandableEntityType = new ExpandableEntityType()
-            {
-                MetaEntityId = _selectedUnitCategory.Id,
-                MetaEntityType = _selectedUnitCategory.TypeName,
-                AdditionalFieldDefinitions = _definedFields
-            };
-
-            var retVal = _importerClient.SaveAdditionalFieldDefinitions(expandableEntityType);
-
-            if(retVal)
-            {
-                GetAdditionalFieldDefinitions();
-            }
-            else
-            {
-                MessageBox.Show("Something went wrong...");
-            }
         }
     }
 }

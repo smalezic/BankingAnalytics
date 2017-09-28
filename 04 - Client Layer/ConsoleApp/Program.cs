@@ -36,7 +36,7 @@ namespace ADS.BankingAnalytics.Client.ConsoleApp
 
 
 
-            worker.FindUnit(1);
+            //worker.FindUnit(1);
 
 
 

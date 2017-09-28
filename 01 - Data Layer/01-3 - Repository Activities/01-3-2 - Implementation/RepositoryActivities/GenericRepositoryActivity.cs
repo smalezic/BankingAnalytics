@@ -48,7 +48,7 @@ namespace ADS.BankingAnalytics.DataEntities.RepositoryActivities
         }
 
         /// <summary>
-        /// Fethcing a antity by Id
+        /// Fetching a antity by Id
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="id"></param>

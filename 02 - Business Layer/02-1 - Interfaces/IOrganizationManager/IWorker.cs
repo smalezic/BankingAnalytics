@@ -13,7 +13,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
         #region Organization & Unit
 
         List<Organization> GetAllOrganizations();
-        Unit FindUnit(int id);
+        T FindEntityWithExpansion<T>(int id) where T : MetaEntity;
         List<Unit> GetUnits(int organizationId);
         bool SaveUnits(List<Unit> entities);
         Unit SaveUnit(Unit unit);
@@ -23,8 +23,9 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region KPI Operations
 
-        bool SaveWorkbook(Workbook workbook);
-        bool UploadFile(WorkbookTransport transport);
+        List<WorkbookTemplate> GetAllWorkbookTemplates();
+        Workbook SaveWorkbook(Workbook workbook);
+        int SaveWorkbook(WorkbookTransport transport);
 
         #endregion KPI Operations
 

@@ -62,6 +62,22 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return expandedUnit;
         }
 
+        public Workbook GetWorkbook(int id)
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "FindWorkbook/" + id.ToString()).Result;
+            var x = response.Content.ReadAsAsync<String>().Result;
+
+            var ser = x.Substring(0, x.IndexOf("|"));
+            var ser1 = x.Substring(x.IndexOf("|") + 1);
+
+            var ext = JsonConvert.DeserializeObject<ExpandableEntity>(ser);
+            var expandedUnit = JsonConvert.DeserializeObject<Workbook>(ser1);
+
+            expandedUnit.Expansion = ext;
+
+            return expandedUnit;
+        }
+
         public List<Unit> GetUnits(int organizationId)
         {
             var response = _client.GetAsync(_client.BaseAddress + "GetUnits/" + organizationId.ToString() + "/").Result;
@@ -103,6 +119,12 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
 
         #region KPI Operations
 
+        public List<WorkbookTemplate> GetAllWorkbookTemplates()
+        {
+            var response = _client.GetAsync(_client.BaseAddress + "GetAllWorkbookTemplates/").Result;
+            return response.Content.ReadAsAsync<List<WorkbookTemplate>>().Result;
+        }
+
         public bool SaveWorkbook(Workbook workbook)
         {
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "SaveWorkbook/", workbook).Result;
@@ -115,7 +137,7 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             return response.Content.ReadAsAsync<WorkbookTemplate>().Result;
         }
 
-        public bool UploadFile(Workbook workbook, byte[] fileContent)
+        public int UploadFile(Workbook workbook, byte[] fileContent)
         {
             //HttpRequestMessage message = new HttpRequestMessage();
             //message.Content = new ByteArrayContent(fileContent);
@@ -129,7 +151,7 @@ namespace ADS.BankingAnalytics.Client.WebApiClientHandler
             };
 
             var response = _client.PostAsJsonAsync(_client.BaseAddress + "UploadFile/", transport).Result;
-            return response.Content.ReadAsAsync<bool>().Result;
+            return response.Content.ReadAsAsync<int>().Result;
         }
 
         #endregion KPI Operations

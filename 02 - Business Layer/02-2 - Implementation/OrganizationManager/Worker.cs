@@ -54,7 +54,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             try
             {
                 _logger.Debug("Entered method 'GetAllOrganizations'");
-
                 retVal = _genericRepository.GetAll<Organization>().ToList();
             }
             catch (Exception exc)
@@ -68,18 +67,24 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public Unit FindUnit(int id)
+        /// <summary>
+        /// Find entities with their expansion such as Units, Workbooks and etc.
+        /// </summary>
+        /// <typeparam name="T">Object inherited from MetaEntity</typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public T FindEntityWithExpansion<T>(int id) where T : MetaEntity
         {
-            Unit retVal = null;
+            T retVal = null;
             var startTime = DateTime.Now;
 
             try
             {
-                _logger.Debug("Entered method 'FindUnit'");
-                _logger.Info("Fetching unit with Id - {0}", id);
+                _logger.Debug("Entered method 'FindWorkbook'");
+                _logger.Info("Fetching workbook with Id - {0}", id);
 
-                retVal = _genericRepository.GetById<Unit>(id);
-                retVal = (Unit)_expansionCreator.Expand(retVal);
+                retVal = _genericRepository.GetById<T>(id);
+                retVal = (T)_expansionCreator.Expand(retVal);
             }
             catch (Exception exc)
             {
@@ -87,7 +92,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 throw;
             }
 
-            _logger.Debug("Method 'FindUnit' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+            _logger.Debug("Method 'FindWorkbook' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
             return retVal;
         }
 
@@ -216,9 +221,30 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
         #region KPI Operations
 
-        public bool SaveWorkbook(Workbook workbook)
+        public List<WorkbookTemplate> GetAllWorkbookTemplates()
         {
-            bool retVal;
+            List<WorkbookTemplate> retVal;
+            var startTime = DateTime.Now;
+
+            try
+            {
+                _logger.Debug("Entered method 'GetAllWorkbookTemplates'");
+                retVal = _genericRepository.GetAll<WorkbookTemplate>().ToList();
+            }
+            catch (Exception exc)
+            {
+                _logger.Error(exc);
+                retVal = null;
+            }
+
+            _logger.Debug("Method 'GetAllWorkbookTemplates' has been completed in {0}ms", (DateTime.Now - startTime).TotalMilliseconds);
+
+            return retVal;
+        }
+
+        public Workbook SaveWorkbook(Workbook workbook)
+        {
+            Workbook retVal;
             var startTime = DateTime.Now;
 
             try
@@ -250,11 +276,11 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
                 SaveExpandableEntity((ExpandableEntity)workbook.Expansion);
 
-                retVal = true;
+                retVal = savedWorkbook;
             }
             catch (Exception exc)
             {
-                retVal = false;
+                retVal = null;
                 _logger.Error(exc);
             }
 
@@ -262,9 +288,10 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
             return retVal;
         }
 
-        public bool UploadFile(WorkbookTransport transport)
+
+        public int SaveWorkbook(WorkbookTransport transport)
         {
-            bool retVal;
+            int retVal;
             var startTime = DateTime.Now;
 
             try
@@ -291,7 +318,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
 
                 List<AdditionalField> addFields = new List<AdditionalField>(additionalFieldDefinitions.Count());
                 
-                // TODO: Process the content of the excel file
                 foreach (DataRow dr in dt.Rows)
                 {
                     if (dr != null && dr.ItemArray != null && dr.ItemArray.Length > 2)
@@ -320,13 +346,6 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                     }
                 }
                 
-                //var expandable = new ExpandableEntity()
-                //{
-                //    MetaEntityId = workbook.Id,
-                //    MetaEntityType = workbook.TypeName,
-                //    AdditionalFields = addFields
-                //};
-
                 var expandable = new ExpandableEntity();
 
                 addFields.ForEach(it =>
@@ -336,21 +355,19 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 
                 workbook.Expansion = expandable;
 
-                SaveWorkbook(workbook);
-
-
-
-
-
-
-
-
-
-                retVal = true;
+                var savedWorkbook = SaveWorkbook(workbook);
+                if (savedWorkbook != null)
+                {
+                    retVal = savedWorkbook.Id;
+                }
+                else
+                {
+                    retVal = 0;
+                }
             }
             catch (Exception exc)
             {
-                retVal = false;
+                retVal = 0;
                 _logger.Error(exc);
             }
 
@@ -372,9 +389,20 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 _logger.Debug("Entered method 'GetAdditionalFieldDefinitions'");
                 _logger.Info("Parameter: unitCategoryId - {0}", unitCategoryId);
 
+                // Find entity
+                var entity = _genericRepository.GetById<UnitCategory>(unitCategoryId);
+
+                // Find ExpandableEntityType for this entity
+                // TODO: Use ExpandableEntityCreator for this expnsion
+                var expandableEntityType = _genericRepository.GetByCriteria<ExpandableEntityType>(
+                    it =>
+                        it.MetaEntityId == unitCategoryId
+                        && it.MetaEntityType == entity.TypeName
+                    ).FirstOrDefault();
+
                 retVal = _genericRepository.GetByCriteria<AdditionalFieldDefinition>(
                     it =>
-                        it.ExpandableEntityTypeId == unitCategoryId
+                        it.ExpandableEntityTypeId == expandableEntityType.Id
                         && it.DeletedAt == null
                     ).ToList();
             }
@@ -469,13 +497,7 @@ namespace ADS.BankingAnalytics.Business.OrganizationManager
                 _logger.Debug("Entered method 'SaveExpandableEntity'");
 
                 retVal = _genericRepository.Save<ExpandableEntity>(entity, entity.Id);
-
-                // Save inner collections
-                //foreach (var fieldDefinition in entity.AdditionalFieldDefinitions)
-                //{
-                //    _genericRepository.Save<AdditionalFieldDefinition>(fieldDefinition);
-                //}
-
+                
                 foreach (var field in entity.AdditionalFields)
                 {
                     field.ExpandableEntityId = retVal.Id;
