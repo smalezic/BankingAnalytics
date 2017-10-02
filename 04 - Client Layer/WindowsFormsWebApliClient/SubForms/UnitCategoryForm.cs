@@ -110,13 +110,17 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient.SubForms
 
         private void GetAdditionalFieldDefinitions()
         {
+            cmbAdditionalFields.Items.Clear();
+            _definedFields.Clear();
+
             var addFieldsDefinitions = _importerClient.GetAdditionalFieldDefinitions(_selectedUnitCategory.Id);
 
-            cmbAdditionalFields.Items.Clear();
-            cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
+            if (addFieldsDefinitions != null)
+            {
+                cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
 
-            _definedFields.Clear();
-            _definedFields.AddRange(addFieldsDefinitions);
+                _definedFields.AddRange(addFieldsDefinitions);
+            }
         }
 
         private void cmbAdditionalFields_SelectedIndexChanged(object sender, EventArgs e)

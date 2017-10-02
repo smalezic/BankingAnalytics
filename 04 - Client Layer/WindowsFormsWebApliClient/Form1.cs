@@ -103,10 +103,14 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             if (_selectedUnitCategory != null)
             {
+                cmbAdditionalFields.Items.Clear();
+
                 var addFieldsDefinitions = _importerClient.GetAdditionalFieldDefinitions(_selectedUnitCategory.Id);
 
-                cmbAdditionalFields.Items.Clear();
-                cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
+                if (addFieldsDefinitions != null)
+                {
+                    cmbAdditionalFields.Items.AddRange(addFieldsDefinitions.ToArray());
+                }
             }
             else
             {
@@ -402,6 +406,11 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
 
 
+            if (String.IsNullOrWhiteSpace(txtWorkbookTemplateName.Text))
+            {
+                MessageBox.Show("The workbook template name must be provided.");
+                return;
+            }
 
             //create the Application object we can use in the member functions.
             Microsoft.Office.Interop.Excel.Application _excelApp = new Microsoft.Office.Interop.Excel.Application();
@@ -479,7 +488,7 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
 
             var workbookType = new WorkbookTemplate()
             {
-                Name = "TestWB",
+                Name = txtWorkbookTemplateName.Text,
                 OrganizationId = _selectedOrganization.Id
             };
 
@@ -530,6 +539,8 @@ namespace ADS.BankingAnalytics.Client.WindowsFormsWebApliClient
                 var savedWorkbook = _importerClient.GetWorkbook(success);
 
                 var definitions = _importerClient.GetAdditionalFieldDefinitions(workbook.WorkbookTemplateId.Value);
+
+                rchAdditionalFields.Clear();
 
                 foreach (var field in ((ExpandableEntity)savedWorkbook.Expansion).AdditionalFields)
                 {
